@@ -2,7 +2,25 @@
 
 namespace App\Providers;
 
-// use Illuminate\Support\Facades\Gate;
+use App\Models\Gallery;
+use App\Models\News;
+use App\Models\Page;
+use App\Models\Program;
+use App\Models\Publication;
+use App\Models\PpidDocument;
+use App\Models\Service;
+use App\Models\Setting;
+use App\Models\User;
+use App\Policies\GalleryPolicy;
+use App\Policies\NewsPolicy;
+use App\Policies\PagePolicy;
+use App\Policies\ProgramPolicy;
+use App\Policies\PublicationPolicy;
+use App\Policies\PpidDocumentPolicy;
+use App\Policies\ServicePolicy;
+use App\Policies\SettingPolicy;
+use App\Policies\UserPolicy;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -13,7 +31,15 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        Gallery::class => GalleryPolicy::class,
+        News::class => NewsPolicy::class,
+        Page::class => PagePolicy::class,
+        Program::class => ProgramPolicy::class,
+        Publication::class => PublicationPolicy::class,
+        PpidDocument::class => PpidDocumentPolicy::class,
+        Service::class => ServicePolicy::class,
+        Setting::class => SettingPolicy::class,
+        User::class => UserPolicy::class,
     ];
 
     /**
@@ -23,6 +49,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('access-dashboard', function ($user) {
+            return $user->hasPermission('Dashboard.View');
+        });
     }
 }
