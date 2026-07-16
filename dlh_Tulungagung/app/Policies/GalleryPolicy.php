@@ -31,4 +31,24 @@ class GalleryPolicy
     {
         return $user->hasPermission('Gallery.Delete');
     }
+
+    public function restore(User $user, Gallery $gallery): bool
+    {
+        return $user->hasPermission('Gallery.Restore');
+    }
+
+    public function forceDelete(User $user, Gallery $gallery): bool
+    {
+        return $user->hasPermission('Gallery.ForceDelete');
+    }
+
+    public function publish(User $user, Gallery $gallery): bool
+    {
+        return $user->hasPermission('Gallery.Publish');
+    }
+
+    public function archive(User $user, Gallery $gallery): bool
+    {
+        return $user->hasPermission('Gallery.Archive');
+    }
 }

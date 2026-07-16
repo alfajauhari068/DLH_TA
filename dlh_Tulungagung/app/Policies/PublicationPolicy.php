@@ -2,32 +2,28 @@
 
 namespace App\Policies;
 
+use App\CMS\Infrastructure\Registry\PermissionRegistry;
 use App\Models\Publication;
 use App\Models\User;
 
-class PublicationPolicy
+class PublicationPolicy extends CrudPolicy
 {
-    public function viewAny(User $user): bool
+    protected string $viewPermission = 'Publication.View';
+    protected string $createPermission = 'Publication.Create';
+    protected string $updatePermission = 'Publication.Update';
+    protected string $deletePermission = 'Publication.Delete';
+
+    public function publish(User $user, Publication $publication): bool
     {
-        return $user->hasPermission('Publication.View');
+        return $user->hasPermission('Publication.Publish');
     }
 
-    public function view(User $user, Publication $publication): bool
+    public function restore(User $user, mixed $publication): bool
     {
-        return $user->hasPermission('Publication.View');
+        return $user->hasPermission('Publication.Update') || $user->hasPermission('Publication.Delete');
     }
 
-    public function create(User $user): bool
-    {
-        return $user->hasPermission('Publication.Create');
-    }
-
-    public function update(User $user, Publication $publication): bool
-    {
-        return $user->hasPermission('Publication.Update');
-    }
-
-    public function delete(User $user, Publication $publication): bool
+    public function forceDelete(User $user, mixed $publication): bool
     {
         return $user->hasPermission('Publication.Delete');
     }

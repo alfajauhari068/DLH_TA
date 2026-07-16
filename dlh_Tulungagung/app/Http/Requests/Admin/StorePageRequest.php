@@ -17,11 +17,12 @@ class StorePageRequest extends FormRequest
             'title' => ['required', 'string', 'max:255'],
             'slug' => ['nullable', 'string', 'max:255'],
             'content' => ['nullable', 'string'],
-            'banner' => ['nullable', 'string', 'max:255'],
+            'cover_image' => ['nullable', 'image', 'max:2048'],
             'status' => ['required', 'string', 'max:50'],
             'template' => ['nullable', 'string', 'max:255'],
             'seo_title' => ['nullable', 'string', 'max:255'],
             'seo_description' => ['nullable', 'string'],
+            'published_at' => ['nullable', 'date'],
         ];
     }
 }

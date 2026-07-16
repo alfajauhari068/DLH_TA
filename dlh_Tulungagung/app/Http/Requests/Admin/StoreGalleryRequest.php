@@ -15,8 +15,16 @@ class StoreGalleryRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:255'],
+            'slug' => ['nullable', 'string', 'max:255', 'unique:galleries,slug'],
             'description' => ['nullable', 'string'],
-            'status' => ['nullable', 'string'],
+            'thumbnail' => ['nullable', 'image'],
+            'image' => ['nullable', 'image'],
+            'status' => ['required', 'integer'],
+            'sort_order' => ['nullable', 'integer'],
+            'published_at' => ['nullable', 'date'],
+            'meta_title' => ['nullable', 'string', 'max:255'],
+            'meta_description' => ['nullable', 'string'],
+            'meta_keywords' => ['nullable', 'string'],
         ];
     }
 }

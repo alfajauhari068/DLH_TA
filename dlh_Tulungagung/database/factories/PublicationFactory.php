@@ -12,14 +12,18 @@ class PublicationFactory extends Factory
     public function definition(): array
     {
         return [
-            'category_id' => fake()->randomElement(['laporan', 'regulasi', 'kajian']),
             'title' => fake()->sentence(5),
-            'description' => fake()->paragraph(),
-            'cover' => 'storage/publications/' . fake()->slug() . '.jpg',
-            'file' => fake()->slug() . '.pdf',
-            'year' => fake()->year(),
-            'downloads' => fake()->numberBetween(0, 1000),
+            'slug' => fake()->unique()->slug(),
+            'summary' => fake()->paragraph(),
+            'content' => fake()->paragraphs(3, true),
+            'cover_file' => 'storage/publications/covers/' . fake()->slug() . '.jpg',
+            'document_file' => 'storage/publications/documents/' . fake()->slug() . '.pdf',
+            'category' => fake()->randomElement(['laporan', 'regulasi', 'kajian']),
             'status' => fake()->randomElement(['draft', 'published']),
+            'published_at' => fake()->optional()->dateTimeBetween('-1 month', 'now'),
+            'download_count' => fake()->numberBetween(0, 1000),
+            'featured' => fake()->boolean(30),
+            'sort_order' => fake()->numberBetween(0, 100),
         ];
     }
 }

@@ -13,14 +13,18 @@ class PublicationsTableSeeder extends Seeder
             Publication::firstOrCreate(
                 ['title' => 'Laporan Tahunan Lingkungan'],
                 [
-                    'category_id' => 'laporan',
                     'title' => 'Laporan Tahunan Lingkungan',
-                    'description' => 'Dokumen publikasi tahunan dinas lingkungan.',
-                    'cover' => null,
-                    'file' => 'laporan-tahunan.pdf',
-                    'year' => 2026,
-                    'downloads' => 0,
+                    'slug' => 'laporan-tahunan-lingkungan',
+                    'summary' => 'Dokumen publikasi tahunan dinas lingkungan.',
+                    'content' => 'Dokumen publikasi tahunan dinas lingkungan.',
+                    'cover_file' => null,
+                    'document_file' => 'laporan-tahunan.pdf',
+                    'category' => 'laporan',
                     'status' => 'published',
+                    'published_at' => now(),
+                    'download_count' => 0,
+                    'featured' => true,
+                    'sort_order' => 1,
                 ]
             );
         });

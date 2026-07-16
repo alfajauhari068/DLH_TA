@@ -2,18 +2,33 @@
 
 namespace App\Policies;
 
+use App\CMS\Infrastructure\Registry\PermissionRegistry;
 use App\Models\Service;
 use App\Models\User;
 
-class ServicePolicy
+class ServicePolicy extends CrudPolicy
 {
-    public function viewAny(User $user): bool
+    protected string $viewPermission;
+    protected string $createPermission;
+    protected string $updatePermission;
+    protected string $deletePermission;
+
+    public function __construct()
     {
-        return $user->hasPermission('Service.View');
+        $permissions = PermissionRegistry::defaultPermissions('Service');
+        $this->viewPermission = $permissions[0];
+        $this->createPermission = $permissions[1];
+        $this->updatePermission = $permissions[2];
+        $this->deletePermission = $permissions[3];
     }
 
-    public function view(User $user, Service $service): bool
+    public function publish(User $user, Service $service): bool
     {
-        return $user->hasPermission('Service.View');
+        return $user->hasPermission('Service.Publish');
+    }
+
+    public function feature(User $user, Service $service): bool
+    {
+        return $user->hasPermission('Service.Publish');
     }
 }

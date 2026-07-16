@@ -13,14 +13,20 @@ return new class extends Migration
     {
         Schema::create('publications', function (Blueprint $table) {
             $table->id();
-            $table->string('category_id');
             $table->string('title');
-            $table->text('description')->nullable();
-            $table->string('cover')->nullable();
-            $table->string('file')->nullable();
-            $table->integer('year')->nullable();
-            $table->integer('downloads')->default(0);
-            $table->string('status');
+            $table->string('slug')->nullable()->unique();
+            $table->text('summary')->nullable();
+            $table->longText('content')->nullable();
+            $table->string('cover_file')->nullable();
+            $table->string('document_file')->nullable();
+            $table->string('category')->nullable();
+            $table->string('status')->default('draft');
+            $table->timestamp('published_at')->nullable();
+            $table->integer('download_count')->default(0);
+            $table->boolean('featured')->default(false);
+            $table->integer('sort_order')->default(0);
+            $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });

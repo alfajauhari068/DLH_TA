@@ -2,75 +2,63 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreServiceRequest;
 use App\Http\Requests\Admin\UpdateServiceRequest;
 use App\Models\Service;
 use App\Services\ServiceService;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
+use Illuminate\Routing\Redirector;
 
-class ServiceController extends Controller
+class ServiceController extends BaseCrudController
 {
-    public function __construct(protected ServiceService $serviceService)
+    protected $service;
+
+    protected array $searchFields = ['title', 'slug', 'summary', 'description', 'service_category', 'service_type', 'status', 'contact_person'];
+    protected array $filterFields = ['status', 'category', 'type', 'featured', 'published_at', 'author', 'created_from', 'created_to', 'updated_from', 'updated_to'];
+    protected array $sortableFields = ['title', 'created_at', 'updated_at', 'published_at', 'status', 'sort_order'];
+
+    public function __construct(ServiceService $service)
     {
+        $this->service = $service;
     }
 
-    public function index(Request $request): View
+    public function store(Request $request, Redirector $redirect)
     {
-        $this->authorize('viewAny', Service::class);
-
-        $services = $this->serviceService->paginate($request->query('per_page', 15));
-
-        return view('admin.services.index', compact('services'));
+        return parent::store($request, $redirect);
     }
 
-    public function create(): View
+    public function update(Request $request, $service, Redirector $redirect)
     {
-        $this->authorize('create', Service::class);
-
-        return view('admin.services.create');
+        return parent::update($request, $service, $redirect);
     }
 
-    public function store(StoreServiceRequest $request): RedirectResponse
+    protected function service()
     {
-        $this->authorize('create', Service::class);
-
-        $this->serviceService->create($request->validated());
-
-        return redirect()->route('admin.services.index')->with('success', 'Service created successfully.');
+        return $this->service;
     }
 
-    public function show(Service $service): View
+    protected function modelClass(): string
     {
-        $this->authorize('view', $service);
-
-        return view('admin.services.show', compact('service'));
+        return Service::class;
     }
 
-    public function edit(Service $service): View
+    protected function viewPath(): string
     {
-        $this->authorize('update', $service);
-
-        return view('admin.services.edit', compact('service'));
+        return 'admin.services';
     }
 
-    public function update(UpdateServiceRequest $request, Service $service): RedirectResponse
+    protected function routePrefix(): string
     {
-        $this->authorize('update', $service);
-
-        $this->serviceService->update($service, $request->validated());
-
-        return redirect()->route('admin.services.index')->with('success', 'Service updated successfully.');
+        return 'admin.services';
     }
 
-    public function destroy(Service $service): RedirectResponse
+    protected function singularVar(): string
     {
-        $this->authorize('delete', $service);
+        return 'service';
+    }
 
-        $this->serviceService->delete($service);
-
-        return redirect()->route('admin.services.index')->with('success', 'Service deleted successfully.');
+    protected function pluralVar(): string
+    {
+        return 'services';
     }
 }

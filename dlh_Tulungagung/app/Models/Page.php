@@ -10,5 +10,15 @@ class Page extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'title',
+        'slug',
+        'content',
+        'banner',
+        'featured_image',
+        'status',
+        'template',
+        'seo_title',
+        'seo_description',
+    ];
 }

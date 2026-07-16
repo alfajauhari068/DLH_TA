@@ -2,75 +2,63 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreGalleryRequest;
 use App\Http\Requests\Admin\UpdateGalleryRequest;
 use App\Models\Gallery;
 use App\Services\GalleryService;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
+use Illuminate\Routing\Redirector;
 
-class GalleryController extends Controller
+class GalleryController extends BaseCrudController
 {
-    public function __construct(protected GalleryService $galleryService)
+    protected $service;
+
+    protected array $searchFields = ['title', 'slug', 'description', 'status'];
+    protected array $filterFields = ['status', 'published', 'draft', 'archived', 'from', 'to', 'author'];
+    protected array $sortableFields = ['title', 'created_at', 'updated_at', 'published_at', 'sort_order', 'status'];
+
+    public function __construct(GalleryService $service)
     {
+        $this->service = $service;
     }
 
-    public function index(Request $request): View
+    public function store(Request $request, Redirector $redirect)
     {
-        $this->authorize('viewAny', Gallery::class);
-
-        $galleries = $this->galleryService->paginate($request->query('per_page', 15));
-
-        return view('admin.galleries.index', compact('galleries'));
+        return parent::store($request, $redirect);
     }
 
-    public function create(): View
+    public function update(Request $request, $gallery, Redirector $redirect)
     {
-        $this->authorize('create', Gallery::class);
-
-        return view('admin.galleries.create');
+        return parent::update($request, $gallery, $redirect);
     }
 
-    public function store(StoreGalleryRequest $request): RedirectResponse
+    protected function service()
     {
-        $this->authorize('create', Gallery::class);
-
-        $this->galleryService->create($request->validated());
-
-        return redirect()->route('admin.galleries.index')->with('success', 'Gallery created successfully.');
+        return $this->service;
     }
 
-    public function show(Gallery $gallery): View
+    protected function modelClass(): string
     {
-        $this->authorize('view', $gallery);
-
-        return view('admin.galleries.show', compact('gallery'));
+        return Gallery::class;
     }
 
-    public function edit(Gallery $gallery): View
+    protected function viewPath(): string
     {
-        $this->authorize('update', $gallery);
-
-        return view('admin.galleries.edit', compact('gallery'));
+        return 'admin.gallery';
     }
 
-    public function update(UpdateGalleryRequest $request, Gallery $gallery): RedirectResponse
+    protected function routePrefix(): string
     {
-        $this->authorize('update', $gallery);
-
-        $this->galleryService->update($gallery, $request->validated());
-
-        return redirect()->route('admin.galleries.index')->with('success', 'Gallery updated successfully.');
+        return 'admin.galleries';
     }
 
-    public function destroy(Gallery $gallery): RedirectResponse
+    protected function singularVar(): string
     {
-        $this->authorize('delete', $gallery);
+        return 'gallery';
+    }
 
-        $this->galleryService->delete($gallery);
-
-        return redirect()->route('admin.galleries.index')->with('success', 'Gallery deleted successfully.');
+    protected function pluralVar(): string
+    {
+        return 'galleries';
     }
 }

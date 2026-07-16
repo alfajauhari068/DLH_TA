@@ -3,30 +3,87 @@
 namespace App\Services;
 
 use App\Models\Service;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Http\UploadedFile;
 
-class ServiceService
+class ServiceService extends ModuleService
 {
-    public function paginate(int $perPage = 15): LengthAwarePaginator
+    public function __construct()
     {
-        return Service::query()->latest()->paginate($perPage);
+        parent::__construct(Service::class, [
+            'slug' => true,
+            'publish' => true,
+            'archive' => true,
+            'soft_delete' => true,
+            'audit' => true,
+            'media' => true,
+        ]);
     }
 
-    public function create(array $data): Service
+    public function create(array $data)
     {
-        return Service::create($data);
+        $this->handleMedia($data);
+
+        return parent::create($data);
     }
 
-    public function update(Service $service, array $data): Service
+    public function update($model, array $data)
     {
-        $service->fill($data);
-        $service->save();
+        $this->handleMedia($data, $model);
 
-        return $service;
+        return parent::update($model, $data);
     }
 
-    public function delete(Service $service): bool
+    public function publish(Service $service): bool
     {
-        return $service->delete();
+        $service->forceFill(['status' => 'published', 'published_at' => $service->published_at ?? now()]);
+
+        return $service->save();
+    }
+
+    public function unpublish(Service $service): bool
+    {
+        $service->forceFill(['status' => 'draft']);
+
+        return $service->save();
+    }
+
+    public function duplicate(Service $service): Service
+    {
+        $clone = $service->replicate(['slug']);
+        $clone->slug = $service->slug . '-copy';
+        $clone->status = 'draft';
+        $clone->published_at = null;
+        $clone->save();
+
+        return $clone;
+    }
+
+    public function feature(Service $service): bool
+    {
+        $service->forceFill(['is_featured' => true]);
+
+        return $service->save();
+    }
+
+    protected function handleMedia(array &$data, ?Service $service = null): void
+    {
+        $mediaService = app(MediaService::class);
+
+        foreach (['thumbnail', 'banner'] as $field) {
+            if (! array_key_exists($field, $data)) {
+                continue;
+            }
+
+            $value = $data[$field];
+
+            if ($value instanceof UploadedFile) {
+                if ($service && ! empty($service->{$field})) {
+                    $mediaService->delete($service->{$field});
+                }
+
+                $result = $mediaService->upload($value, 'public', 'services/' . $field . 's');
+                $data[$field] = $result['path'];
+            }
+        }
     }
 }

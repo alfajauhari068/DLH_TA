@@ -2,75 +2,64 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StoreNewsRequest;
-use App\Http\Requests\Admin\UpdateNewsRequest;
 use App\Models\News;
 use App\Services\NewsService;
-use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\Admin\StoreNewsRequest;
+use App\Http\Requests\Admin\UpdateNewsRequest;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
+use Illuminate\Routing\Redirector;
 
-class NewsController extends Controller
+class NewsController extends BaseCrudController
 {
-    public function __construct(protected NewsService $newsService)
+    protected $service;
+
+    protected array $searchFields = ['title', 'slug', 'excerpt', 'status'];
+    protected array $filterFields = ['status', 'author', 'from', 'to'];
+    protected array $sortableFields = ['title', 'created_at', 'updated_at', 'published_at', 'status'];
+
+    public function __construct(NewsService $service)
     {
+        $this->service = $service;
     }
 
-    public function index(Request $request): View
+    public function store(Request $request, Redirector $redirect)
     {
-        $this->authorize('viewAny', News::class);
-
-        $news = $this->newsService->paginate($request->query('per_page', 15));
-
-        return view('admin.news.index', compact('news'));
+        return parent::store($request, $redirect);
     }
 
-    public function create(): View
+    public function update(Request $request, $news, Redirector $redirect)
     {
-        $this->authorize('create', News::class);
-
-        return view('admin.news.create');
+        return parent::update($request, $news, $redirect);
     }
 
-    public function store(StoreNewsRequest $request): RedirectResponse
+    protected function service()
     {
-        $this->authorize('create', News::class);
-
-        $this->newsService->create($request->validated());
-
-        return redirect()->route('admin.news.index')->with('success', 'News created successfully.');
+        return $this->service;
     }
 
-    public function show(News $news): View
+    protected function modelClass(): string
     {
-        $this->authorize('view', $news);
-
-        return view('admin.news.show', compact('news'));
+        return News::class;
     }
 
-    public function edit(News $news): View
+    protected function viewPath(): string
     {
-        $this->authorize('update', $news);
-
-        return view('admin.news.edit', compact('news'));
+        return 'admin.news';
     }
 
-    public function update(UpdateNewsRequest $request, News $news): RedirectResponse
+    protected function routePrefix(): string
     {
-        $this->authorize('update', $news);
-
-        $this->newsService->update($news, $request->validated());
-
-        return redirect()->route('admin.news.index')->with('success', 'News updated successfully.');
+        return 'admin.news';
     }
 
-    public function destroy(News $news): RedirectResponse
+    protected function singularVar(): string
     {
-        $this->authorize('delete', $news);
+        return 'news';
+    }
 
-        $this->newsService->delete($news);
-
-        return redirect()->route('admin.news.index')->with('success', 'News deleted successfully.');
+    protected function pluralVar(): string
+    {
+        return 'news';
     }
 }
+

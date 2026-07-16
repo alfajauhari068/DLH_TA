@@ -14,12 +14,15 @@ class ProgramFactory extends Factory
         return [
             'title' => fake()->sentence(4),
             'slug' => fake()->unique()->slug(),
-            'description' => fake()->paragraph(),
+            'excerpt' => fake()->paragraph(),
             'content' => fake()->paragraphs(3, true),
+            'description' => fake()->paragraph(),
+            'featured_image' => 'storage/programs/' . fake()->slug() . '.jpg',
             'thumbnail' => 'storage/programs/' . fake()->slug() . '.jpg',
             'start_date' => fake()->dateTimeBetween('-1 year', '+1 month')->format('Y-m-d'),
             'end_date' => fake()->dateTimeBetween('+1 month', '+1 year')->format('Y-m-d'),
-            'status' => fake()->randomElement(['draft', 'active', 'completed']),
+            'status' => fake()->randomElement(['draft', 'published']),
+            'published_at' => fake()->optional()->dateTimeBetween('-1 month', 'now'),
         ];
     }
 }

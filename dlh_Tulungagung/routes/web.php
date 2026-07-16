@@ -13,9 +13,18 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Http\Controllers\FrontendController;
+
+Route::get('/', [FrontendController::class, 'home'])->name('home');
+Route::get('/profil', [FrontendController::class, 'profile'])->name('profile');
+Route::get('/layanan', [FrontendController::class, 'services'])->name('services');
+Route::get('/ppid', [FrontendController::class, 'ppid'])->name('ppid');
+Route::get('/berita', [FrontendController::class, 'news'])->name('news');
+Route::get('/berita/{slug}', [FrontendController::class, 'newsDetail'])->name('news.detail');
+Route::get('/galeri', [FrontendController::class, 'galleries'])->name('galleries');
+Route::get('/dokumen', [FrontendController::class, 'documents'])->name('documents');
+Route::get('/kontak', [FrontendController::class, 'contact'])->name('contact');
+Route::get('/halaman/{slug}', [FrontendController::class, 'page'])->name('page');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
@@ -24,18 +33,35 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard')
-        ->middleware(['permission:Dashboard.View']);
+    
+    Route::middleware('role:Administrator')->group(function () {
+        Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('users', UserController::class);
         Route::resource('news', NewsController::class);
+        Route::get('news/trash', [NewsController::class, 'trash'])->name('news.trash');
+        Route::post('news/{id}/restore', [NewsController::class, 'restore'])->name('news.restore');
+        Route::delete('news/{id}/force-delete', [NewsController::class, 'forceDelete'])->name('news.forceDelete');
         Route::resource('galleries', GalleryController::class);
+        Route::get('galleries/trash', [GalleryController::class, 'trash'])->name('galleries.trash');
+        Route::post('galleries/{id}/restore', [GalleryController::class, 'restore'])->name('galleries.restore');
+        Route::delete('galleries/{id}/force-delete', [GalleryController::class, 'forceDelete'])->name('galleries.forceDelete');
         Route::resource('publications', PublicationController::class);
+        Route::get('publications/trash', [PublicationController::class, 'trash'])->name('publications.trash');
+        Route::post('publications/{id}/restore', [PublicationController::class, 'restore'])->name('publications.restore');
+        Route::delete('publications/{id}/force-delete', [PublicationController::class, 'forceDelete'])->name('publications.forceDelete');
         Route::resource('programs', ProgramController::class);
+        Route::get('programs/trash', [ProgramController::class, 'trash'])->name('programs.trash');
+        Route::post('programs/{id}/restore', [ProgramController::class, 'restore'])->name('programs.restore');
+        Route::delete('programs/{id}/force-delete', [ProgramController::class, 'forceDelete'])->name('programs.forceDelete');
         Route::resource('services', ServiceController::class);
+        Route::get('services/trash', [ServiceController::class, 'trash'])->name('services.trash');
+        Route::post('services/{id}/restore', [ServiceController::class, 'restore'])->name('services.restore');
+        Route::delete('services/{id}/force-delete', [ServiceController::class, 'forceDelete'])->name('services.forceDelete');
         Route::resource('ppid', PpidController::class);
         Route::resource('pages', PageController::class);
         Route::resource('settings', SettingController::class)->only(['index', 'edit', 'update']);
+    });
     });
 });

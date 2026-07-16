@@ -22,7 +22,7 @@ class OfficialsTableSeeder extends Seeder
                 [
                     'department_id' => $department->id,
                     'name' => 'Kepala Dinas',
-                    'position' => 'Head of Agency',
+                    'position' => 'Kepala Dinas',
                     'photo' => null,
                     'biography' => 'Pejabat kepala dinas lingkungan hidup.',
                     'email' => 'kepala-dinas@example.com',

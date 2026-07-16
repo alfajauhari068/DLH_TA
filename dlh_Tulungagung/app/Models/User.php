@@ -36,29 +36,7 @@ class User extends Authenticatable
 
     public function hasPermission(array|string $permissions): bool
     {
-        if ($this->hasRole('Administrator')) {
-            return true;
-        }
-
-        $requiredPermissions = collect($permissions)
-            ->map(fn ($permission) => is_string($permission) ? $permission : (string) $permission)
-            ->map(fn ($permission) => trim($permission))
-            ->filter()
-            ->all();
-
-        if ($requiredPermissions === []) {
-            return false;
-        }
-
-        $roleName = $this->role?->name ?? $this->getAttribute('role_name') ?? null;
-
-        if (! $roleName) {
-            return false;
-        }
-
-        $permissionNames = Role::permissionsFor($roleName);
-
-        return collect($permissionNames)->contains(fn ($permission) => in_array($permission, $requiredPermissions, true));
+        return $this->hasRole('Administrator');
     }
 
     /**

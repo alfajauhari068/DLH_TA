@@ -10,30 +10,22 @@ class SettingsTableSeeder extends Seeder
     public function run(): void
     {
         Setting::unguarded(function () {
-            Setting::firstOrCreate(
-                ['key' => 'site_name'],
-                ['value' => 'DLH Tulungagung']
-            );
-
-            Setting::firstOrCreate(
-                ['key' => 'address'],
-                ['value' => 'Jl. Raya Tulungagung']
-            );
-
-            Setting::firstOrCreate(
-                ['key' => 'phone'],
-                ['value' => '(0355) 123456']
-            );
-
-            Setting::firstOrCreate(
-                ['key' => 'email'],
-                ['value' => 'dlh@example.com']
-            );
-
-            Setting::firstOrCreate(
-                ['key' => 'office_hours'],
-                ['value' => '08:00 - 16:00']
-            );
+            if (Setting::count() === 0) {
+                $settings = [
+                    ['key' => 'site_name', 'value' => 'DLH Tulungagung'],
+                    ['key' => 'site_description', 'value' => 'Dinas Lingkungan Hidup Kabupaten Tulungagung'],
+                    ['key' => 'address', 'value' => 'Jl. Pahlawan No. 1, Tulungagung'],
+                    ['key' => 'phone', 'value' => '(0355) 123456'],
+                    ['key' => 'email', 'value' => 'dlh@tulungagung.go.id'],
+                    ['key' => 'facebook', 'value' => 'https://facebook.com/dlhtulungagung'],
+                    ['key' => 'instagram', 'value' => 'https://instagram.com/dlhtulungagung'],
+                    ['key' => 'copyright', 'value' => 'Dinas Lingkungan Hidup Kabupaten Tulungagung'],
+                ];
+                
+                foreach ($settings as $setting) {
+                    Setting::create($setting);
+                }
+            }
         });
     }
 }

@@ -11,48 +11,67 @@
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <script src="{{ asset('js/app.js') }}" defer></script>
     @endif
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     @stack('head')
 </head>
-<body class="admin-page">
-    <a class="visually-hidden-focusable skip-link" href="#main-content">Skip to main content</a>
+<body class="bg-surface-muted text-gray-800 font-sans antialiased overflow-hidden">
+    <a class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-white focus:text-primary" href="#main-content">Skip to main content</a>
 
-    <div class="admin-shell">
+    <div class="flex h-screen w-full">
+        <!-- Sidebar -->
         <x-admin.sidebar />
 
-        <div class="admin-content-shell">
-            <div class="admin-page-content">
-                <header class="admin-header bg-white">
-                    <x-admin.topbar />
-                </header>
+        <!-- Content Shell -->
+        <div class="flex-1 flex flex-col min-w-0 overflow-hidden relative">
+            
+            <!-- Topbar -->
+            <header class="bg-white border-b border-surface-border sticky top-0 z-30">
+                <x-admin.topbar />
+            </header>
 
-                <main id="main-content" class="admin-main">
-                    <div class="admin-page-toolbar mb-4">
-                        <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-3">
-                            <div class="page-heading-copy">
-                                <p class="text-uppercase text-muted small mb-2">@yield('section', 'Admin')</p>
-                                <h1 class="page-title mb-1">@yield('title', 'Dashboard')</h1>
-                                <p class="page-subtitle text-muted mb-0">@yield('subtitle', 'Manage DLH Tulungagung services and content in one central interface.')</p>
-                            </div>
-                            <div class="d-flex flex-wrap gap-2">@hasSection('actions')@yield('actions')@endif</div>
+            <!-- Main Scrollable Content -->
+            <div class="flex-1 overflow-y-auto overflow-x-hidden">
+                <main id="main-content" class="p-6 md:p-8 max-w-7xl mx-auto w-full">
+                    
+                    <!-- Page Header -->
+                    <div class="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div>
+                            @hasSection('section')
+                                <div class="text-primary font-medium text-sm tracking-wider uppercase mb-1">@yield('section')</div>
+                            @endif
+                            <x-ui.heading size="title">@yield('title', 'Dashboard')</x-ui.heading>
+                            <x-ui.text size="body" color="text-muted">@yield('subtitle', 'Manage DLH Tulungagung services and content in one central interface.')</x-ui.text>
                         </div>
-
-                        @if (View::hasSection('breadcrumb'))
-                            <div class="mt-4 admin-breadcrumb-shell">
-                                @yield('breadcrumb')
-                            </div>
-                        @endif
+                        
+                        <div class="flex items-center gap-3">
+                            @hasSection('actions')@yield('actions')@endif
+                        </div>
                     </div>
 
+                    @if (View::hasSection('breadcrumb'))
+                        <div class="mb-6">
+                            @yield('breadcrumb')
+                        </div>
+                    @endif
+
+                    <!-- Alerts -->
                     @if(session('success'))
-                        <x-admin.alert type="success" message="{{ session('success') }}" />
+                        <x-ui.alert type="success" title="Berhasil!" dismissible="true">
+                            {{ session('success') }}
+                        </x-ui.alert>
                     @endif
 
                     @if(session('error'))
-                        <x-admin.alert type="danger" message="{{ session('error') }}" />
+                        <x-ui.alert type="error" title="Gagal!" dismissible="true">
+                            {{ session('error') }}
+                        </x-ui.alert>
                     @endif
 
-                    <section class="admin-page-body">
+                    <!-- Page Body -->
+                    <section class="pb-12">
                         @yield('content')
                     </section>
                 </main>
@@ -62,6 +81,7 @@
         </div>
     </div>
 
-    <div class="admin-overlay" aria-hidden="true"></div>
+    <!-- Mobile Overlay -->
+    <div class="fixed inset-0 bg-gray-900/50 z-40 lg:hidden hidden pointer-events-none" id="mobile-sidebar-overlay" aria-hidden="true"></div>
 </body>
 </html>

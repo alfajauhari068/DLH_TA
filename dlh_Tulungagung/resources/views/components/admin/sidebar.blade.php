@@ -1,49 +1,62 @@
 @php
     $user = auth()->user();
     $menuItems = [
-        ['label' => 'Dashboard', 'route' => 'dashboard', 'permission' => 'Dashboard.View', 'icon' => 'M3 13h8v8H3v-8zm10-10h8v8h-8V3zm0 10h8v8h-8v-8zM3 3h8v8H3V3z'],
-        ['label' => 'Users', 'route' => 'admin.users.index', 'permission' => 'Users.View', 'icon' => 'M16 14s-1 0-1 1 1 3 3 3h2c2 0 3-2 3-3s-1-1-1-1h-6zm-8 0s-1 0-1 1 1 3 3 3h2c2 0 3-2 3-3s-1-1-1-1H8zm0-6c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3zm8 0c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3z'],
-        ['label' => 'News', 'route' => 'admin.news.index', 'permission' => 'News.View', 'icon' => 'M4 4h16v2H4V4zm0 4h16v2H4V8zm0 4h10v2H4v-2z'],
-        ['label' => 'Gallery', 'route' => 'admin.galleries.index', 'permission' => 'Gallery.View', 'icon' => 'M4 5h16v12H4V5zm2 2v8h12V7H6zm3 1l2 2 3-3 4 5H8l1-4z'],
-        ['label' => 'Publications', 'route' => 'admin.publications.index', 'permission' => 'Publication.View', 'icon' => 'M6 2h9a2 2 0 0 1 2 2v16l-5-3H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z'],
-        ['label' => 'Programs', 'route' => 'admin.programs.index', 'permission' => 'Program.View', 'icon' => 'M8 4h8v2H8V4zm0 4h8v2H8V8zm0 4h8v2H8v-2zm0 4h8v2H8v-2z'],
-        ['label' => 'Services', 'route' => 'admin.services.index', 'permission' => 'Service.View', 'icon' => 'M6 4h12v2H6V4zm0 4h12v2H6V8zm0 4h12v2H6v-2zm0 4h12v2H6v-2z'],
-        ['label' => 'PPID', 'route' => 'admin.ppid.index', 'permission' => 'PPID.View', 'icon' => 'M4 6h16v12H4V6zm2 2v8h12V8H6zm2 2h8v2H8v-2zm0 4h5v2H8v-2z'],
-        ['label' => 'Pages', 'route' => 'admin.pages.index', 'permission' => 'Page.View', 'icon' => 'M4 5h16v14H4V5zm2 2v10h12V7H6zm2 2h8v2H8V9z'],
-        ['label' => 'Website Settings', 'route' => 'admin.settings.index', 'permission' => 'Settings.View', 'icon' => 'M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm8.94 2.06l-1.41-1.41 1.22-1.22-2.12-2.12-1.22 1.22-1.41-1.41L14.94 4H9.06L7.88 5.22 6.66 4 4.54 6.12l1.22 1.22-1.41 1.41L4.06 10l1.22 1.22-1.22 1.22 2.12 2.12 1.22-1.22 1.41 1.41L9.06 20h5.88l1.18-1.22 1.22 1.22 2.12-2.12-1.22-1.22 1.41-1.41L19.94 12z']
+        ['label' => 'Dashboard', 'route' => 'dashboard', 'permission' => 'Dashboard.View', 'icon' => 'grid-1x2'],
+        ['label' => 'Users', 'route' => 'admin.users.index', 'permission' => 'Users.View', 'icon' => 'people'],
+        ['label' => 'News', 'route' => 'admin.news.index', 'permission' => 'News.View', 'icon' => 'newspaper'],
+        ['label' => 'Gallery', 'route' => 'admin.galleries.index', 'permission' => 'Gallery.View', 'icon' => 'images'],
+        ['label' => 'Publications', 'route' => 'admin.publications.index', 'permission' => 'Publication.View', 'icon' => 'journal-text'],
+        ['label' => 'Programs', 'route' => 'admin.programs.index', 'permission' => 'Program.View', 'icon' => 'briefcase'],
+        ['label' => 'Services', 'route' => 'admin.services.index', 'permission' => 'Service.View', 'icon' => 'tools'],
+        ['label' => 'PPID', 'route' => 'admin.ppid.index', 'permission' => 'PPID.View', 'icon' => 'envelope-open'],
+        ['label' => 'Pages', 'route' => 'admin.pages.index', 'permission' => 'Page.View', 'icon' => 'file-earmark-text'],
+        ['label' => 'Website Settings', 'route' => 'admin.settings.index', 'permission' => 'Settings.View', 'icon' => 'gear']
     ];
 @endphp
 
-<aside {{ $attributes->merge(['class' => 'admin-sidebar bg-white']) }} role="navigation" aria-label="Primary navigation">
-    <div class="sidebar-brand">
-        <a href="{{ route('dashboard') }}" class="d-flex align-items-center gap-2 text-decoration-none">
-            <span class="sidebar-brand-mark"></span>
-            <div>
-                <div class="h6 mb-0 text-dark">DLH Tulungagung</div>
-                <small class="text-muted">Administration</small>
+<aside {{ $attributes->merge(['class' => 'w-[280px] shrink-0 bg-surface border-r border-surface-border flex-shrink-0 hidden lg:flex flex-col h-screen sticky top-0 transition-all duration-300 z-40']) }} role="navigation" aria-label="Primary navigation">
+    <div class="h-[72px] px-6 flex items-center border-b border-surface-border shrink-0">
+        <a href="{{ route('dashboard') }}" class="flex items-center gap-3 no-underline group w-full min-w-0">
+            <img src="{{ asset('build/assets/icon-dinas.png') }}" alt="Logo DLH" class="shrink-0" style="width: 40px; height: 40px; object-fit: contain;">
+            <div class="flex-1 min-w-0">
+                <h2 class="text-xl font-bold text-gray-900 truncate leading-none mb-1">DLH Tulungagung</h2>
+                <p class="text-sm text-muted truncate leading-none">Administration</p>
             </div>
         </a>
-        <button type="button" class="btn btn-icon d-lg-none" data-admin-toggle-sidebar aria-label="Close navigation">
-            <span class="visually-hidden">Close</span>
-            <span class="icon-close" aria-hidden="true"></span>
-        </button>
     </div>
 
-    <div class="sidebar-scroll">
-        <ul class="nav flex-column sidebar-nav" role="menu">
+    <div class="flex-1 overflow-y-auto py-4 px-3 custom-scrollbar">
+        <ul class="space-y-1" role="menu">
             @foreach($menuItems as $item)
                 @if($user && $user->hasPermission($item['permission']))
-                    <li class="nav-item">
-                        @php $isActive = request()->routeIs($item['route'] . '*'); @endphp
-                        <a href="{{ route($item['route']) }}" role="menuitem" class="nav-link {{ $isActive ? 'active' : '' }}" {{ $isActive ? 'aria-current="page"' : '' }}>
-                            <span class="sidebar-icon" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="{{ $item['icon'] }}"/></svg>
-                            </span>
-                            <span>{{ $item['label'] }}</span>
+                    @php 
+                        $isActive = request()->routeIs($item['route'] . '*'); 
+                        $iconClass = $isActive ? 'text-primary' : 'text-gray-400 group-hover:text-primary';
+                        $bgClass = $isActive ? 'bg-primary/10 text-primary font-semibold' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900';
+                    @endphp
+                    <li>
+                        <a href="{{ route($item['route']) }}" 
+                           role="menuitem" 
+                           class="group flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 {{ $bgClass }}"
+                           {{ $isActive ? 'aria-current="page"' : '' }}>
+                            
+                            <i class="bi bi-{{ $item['icon'] }} text-lg transition-colors {{ $iconClass }}"></i>
+                            <span class="text-sm truncate">{{ $item['label'] }}</span>
+                            
+                            @if($isActive)
+                                <div class="w-1.5 h-1.5 rounded-full bg-primary ml-auto shadow-[0_0_8px_rgba(30,126,52,0.6)]"></div>
+                            @endif
                         </a>
                     </li>
                 @endif
             @endforeach
         </ul>
+    </div>
+    
+    <div class="p-4 border-t border-surface-border shrink-0">
+        <div class="bg-surface-muted rounded-xl p-4 text-center">
+            <p class="text-xs text-muted">Versi Sistem</p>
+            <p class="text-sm font-semibold text-gray-900">v2.0.0</p>
+        </div>
     </div>
 </aside>

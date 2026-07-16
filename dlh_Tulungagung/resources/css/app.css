@@ -1,8 +1,60 @@
+/* Import Tailwind first so Bootstrap Reboot can normalize it */
+@import "tailwindcss";
+
 /* Import Bootstrap CSS from node_modules for reliable loading via Vite */
 @import "bootstrap/dist/css/bootstrap.min.css";
+@source "../../resources/views";
+@source "../../resources/js";
+
+@theme {
+    --color-primary: var(--primary);
+    --color-secondary: var(--secondary);
+    --color-success: var(--success);
+    --color-warning: var(--warning);
+    --color-danger: var(--danger);
+    --color-info: var(--info);
+    --color-surface: var(--surface);
+    --color-surface-muted: var(--surface-muted);
+    --color-muted: var(--muted);
+    
+    --radius-xl: 1rem;
+    --radius-2xl: 1.5rem;
+    
+    --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+    --shadow-hover: 0 10px 40px -4px rgba(0, 0, 0, 0.08);
+    
+    --animate-fade-in: fadeIn 300ms ease-out;
+    --animate-fade-up: fadeUp 400ms ease-out;
+    --animate-fade-down: fadeDown 400ms ease-out;
+    --animate-scale-up: scaleUp 300ms ease-out;
+
+    @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+    @keyframes fadeUp {
+        0% { opacity: 0; transform: translateY(10px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeDown {
+        0% { opacity: 0; transform: translateY(-10px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scaleUp {
+        0% { opacity: 0; transform: scale(0.95); }
+        100% { opacity: 1; transform: scale(1); }
+    }
+}
 
 /* Design tokens and spacing scale */
 :root {
+    --primary: #1e7e34;
+    --secondary: #0056b3;
+    --success: #28a745;
+    --warning: #ffc107;
+    --danger: #dc3545;
+    --info: #17a2b8;
+    
     --space-1: 8px;
     --space-2: 12px;
     --space-3: 16px;
@@ -10,18 +62,25 @@
     --space-5: 32px;
     --space-6: 40px;
     --space-7: 48px;
+    
     --sidebar-width: 280px;
     --topbar-height: 72px;
     --card-radius: 18px;
     --card-padding: 24px;
+    
     --surface: #ffffff;
+    --background: #f8f9fa;
     --surface-muted: #f8f9fa;
     --surface-border: rgba(0, 0, 0, 0.08);
+    --text-primary: #212529;
+    --text-secondary: #6c757d;
+    --muted: #6c757d;
     --text-muted: #6c757d;
+    --border-radius: 0.375rem;
 }
 
 html, body {
-    height: 100%;
+    min-height: 100vh;
     margin: 0;
     font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     color: #212529;
@@ -154,6 +213,7 @@ body.admin-page {
     z-index: 1025;
     opacity: 0;
     transition: opacity 0.24s ease;
+    pointer-events: none;
 }
 
 .admin-shell.sidebar-open + .admin-overlay,
@@ -179,108 +239,7 @@ body.admin-page {
     border-radius: 0.5rem;
 }
 
-/* Sidebar internals */
-.sidebar-brand {
-    padding: var(--space-4);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid var(--surface-border);
-}
 
-.sidebar-brand-mark {
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
-    background: var(--bs-primary);
-}
-
-.sidebar-scroll {
-    padding: 0 var(--space-3) var(--space-4);
-}
-
-.sidebar-nav .nav-link {
-    color: #495057;
-    padding: 0.85rem 1rem;
-    border-radius: 0.75rem;
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
-    transition: background 0.2s ease, color 0.2s ease;
-}
-
-.sidebar-nav .nav-link:hover,
-.sidebar-nav .nav-link:focus {
-    background: rgba(13, 110, 253, 0.08);
-    color: var(--bs-primary);
-}
-
-.sidebar-nav .nav-link.active {
-    background: var(--bs-primary);
-    color: #fff;
-}
-
-.sidebar-nav .sidebar-icon {
-    width: 20px;
-    min-width: 20px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Topbar */
-.admin-topbar {
-    height: var(--topbar-height);
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 24px 32px;
-    background: transparent;
-}
-
-.topbar-brand-mark {
-    width: 36px;
-    height: 36px;
-    border-radius: 12px;
-    background: var(--bs-primary);
-}
-
-.topbar-search .input-group-text {
-    background: #fff;
-}
-
-.topbar-search {
-    flex: 1 1 auto;
-    display: flex;
-    align-items: center;
-}
-
-.btn-icon {
-    width: 44px;
-    height: 44px;
-    padding: 0;
-    border-radius: 12px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.profile-dropdown summary {
-    list-style: none;
-    cursor: pointer;
-}
-
-.profile-menu {
-    position: absolute;
-    right: 0;
-    top: calc(var(--topbar-height) + var(--space-2));
-    min-width: 16rem;
-    background: var(--surface);
-    border-radius: 0.75rem;
-    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.12);
-    padding: var(--space-3);
-}
 
 /* Cards */
 .card-admin {
@@ -392,3 +351,72 @@ body.admin-page {
 .icon-search::before { content: '\1F50D'; }
 .icon-bell::before { content: '\1F514'; }
 .icon-chevron-down::before { content: '\25BE'; }
+
+/* Global UI Polish Tokens - Phase 3 */
+
+/* Part 1: Spacing */
+.section-spacing {
+    padding-top: 56px;
+    padding-bottom: 56px;
+}
+
+@media (min-width: 768px) {
+    .section-spacing {
+        padding-top: 72px;
+        padding-bottom: 72px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .section-spacing {
+        padding-top: 96px;
+        padding-bottom: 96px;
+    }
+}
+
+.card-padding { padding: 24px !important; }
+.btn-padding { padding: 16px 24px !important; }
+.heading-spacing { margin-bottom: 24px !important; }
+.paragraph-spacing { margin-bottom: 16px !important; }
+.gap-components { gap: 16px !important; }
+
+/* Part 2: Typography */
+.text-hero { font-size: 56px; line-height: 1.1; font-weight: 700; letter-spacing: -1px; }
+@media (min-width: 992px) { .text-hero { font-size: 64px; } }
+.text-section { font-size: 36px; line-height: 1.2; font-weight: 700; letter-spacing: -0.5px; }
+.text-card-title { font-size: 24px; line-height: 1.3; font-weight: 600; }
+.text-subtitle { font-size: 18px; line-height: 1.5; font-weight: 500; }
+.text-body { font-size: 16px; line-height: 1.6; }
+.text-small { font-size: 14px; line-height: 1.5; }
+.text-meta { font-size: 13px; line-height: 1.5; }
+
+/* Part 3: Border Radius */
+.rounded-btn { border-radius: 12px !important; }
+.rounded-card { border-radius: 16px !important; }
+.rounded-img { border-radius: 16px !important; }
+.rounded-input { border-radius: 12px !important; }
+.rounded-hero-img { border-radius: 20px !important; }
+
+/* Part 4 & 9: Shadows and Micro-Animations */
+.shadow-elevate-1 { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important; }
+.shadow-elevate-2 { box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06) !important; }
+.shadow-elevate-3 { box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important; }
+
+.transition-200 { transition: all 200ms ease-out !important; }
+
+.btn-lift { transition: all 200ms ease-out !important; }
+.btn-lift:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important; }
+
+.card-lift { transition: all 300ms ease-out !important; }
+.card-lift:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important; }
+
+.img-zoom { transition: transform 500ms ease-out !important; }
+.img-zoom-container:hover .img-zoom { transform: scale(1.05); }
+
+/* Part 8: Icon Consistency */
+.icon-container-48 {
+    width: 48px; height: 48px; min-width: 48px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid rgba(0,0,0,0.05);
+}

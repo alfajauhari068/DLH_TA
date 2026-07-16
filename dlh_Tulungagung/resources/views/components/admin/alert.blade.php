@@ -1,5 +1,9 @@
 @props(['type' => 'info', 'message'])
-<div class="alert alert-{{ $type }} alert-dismissible fade show" role="alert">
+
+@php
+    $uiType = $type === 'danger' ? 'error' : $type;
+@endphp
+
+<x-ui.alert :type="$uiType" :dismissible="true">
     {{ $message }}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
+</x-ui.alert>

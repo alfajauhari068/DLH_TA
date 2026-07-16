@@ -3,30 +3,56 @@
 namespace App\Services;
 
 use App\Models\Program;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Http\UploadedFile;
 
-class ProgramService
+class ProgramService extends ModuleService
 {
-    public function paginate(int $perPage = 15): LengthAwarePaginator
+    public function __construct()
     {
-        return Program::query()->latest()->paginate($perPage);
+        parent::__construct(Program::class, [
+            'slug' => true,
+            'publish' => true,
+            'archive' => true,
+            'soft_delete' => true,
+            'audit' => true,
+            'media' => true,
+        ]);
     }
 
-    public function create(array $data): Program
+    public function publish(Program $program): bool
     {
-        return Program::create($data);
+        $program->forceFill(['status' => 'published', 'published_at' => now()]);
+        return $program->save();
     }
 
-    public function update(Program $program, array $data): Program
+    public function uploadFeaturedImage(Program $program, UploadedFile $file): array
     {
-        $program->fill($data);
+        $mediaService = app(MediaService::class);
+        $result = $mediaService->replace($program->featured_image, $file, 'public', 'programs');
+        $program->forceFill(['featured_image' => $result['path']]);
         $program->save();
 
-        return $program;
+        return $result;
     }
 
-    public function delete(Program $program): bool
+    public function unpublish(Program $program): bool
     {
-        return $program->delete();
+        $program->forceFill(['status' => 'draft']);
+        return $program->save();
+    }
+
+    public function duplicate(Program $program): Program
+    {
+        $clone = $program->replicate(['slug']);
+        $clone->slug = $program->slug . '-copy';
+        $clone->save();
+
+        return $clone;
+    }
+
+    public function feature(Program $program): bool
+    {
+        $program->forceFill(['featured' => true]);
+        return $program->save();
     }
 }

@@ -16,9 +16,14 @@ class StorePublicationRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
             'slug' => ['nullable', 'string', 'max:255'],
+            'summary' => ['nullable', 'string'],
             'content' => ['nullable', 'string'],
-            'status' => ['nullable', 'string'],
+            'category' => ['nullable', 'string', 'max:255'],
+            'status' => ['nullable', 'string', 'in:draft,published'],
+            'featured' => ['nullable', 'boolean'],
             'published_at' => ['nullable', 'date'],
+            'cover_file' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp,pdf'],
+            'document_file' => ['nullable', 'file', 'mimes:pdf,doc,docx,xls,xlsx,zip'],
         ];
     }
 }

@@ -2,75 +2,61 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StoreProgramRequest;
-use App\Http\Requests\Admin\UpdateProgramRequest;
 use App\Models\Program;
 use App\Services\ProgramService;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
+use Illuminate\Routing\Redirector;
 
-class ProgramController extends Controller
+class ProgramController extends BaseCrudController
 {
-    public function __construct(protected ProgramService $programService)
+    protected $service;
+
+    protected array $searchFields = ['title', 'slug', 'excerpt', 'content', 'status'];
+    protected array $filterFields = ['status', 'author', 'from', 'to'];
+    protected array $sortableFields = ['title', 'created_at', 'updated_at', 'published_at', 'status'];
+
+    public function __construct(ProgramService $service)
     {
+        $this->service = $service;
     }
 
-    public function index(Request $request): View
+    public function store(Request $request, Redirector $redirect)
     {
-        $this->authorize('viewAny', Program::class);
-
-        $programs = $this->programService->paginate($request->query('per_page', 15));
-
-        return view('admin.programs.index', compact('programs'));
+        return parent::store($request, $redirect);
     }
 
-    public function create(): View
+    public function update(Request $request, $program, Redirector $redirect)
     {
-        $this->authorize('create', Program::class);
-
-        return view('admin.programs.create');
+        return parent::update($request, $program, $redirect);
     }
 
-    public function store(StoreProgramRequest $request): RedirectResponse
+    protected function service()
     {
-        $this->authorize('create', Program::class);
-
-        $this->programService->create($request->validated());
-
-        return redirect()->route('admin.programs.index')->with('success', 'Program created successfully.');
+        return $this->service;
     }
 
-    public function show(Program $program): View
+    protected function modelClass(): string
     {
-        $this->authorize('view', $program);
-
-        return view('admin.programs.show', compact('program'));
+        return Program::class;
     }
 
-    public function edit(Program $program): View
+    protected function viewPath(): string
     {
-        $this->authorize('update', $program);
-
-        return view('admin.programs.edit', compact('program'));
+        return 'admin.programs';
     }
 
-    public function update(UpdateProgramRequest $request, Program $program): RedirectResponse
+    protected function routePrefix(): string
     {
-        $this->authorize('update', $program);
-
-        $this->programService->update($program, $request->validated());
-
-        return redirect()->route('admin.programs.index')->with('success', 'Program updated successfully.');
+        return 'admin.programs';
     }
 
-    public function destroy(Program $program): RedirectResponse
+    protected function singularVar(): string
     {
-        $this->authorize('delete', $program);
+        return 'program';
+    }
 
-        $this->programService->delete($program);
-
-        return redirect()->route('admin.programs.index')->with('success', 'Program deleted successfully.');
+    protected function pluralVar(): string
+    {
+        return 'programs';
     }
 }

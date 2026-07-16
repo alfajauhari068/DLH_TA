@@ -16,16 +16,6 @@ class RolesTableSeeder extends Seeder
             );
 
             Role::firstOrCreate(
-                ['name' => 'Operator'],
-                ['description' => 'Operator managing content and services.']
-            );
-
-            Role::firstOrCreate(
-                ['name' => 'Editor'],
-                ['description' => 'Editor managing articles and pages.']
-            );
-
-            Role::firstOrCreate(
                 ['name' => 'Guest'],
                 ['description' => 'Limited access for public-facing users.']
             );

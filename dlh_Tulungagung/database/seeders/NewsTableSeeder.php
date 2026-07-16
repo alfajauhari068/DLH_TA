@@ -12,7 +12,7 @@ class NewsTableSeeder extends Seeder
     public function run(): void
     {
         $category = NewsCategory::where('slug', 'berita')->first();
-        $author = User::where('email', 'editor@example.com')->first();
+        $author = User::where('email', 'admin@example.com')->first();
 
         if (! $category || ! $author) {
             return;

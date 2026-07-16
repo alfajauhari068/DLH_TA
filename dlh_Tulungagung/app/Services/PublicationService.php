@@ -3,30 +3,40 @@
 namespace App\Services;
 
 use App\Models\Publication;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Http\UploadedFile;
 
-class PublicationService
+class PublicationService extends ModuleService
 {
-    public function paginate(int $perPage = 15): LengthAwarePaginator
+    public function __construct()
     {
-        return Publication::query()->latest()->paginate($perPage);
+        parent::__construct(Publication::class, [
+            'slug' => true,
+            'publish' => true,
+            'archive' => true,
+            'soft_delete' => true,
+            'audit' => true,
+            'media' => true,
+        ]);
     }
 
-    public function create(array $data): Publication
+    public function uploadCover(Publication $publication, UploadedFile $file): array
     {
-        return Publication::create($data);
-    }
-
-    public function update(Publication $publication, array $data): Publication
-    {
-        $publication->fill($data);
+        $mediaService = app(MediaService::class);
+        $result = $mediaService->replace($publication->cover_file, $file, 'public', 'publications/covers');
+        $publication->forceFill(['cover_file' => $result['path']]);
         $publication->save();
 
-        return $publication;
+        return $result;
     }
 
-    public function delete(Publication $publication): bool
+    public function uploadDocument(Publication $publication, UploadedFile $file): array
     {
-        return $publication->delete();
+        $mediaService = app(MediaService::class);
+        $result = $mediaService->replace($publication->document_file, $file, 'public', 'publications/documents');
+        $publication->forceFill(['document_file' => $result['path']]);
+        $publication->save();
+
+        return $result;
     }
 }
+

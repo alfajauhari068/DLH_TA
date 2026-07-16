@@ -21,7 +21,9 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    overlay.addEventListener('click', () => setSidebarState(false));
+    if (overlay) {
+        overlay.addEventListener('click', () => setSidebarState(false));
+    }
 
     document.addEventListener('click', (e) => {
         if (!sidebar || !shell) return;

@@ -3,30 +3,46 @@
 namespace App\Services;
 
 use App\Models\Page;
-use Illuminate\Pagination\LengthAwarePaginator;
+use App\Repositories\PageRepository;
+use Illuminate\Http\Request;
 
-class PageService
+class PageService extends ModuleService
 {
-    public function paginate(int $perPage = 15): LengthAwarePaginator
+    public function __construct(?PageRepository $repository = null)
     {
-        return Page::query()->latest()->paginate($perPage);
+        parent::__construct(Page::class, []);
+        $this->repository = $repository ?? new PageRepository();
     }
 
-    public function create(array $data): Page
+    protected $repository;
+
+    public function paginate(Request|int|null $requestOrPerPage = null, int $defaultPerPage = null)
     {
-        return Page::create($data);
+        $perPage = $requestOrPerPage instanceof Request 
+            ? (int) $requestOrPerPage->query('per_page', $defaultPerPage ?? 15)
+            : ($requestOrPerPage ?? 15);
+            
+        return $this->repository->paginate(['per_page' => $perPage]);
     }
 
-    public function update(Page $page, array $data): Page
+    public function create(array $data)
     {
-        $page->fill($data);
-        $page->save();
+        $this->normalizeSlug($data);
+        $this->setAuditFields($data);
 
-        return $page;
+        return $this->repository->create($data);
     }
 
-    public function delete(Page $page): bool
+    public function update($model, array $data)
     {
-        return $page->delete();
+        $this->normalizeSlug($data, $model);
+        $this->setAuditFields($data);
+
+        return $this->repository->update($model, $data);
+    }
+
+    public function delete($model)
+    {
+        return $this->repository->delete($model);
     }
 }

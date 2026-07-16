@@ -2,15 +2,15 @@
 
 namespace Database\Seeders;
 
-use App\Models\Visitor;
+use App\Models\VisitorLog;
 use Illuminate\Database\Seeder;
 
 class VisitorLogsTableSeeder extends Seeder
 {
     public function run(): void
     {
-        Visitor::unguarded(function () {
-            Visitor::firstOrCreate(
+        VisitorLog::unguarded(function () {
+            VisitorLog::firstOrCreate(
                 ['ip_address' => '127.0.0.1'],
                 [
                     'ip_address' => '127.0.0.1',

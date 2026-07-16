@@ -14,13 +14,18 @@ return new class extends Migration
         Schema::create('programs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('slug');
-            $table->text('description')->nullable();
+            $table->string('slug')->nullable()->unique();
+            $table->text('excerpt')->nullable();
             $table->longText('content')->nullable();
+            $table->text('description')->nullable();
+            $table->string('featured_image')->nullable();
             $table->string('thumbnail')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
-            $table->string('status');
+            $table->string('status')->default('draft');
+            $table->timestamp('published_at')->nullable();
+            $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -2,75 +2,76 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StorePublicationRequest;
 use App\Http\Requests\Admin\UpdatePublicationRequest;
 use App\Models\Publication;
 use App\Services\PublicationService;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
+use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Validator;
 
-class PublicationController extends Controller
+class PublicationController extends BaseCrudController
 {
-    public function __construct(protected PublicationService $publicationService)
+    protected $service;
+
+    protected array $searchFields = ['title', 'slug', 'summary', 'content', 'status'];
+    protected array $filterFields = ['status', 'category', 'from', 'to'];
+    protected array $sortableFields = ['title', 'created_at', 'updated_at', 'published_at', 'status'];
+
+    public function __construct(PublicationService $service)
     {
+        $this->service = $service;
     }
 
-    public function index(Request $request): View
+    public function store(Request $request, Redirector $redirect)
     {
-        $this->authorize('viewAny', Publication::class);
+        $validator = Validator::make($request->all(), (new StorePublicationRequest())->rules());
 
-        $publications = $this->publicationService->paginate($request->query('per_page', 15));
+        if ($validator->fails()) {
+            return $redirect->back()->withErrors($validator)->withInput();
+        }
 
-        return view('admin.publications.index', compact('publications'));
+        return parent::store($request, $redirect);
     }
 
-    public function create(): View
+    public function update(Request $request, $publication, Redirector $redirect)
     {
-        $this->authorize('create', Publication::class);
+        $validator = Validator::make($request->all(), (new UpdatePublicationRequest())->rules());
 
-        return view('admin.publications.create');
+        if ($validator->fails()) {
+            return $redirect->back()->withErrors($validator)->withInput();
+        }
+
+        return parent::update($request, $publication, $redirect);
     }
 
-    public function store(StorePublicationRequest $request): RedirectResponse
+    protected function service()
     {
-        $this->authorize('create', Publication::class);
-
-        $this->publicationService->create($request->validated());
-
-        return redirect()->route('admin.publications.index')->with('success', 'Publication created successfully.');
+        return $this->service;
     }
 
-    public function show(Publication $publication): View
+    protected function modelClass(): string
     {
-        $this->authorize('view', $publication);
-
-        return view('admin.publications.show', compact('publication'));
+        return Publication::class;
     }
 
-    public function edit(Publication $publication): View
+    protected function viewPath(): string
     {
-        $this->authorize('update', $publication);
-
-        return view('admin.publications.edit', compact('publication'));
+        return 'admin.publications';
     }
 
-    public function update(UpdatePublicationRequest $request, Publication $publication): RedirectResponse
+    protected function routePrefix(): string
     {
-        $this->authorize('update', $publication);
-
-        $this->publicationService->update($publication, $request->validated());
-
-        return redirect()->route('admin.publications.index')->with('success', 'Publication updated successfully.');
+        return 'admin.publications';
     }
 
-    public function destroy(Publication $publication): RedirectResponse
+    protected function singularVar(): string
     {
-        $this->authorize('delete', $publication);
+        return 'publication';
+    }
 
-        $this->publicationService->delete($publication);
-
-        return redirect()->route('admin.publications.index')->with('success', 'Publication deleted successfully.');
+    protected function pluralVar(): string
+    {
+        return 'publications';
     }
 }
