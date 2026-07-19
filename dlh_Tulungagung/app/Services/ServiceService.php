@@ -69,7 +69,7 @@ class ServiceService extends ModuleService
     {
         $mediaService = app(MediaService::class);
 
-        foreach (['thumbnail', 'banner'] as $field) {
+        foreach (['icon', 'thumbnail', 'banner'] as $field) {
             if (! array_key_exists($field, $data)) {
                 continue;
             }

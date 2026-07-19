@@ -6,7 +6,7 @@
             <h1 class="text-xl font-semibold">News</h1>
         @endslot
         @slot('right')
-            <a href="{{ route('admin.news.create') }}" class="btn btn-primary">Create News</a>
+            <a href="{{ route('admin.news.create') }}" class="btn btn-primary">Tambah Berita</a>
         @endslot
     </x-admin.crud.toolbar>
 
@@ -24,12 +24,12 @@
                         <td class="px-4 py-2">{{ ucfirst(array_search($item->status, config('cms.status')) ?: '') }}</td>
                         <td class="px-4 py-2">{{ $item->published_at?->toDateString() }}</td>
                         <td class="px-4 py-2">
-                            <a href="{{ route('admin.news.show', $item) }}">View</a>
+                            <a href="{{ route('admin.news.show', $item) }}">Lihat</a>
                             <a href="{{ route('admin.news.edit', $item) }}" class="ml-2">Edit</a>
                             <form action="{{ route('admin.news.destroy', $item) }}" method="POST" class="inline">
                                 @csrf
                                 @method('DELETE')
-                                <button class="ml-2 text-red-600">Delete</button>
+                                <button class="ml-2 text-red-600">Hapus</button>
                             </form>
                         </td>
                     </tr>

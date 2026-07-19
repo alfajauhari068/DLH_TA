@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
-@section('title', 'View PPID Document')
-@section('subtitle', 'View details of public information document.')
+@section('title', 'Lihat PPID Document')
+@section('subtitle', 'Lihat details of public information document.')
 
 @section('actions')
     @can('update', $ppidDocument)
@@ -13,7 +13,7 @@
     <x-ui.breadcrumb :items="[
         ['label' => 'Dashboard', 'url' => route('dashboard')],
         ['label' => 'PPID', 'url' => route('admin.ppid.index')],
-        ['label' => 'View']
+        ['label' => 'Lihat']
     ]" />
 @endsection
 
@@ -51,7 +51,7 @@
                 <div class="mt-2">
                     @if($ppidDocument->file_path)
                         <a href="{{ Storage::url($ppidDocument->file_path) }}" target="_blank" class="inline-flex items-center text-primary hover:underline">
-                            <i class="bi bi-file-earmark-pdf mr-2"></i> View/Download Document
+                            <i class="bi bi-file-earmark-pdf mr-2"></i> Lihat/Download Document
                         </a>
                     @else
                         <span class="text-gray-500">No file attached.</span>

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', 'Edit PPID Document')
-@section('subtitle', 'Update an existing public information document.')
+@section('subtitle', 'Perbarui an existing public information document.')
 
 @section('breadcrumb')
     <x-ui.breadcrumb :items="[
@@ -37,7 +37,7 @@
                 <label for="file" class="block text-sm font-medium text-gray-700">Document File (Leave empty to keep current file)</label>
                 <input type="file" name="file" id="file" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary-dark">
                 @if($ppidDocument->file_path)
-                    <p class="mt-2 text-sm text-gray-500">Current file: <a href="{{ Storage::url($ppidDocument->file_path) }}" target="_blank" class="text-primary hover:underline">View Document</a></p>
+                    <p class="mt-2 text-sm text-gray-500">Current file: <a href="{{ Storage::url($ppidDocument->file_path) }}" target="_blank" class="text-primary hover:underline">Lihat Document</a></p>
                 @endif
                 @error('file')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -56,8 +56,8 @@
             </div>
 
             <div class="flex justify-end gap-3 pt-4">
-                <x-ui.button type="button" href="{{ route('admin.ppid.index') }}" variant="secondary">Cancel</x-ui.button>
-                <x-ui.button type="submit" variant="primary">Update</x-ui.button>
+                <x-ui.button type="button" href="{{ route('admin.ppid.index') }}" variant="secondary">Batal</x-ui.button>
+                <x-ui.button type="submit" variant="primary">Perbarui</x-ui.button>
             </div>
         </form>
     </x-ui.card>

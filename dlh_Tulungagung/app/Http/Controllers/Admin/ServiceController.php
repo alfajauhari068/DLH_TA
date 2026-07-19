@@ -24,12 +24,14 @@ class ServiceController extends BaseCrudController
 
     public function store(Request $request, Redirector $redirect)
     {
-        return parent::store($request, $redirect);
+        $validatedRequest = app(StoreServiceRequest::class);
+        return parent::store($validatedRequest, $redirect);
     }
 
     public function update(Request $request, $service, Redirector $redirect)
     {
-        return parent::update($request, $service, $redirect);
+        $validatedRequest = app(UpdateServiceRequest::class);
+        return parent::update($validatedRequest, $service, $redirect);
     }
 
     protected function service()

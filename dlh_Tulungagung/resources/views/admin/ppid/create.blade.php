@@ -52,7 +52,7 @@
             </div>
 
             <div class="flex justify-end gap-3 pt-4">
-                <x-ui.button type="button" href="{{ route('admin.ppid.index') }}" variant="secondary">Cancel</x-ui.button>
+                <x-ui.button type="button" href="{{ route('admin.ppid.index') }}" variant="secondary">Batal</x-ui.button>
                 <x-ui.button type="submit" variant="primary">Create</x-ui.button>
             </div>
         </form>

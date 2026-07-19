@@ -5,7 +5,7 @@
 
 @section('actions')
     @can('create', App\Models\Page::class)
-        <x-ui.button href="{{ route('admin.pages.create') }}" variant="primary">Create Page</x-ui.button>
+        <x-ui.button href="{{ route('admin.pages.create') }}" variant="primary">Tambah Halaman</x-ui.button>
     @endcan
 @endsection
 
@@ -21,13 +21,13 @@
         <x-slot:toolbar>
             <x-ui.toolbar>
                 <form action="{{ route('admin.pages.index') }}" method="GET" class="flex gap-2">
-                    <input type="text" name="search" placeholder="Search pages..." value="{{ request('search') }}" class="form-input rounded-md border-gray-300">
-                    <x-ui.button type="submit" variant="secondary">Search</x-ui.button>
+                    <input type="text" name="search" placeholder="Cari pages..." value="{{ request('search') }}" class="form-input rounded-md border-gray-300">
+                    <x-ui.button type="submit" variant="secondary">Cari</x-ui.button>
                 </form>
             </x-ui.toolbar>
         </x-slot:toolbar>
 
-        <x-ui.table :headers="['Title', 'Slug', 'Status', 'Actions']">
+        <x-ui.table :headers="['Title', 'Slug', 'Status', 'Aksi']">
             @forelse($pages as $page)
                 <tr>
                     <td class="px-6 py-4">{{ $page->title }}</td>

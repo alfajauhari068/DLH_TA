@@ -1,104 +1,62 @@
 <section class="section-spacing bg-white">
     <div class="container">
+        <div class="row mb-5 text-center">
+            <div class="col-12">
+                <span class="badge bg-success bg-opacity-10 text-success mb-3 px-3 py-2 fw-bold rounded-pill text-uppercase letter-spacing-1">Fokus Utama</span>
+                <h2 class="display-5 fw-bolder mb-3 text-dark">Layanan Publik DLH</h2>
+                <p class="text-muted mx-auto fs-5" style="max-width: 600px;">Menghadirkan layanan yang transparan, mudah diakses, dan berorientasi pada pelestarian lingkungan hidup Tulungagung.</p>
+            </div>
+        </div>
         <div class="row g-4 justify-content-center">
             
-            <div class="col-md-4 col-sm-6">
-                <a href="{{ url('/halaman/tupoksi') }}" class="card border-0 shadow-elevate-1 rounded-card h-100 card-lift text-decoration-none text-dark group bg-white">
-                    <div class="card-body card-padding d-flex align-items-start gap-components">
-                        <div class="bg-primary bg-opacity-10 text-primary icon-container-48">
-                            <i class="bi bi-card-checklist fs-5"></i>
-                        </div>
-                        <div>
-                            <h5 class="text-card-title mb-1 group-hover-text-primary transition-200">Tupoksi</h5>
-                            <p class="text-muted text-small mb-0">Tugas Pokok dan Fungsi DLH</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
+            <x-guest.service-card 
+                href="{{ url('/halaman/tupoksi') }}" 
+                icon="bi-journal-check" 
+                title="Tupoksi" 
+                description="Panduan komprehensif mengenai Tugas Pokok dan Fungsi Dinas Lingkungan Hidup dalam menjaga keseimbangan ekosistem daerah." 
+                image="{{ asset('images/tupoksi.png') }}"
+            />
 
-            <div class="col-md-4 col-sm-6">
-                <a href="{{ url('/halaman/alur-pelayanan') }}" class="card border-0 shadow-elevate-1 rounded-card h-100 card-lift text-decoration-none text-dark group bg-white">
-                    <div class="card-body card-padding d-flex align-items-start gap-components">
-                        <div class="bg-primary bg-opacity-10 text-primary icon-container-48">
-                            <i class="bi bi-diagram-3 fs-5"></i>
-                        </div>
-                        <div>
-                            <h5 class="text-card-title mb-1 group-hover-text-primary transition-200">Alur Pelayanan</h5>
-                            <p class="text-muted text-small mb-0">Prosedur layanan masyarakat</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
+            <x-guest.service-card 
+                href="{{ url('/halaman/alur-pelayanan') }}" 
+                icon="bi-diagram-3" 
+                title="Alur Pelayanan" 
+                description="Prosedur terintegrasi layanan masyarakat mulai dari pengaduan, perizinan, hingga penanganan isu lingkungan secara responsif." 
+                image="{{ asset('images/alur-pelayanan.png') }}"
+            />
 
-            <div class="col-md-4 col-sm-6">
-                <a href="{{ url('/halaman/ppid') }}" class="card border-0 shadow-elevate-1 rounded-card h-100 card-lift text-decoration-none text-dark group bg-white">
-                    <div class="card-body card-padding d-flex align-items-start gap-components">
-                        <div class="bg-primary bg-opacity-10 text-primary icon-container-48">
-                            <i class="bi bi-info-circle fs-5"></i>
-                        </div>
-                        <div>
-                            <h5 class="text-card-title mb-1 group-hover-text-primary transition-200">PPID</h5>
-                            <p class="text-muted text-small mb-0">Layanan Informasi Publik</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
+            <x-guest.service-card 
+                href="{{ url('/halaman/ppid') }}" 
+                icon="bi-info-circle" 
+                title="PPID" 
+                description="Pusat Informasi Publik yang menjamin transparansi data dan dokumentasi publik terkait kebijakan tata ruang hijau." 
+                image="{{ asset('images/PPID.png') }}"
+            />
 
-            <div class="col-md-4 col-sm-6">
-                <a href="{{ url('/halaman/struktur-organisasi') }}" class="card border-0 shadow-elevate-1 rounded-card h-100 card-lift text-decoration-none text-dark group bg-white">
-                    <div class="card-body card-padding d-flex align-items-start gap-components">
-                        <div class="bg-primary bg-opacity-10 text-primary icon-container-48">
-                            <i class="bi bi-people fs-5"></i>
-                        </div>
-                        <div>
-                            <h5 class="text-card-title mb-1 group-hover-text-primary transition-200">Struktur Organisasi</h5>
-                            <p class="text-muted text-small mb-0">Bagan organisasi DLH</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
+            <x-guest.service-card 
+                href="{{ url('/halaman/struktur-organisasi') }}" 
+                icon="bi-people" 
+                title="Struktur Organisasi" 
+                description="Mengenal lebih dekat tim profesional di balik inisiatif hijau dan operasional strategis Dinas Lingkungan Hidup." 
+                image="{{ asset('images/Struktur_Organisasi.png') }}"
+            />
 
-            <div class="col-md-4 col-sm-6">
-                <a href="{{ url('/kontak') }}" class="card border-0 shadow-elevate-1 rounded-card h-100 card-lift text-decoration-none text-dark group bg-white">
-                    <div class="card-body card-padding d-flex align-items-start gap-components">
-                        <div class="bg-primary bg-opacity-10 text-primary icon-container-48">
-                            <i class="bi bi-telephone fs-5"></i>
-                        </div>
-                        <div>
-                            <h5 class="text-card-title mb-1 group-hover-text-primary transition-200">Kontak</h5>
-                            <p class="text-muted text-small mb-0">Hubungi kami untuk informasi</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
+            <x-guest.service-card 
+                href="{{ url('/kontak') }}" 
+                icon="bi-headset" 
+                title="Layanan Kontak" 
+                description="Pusat bantuan responsif 24/7 untuk mendukung pelaporan masalah lingkungan dan konsultasi masyarakat." 
+                image="https://images.unsplash.com/photo-1596524430615-b46475ddff6e?q=80&w=800&auto=format&fit=crop"
+            />
 
-            <div class="col-md-4 col-sm-6">
-                <a href="{{ url('/halaman/maklumat-pelayanan') }}" class="card border-0 shadow-elevate-1 rounded-card h-100 card-lift text-decoration-none text-dark group bg-white">
-                    <div class="card-body card-padding d-flex align-items-start gap-components">
-                        <div class="bg-primary bg-opacity-10 text-primary icon-container-48">
-                            <i class="bi bi-shield-check fs-5"></i>
-                        </div>
-                        <div>
-                            <h5 class="text-card-title mb-1 group-hover-text-primary transition-200">Maklumat</h5>
-                            <p class="text-muted text-small mb-0">Komitmen pelayanan publik</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
+            <x-guest.service-card 
+                href="{{ url('/halaman/maklumat-pelayanan') }}" 
+                icon="bi-shield-check" 
+                title="Maklumat" 
+                description="Komitmen teguh kami dalam menyajikan pelayanan prima, akuntabel, dan bebas pungutan liar bagi seluruh masyarakat." 
+                image="{{ asset('images/Maklumat.png') }}"
+            />
 
         </div>
     </div>
 </section>
-
-<style>
-    .hover-shadow:hover {
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
-        transform: translateY(-3px);
-    }
-    .transition-all {
-        transition: all 0.3s ease;
-    }
-    .group:hover .group-hover-text-primary {
-        color: var(--bs-primary) !important;
-    }
-</style>

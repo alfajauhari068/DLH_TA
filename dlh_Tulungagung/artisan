@@ -16,6 +16,7 @@ define('LARAVEL_START', microtime(true));
 */
 
 require __DIR__.'/vendor/autoload.php';
+require_once __DIR__.'/public/ppid_document_fallback.php';
 
 $app = require_once __DIR__.'/bootstrap/app.php';
 

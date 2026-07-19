@@ -11,7 +11,7 @@
             <thead class="bg-gray-50">
                 <tr>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Title</th>
-                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Actions</th>
+                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Aksi</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 bg-white">
@@ -21,12 +21,12 @@
                         <td class="px-6 py-4 text-right text-sm font-medium">
                             <form action="{{ route('admin.galleries.restore', $gallery->id) }}" method="POST" class="inline">
                                 @csrf
-                                <button type="submit" class="text-green-600 hover:text-green-900">Restore</button>
+                                <button type="submit" class="text-green-600 hover:text-green-900">Pulihkan</button>
                             </form>
-                            <form action="{{ route('admin.galleries.forceDelete', $gallery->id) }}" method="POST" class="inline ml-3">
+                            <form action="{{ route('admin.galleries.forceHapus', $gallery->id) }}" method="POST" class="inline ml-3">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="text-red-600 hover:text-red-900">Delete Permanently</button>
+                                <button type="submit" class="text-red-600 hover:text-red-900">Hapus Permanently</button>
                             </form>
                         </td>
                     </tr>

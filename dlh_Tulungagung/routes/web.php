@@ -22,9 +22,15 @@ Route::get('/ppid', [FrontendController::class, 'ppid'])->name('ppid');
 Route::get('/berita', [FrontendController::class, 'news'])->name('news');
 Route::get('/berita/{slug}', [FrontendController::class, 'newsDetail'])->name('news.detail');
 Route::get('/galeri', [FrontendController::class, 'galleries'])->name('galleries');
+Route::get('/galeri/{slug}', [FrontendController::class, 'galleryDetail'])->name('galleries.detail');
 Route::get('/dokumen', [FrontendController::class, 'documents'])->name('documents');
 Route::get('/kontak', [FrontendController::class, 'contact'])->name('contact');
 Route::get('/halaman/{slug}', [FrontendController::class, 'page'])->name('page');
+
+Route::get('/layanan/{slug}', [FrontendController::class, 'serviceDetail'])->name('services.detail');
+Route::get('/agenda', [FrontendController::class, 'agendas'])->name('agendas');
+Route::get('/skm', [FrontendController::class, 'skm'])->name('skm');
+Route::get('/struktur-organisasi', [FrontendController::class, 'officials'])->name('officials');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
@@ -62,6 +68,20 @@ Route::middleware('auth')->group(function () {
         Route::resource('ppid', PpidController::class);
         Route::resource('pages', PageController::class);
         Route::resource('settings', SettingController::class)->only(['index', 'edit', 'update']);
+        
+        Route::get('menus', [\App\Http\Controllers\Admin\MenuController::class, 'index'])->name('menus.index');
+        Route::resource('menu-items', \App\Http\Controllers\Admin\MenuItemController::class)
+            ->parameters(['menu-items' => 'item'])
+            ->names('menus.items')
+            ->except(['index', 'show']);
+        
+        Route::resource('departments', \App\Http\Controllers\Admin\DepartmentController::class);
+        Route::resource('positions', \App\Http\Controllers\Admin\PositionController::class);
+        Route::resource('officials', \App\Http\Controllers\Admin\OfficialController::class);
+        Route::resource('agendas', \App\Http\Controllers\Admin\AgendaController::class);
+        Route::resource('skm-scores', \App\Http\Controllers\Admin\SkmScoreController::class);
+
+        Route::post('media/upload', [\App\Http\Controllers\Admin\MediaController::class, 'upload'])->name('media.upload');
     });
     });
 });

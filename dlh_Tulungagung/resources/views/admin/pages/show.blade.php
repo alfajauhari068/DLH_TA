@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 
-@section('title', 'View Page')
-@section('subtitle', 'View details of static page.')
+@section('title', 'Lihat Page')
+@section('subtitle', 'Lihat details of static page.')
 
 @section('actions')
     @can('update', $page)
-        <x-ui.button href="{{ route('admin.pages.edit', $page) }}" variant="primary">Edit Page</x-ui.button>
+        <x-ui.button href="{{ route('admin.pages.edit', $page) }}" variant="primary">Ubah Halaman</x-ui.button>
     @endcan
 @endsection
 
@@ -13,7 +13,7 @@
     <x-ui.breadcrumb :items="[
         ['label' => 'Dashboard', 'url' => route('dashboard')],
         ['label' => 'Pages', 'url' => route('admin.pages.index')],
-        ['label' => 'View']
+        ['label' => 'Lihat']
     ]" />
 @endsection
 

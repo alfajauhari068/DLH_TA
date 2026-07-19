@@ -22,6 +22,27 @@ class NewsController extends BaseCrudController
         $this->service = $service;
     }
 
+    public function create()
+    {
+        $categories = \App\Models\NewsCategory::all();
+        return view($this->viewPath() . '.create', [
+            $this->singularVar() => new News(),
+            'categories' => $categories
+        ]);
+    }
+
+    public function edit($id)
+    {
+        $model = $this->resolveModel($id);
+        $this->authorize('update', $model);
+        $categories = \App\Models\NewsCategory::all();
+
+        return view($this->viewPath() . '.edit', [
+            $this->singularVar() => $model,
+            'categories' => $categories
+        ]);
+    }
+
     public function store(Request $request, Redirector $redirect)
     {
         return parent::store($request, $redirect);

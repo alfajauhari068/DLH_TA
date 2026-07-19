@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\HasSlug;
 use App\Traits\HasStatus;
+use App\Traits\HasMedia;
 use App\Traits\HasCreatedBy;
 use App\Traits\HasUpdatedBy;
 use App\Models\User;
 
 class News extends Model
 {
-    use HasFactory, SoftDeletes, HasSlug, HasStatus;
+    use HasFactory, SoftDeletes, HasSlug, HasStatus, HasMedia;
 
     protected $fillable = [
         'category_id', 'author_id', 'title', 'slug', 'summary', 'content', 'featured_image',
@@ -31,9 +32,9 @@ class News extends Model
         return $this->belongsTo(User::class, 'author_id');
     }
 
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo(NewsCategory::class, 'category_id');
+        return $this->belongsToMany(NewsCategory::class, 'news_news_category', 'news_id', 'news_category_id');
     }
 
     public function tags()
@@ -41,10 +42,22 @@ class News extends Model
         // return $this->morphToMany(Tag::class, 'taggable');
     }
 
-    public function media()
+    public function getUrlAttribute()
     {
-        // return $this->hasMany(Media::class);
+        return route('news.detail', $this->slug);
     }
+
+    public function getImageUrlAttribute()
+    {
+        return $this->featured_image ? asset('storage/' . $this->featured_image) : asset('images/default-news.jpg');
+    }
+
+    public function getCategoryNameAttribute()
+    {
+        return $this->categories->first()->name ?? 'Uncategorized';
+    }
+
+
 
 }
 

@@ -6,7 +6,7 @@
             <h1 class="text-xl font-semibold">Publications</h1>
         @endslot
         @slot('right')
-            <a href="{{ route('admin.publications.create') }}" class="btn btn-primary">Create Publication</a>
+            <a href="{{ route('admin.publications.create') }}" class="btn btn-primary">Tambah Publikasi</a>
         @endslot
     </x-admin.crud.toolbar>
 
@@ -24,12 +24,12 @@
                         <td class="px-4 py-2">{{ $item->category }}</td>
                         <td class="px-4 py-2">{{ $item->status }}</td>
                         <td class="px-4 py-2">
-                            <a href="{{ route('admin.publications.show', $item) }}">View</a>
+                            <a href="{{ route('admin.publications.show', $item) }}">Lihat</a>
                             <a href="{{ route('admin.publications.edit', $item) }}" class="ml-2">Edit</a>
                             <form action="{{ route('admin.publications.destroy', $item) }}" method="POST" class="inline">
                                 @csrf
                                 @method('DELETE')
-                                <button class="ml-2 text-red-600">Delete</button>
+                                <button class="ml-2 text-red-600">Hapus</button>
                             </form>
                         </td>
                     </tr>

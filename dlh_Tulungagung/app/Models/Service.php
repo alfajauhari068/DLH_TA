@@ -10,9 +10,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use App\Traits\HasMedia;
+
 class Service extends Model
 {
-    use HasFactory, SoftDeletes, HasSlug, HasStatus, HasCreatedBy, HasUpdatedBy;
+    use HasFactory, SoftDeletes, HasSlug, HasStatus, HasCreatedBy, HasUpdatedBy, HasMedia;
 
     protected $fillable = [
         'title', 'slug', 'summary', 'description', 'service_type', 'service_category',

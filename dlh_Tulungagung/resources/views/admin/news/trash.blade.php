@@ -15,12 +15,12 @@
                         <td class="px-4 py-2">
                             <form action="{{ route('admin.news.restore', $item->id) }}" method="POST" class="inline">
                                 @csrf
-                                <button class="text-green-600">Restore</button>
+                                <button class="text-green-600">Pulihkan</button>
                             </form>
-                            <form action="{{ route('admin.news.forceDelete', $item->id) }}" method="POST" class="inline">
+                            <form action="{{ route('admin.news.forceHapus', $item->id) }}" method="POST" class="inline">
                                 @csrf
                                 @method('DELETE')
-                                <button class="text-red-600">Delete Permanently</button>
+                                <button class="text-red-600">Hapus Permanently</button>
                             </form>
                         </td>
                     </tr>

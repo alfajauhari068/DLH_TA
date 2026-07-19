@@ -12,7 +12,7 @@
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <i class="bi bi-search text-gray-400"></i>
                 </div>
-                <input type="text" class="block w-full pl-10 pr-3 py-2 border border-gray-200 rounded-xl leading-5 bg-gray-50 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/20 focus:border-primary sm:text-sm transition-colors" placeholder="Cari data...">
+                <input type="text" class="block w-full pl-10 pr-3 py-2 border border-slate-200/80 rounded-xl leading-5 bg-slate-50 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 sm:text-sm transition-colors" placeholder="Cari data...">
             </div>
         </div>
     </div>
@@ -28,9 +28,9 @@
 
         <div class="h-8 w-px bg-gray-200 mx-1 hidden sm:block"></div>
 
-        <!-- Profile Dropdown (Using Alpine or Bootstrap Dropdown) -->
-        <div class="dropdown">
-            <button class="flex items-center gap-3 p-1 rounded-xl hover:bg-gray-50 transition-colors focus:outline-none" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        <!-- Profile Dropdown (Native Implementation) -->
+        <div class="relative" id="profile-dropdown-container">
+            <button class="flex items-center gap-3 p-1 rounded-2xl hover:bg-primary/5 transition-colors focus:outline-none" type="button" id="profileDropdownBtn" aria-expanded="false">
                 <div class="w-10 h-10 rounded-xl bg-primary/10 text-primary font-bold flex items-center justify-center shrink-0">
                     {{ strtoupper(substr(auth()->user()->name ?? 'A', 0, 1)) }}
                 </div>
@@ -38,19 +38,57 @@
                     <p class="text-sm font-semibold text-gray-900 leading-none mb-1">{{ auth()->user()->name ?? 'Administrator' }}</p>
                     <p class="text-xs text-muted leading-none">Admin</p>
                 </div>
-                <i class="bi bi-chevron-down text-gray-400 text-sm hidden sm:block"></i>
+                <i class="bi bi-chevron-down text-gray-400 text-sm hidden sm:block transition-transform duration-300" id="profileDropdownIcon"></i>
             </button>
-            <ul class="dropdown-menu dropdown-menu-end border-0 shadow-hover rounded-xl mt-2 p-2 min-w-[200px]" aria-labelledby="profileDropdown">
-                <li><a class="dropdown-item rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors flex items-center gap-2" href="{{ route('admin.users.edit', auth()->id()) }}"><i class="bi bi-person"></i> Profil Saya</a></li>
-                <li><a class="dropdown-item rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors flex items-center gap-2" href="{{ route('admin.settings.index') }}"><i class="bi bi-gear"></i> Pengaturan</a></li>
-                <li><hr class="dropdown-divider my-2 border-gray-100"></li>
-                <li>
-                    <x-logout-button class="dropdown-item rounded-lg px-3 py-2 text-sm text-danger hover:bg-danger/10 hover:text-danger transition-colors flex items-center gap-2 w-full text-left">
-                        <i class="bi bi-box-arrow-right"></i> Keluar
-                    </x-logout-button>
-                </li>
-            </ul>
+            
+            <div id="profileDropdownMenu" class="absolute right-0 mt-2 w-56 bg-white/95 backdrop-blur-sm rounded-2xl shadow-glass border border-gray-100 p-2 invisible opacity-0 transform scale-95 transition-all duration-300 z-50 origin-top-right">
+                <a class="flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm text-gray-700 hover:bg-primary/5 hover:text-primary transition-colors w-full font-medium" href="{{ route('admin.users.edit', auth()->id()) }}">
+                    <i class="bi bi-person text-lg text-gray-400"></i> Profil Saya
+                </a>
+                <a class="flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm text-gray-700 hover:bg-primary/5 hover:text-primary transition-colors w-full font-medium" href="{{ route('admin.settings.index') }}">
+                    <i class="bi bi-gear text-lg text-gray-400"></i> Pengaturan
+                </a>
+                <hr class="my-2 border-gray-100">
+                <x-logout-button class="flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm text-danger hover:bg-danger/10 hover:text-danger transition-colors w-full text-left font-medium">
+                    <i class="bi bi-box-arrow-right text-lg"></i> Keluar
+                </x-logout-button>
+            </div>
         </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const btn = document.getElementById('profileDropdownBtn');
+                const menu = document.getElementById('profileDropdownMenu');
+                const icon = document.getElementById('profileDropdownIcon');
+                
+                if (btn && menu && icon) {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+                        btn.setAttribute('aria-expanded', !isExpanded);
+                        
+                        if (!isExpanded) {
+                            menu.classList.remove('invisible', 'opacity-0', 'scale-95');
+                            menu.classList.add('opacity-100', 'scale-100');
+                            icon.classList.add('rotate-180');
+                        } else {
+                            menu.classList.add('invisible', 'opacity-0', 'scale-95');
+                            menu.classList.remove('opacity-100', 'scale-100');
+                            icon.classList.remove('rotate-180');
+                        }
+                    });
+
+                    document.addEventListener('click', (e) => {
+                        if (!menu.contains(e.target) && !btn.contains(e.target)) {
+                            btn.setAttribute('aria-expanded', 'false');
+                            menu.classList.add('invisible', 'opacity-0', 'scale-95');
+                            menu.classList.remove('opacity-100', 'scale-100');
+                            icon.classList.remove('rotate-180');
+                        }
+                    });
+                }
+            });
+        </script>
         
     </div>
 </div>

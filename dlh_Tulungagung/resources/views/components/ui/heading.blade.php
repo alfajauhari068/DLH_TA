@@ -8,8 +8,8 @@
 @php
     $sizeClasses = [
         'display' => 'text-4xl md:text-5xl font-bold tracking-tight',
-        'title' => 'text-2xl md:text-3xl font-bold',
-        'heading' => 'text-xl md:text-2xl font-semibold',
+        'title' => 'text-4xl font-bold',
+        'heading' => 'text-2xl font-bold',
         'subtitle' => 'text-lg font-medium',
     ][$size] ?? 'text-2xl font-bold';
 

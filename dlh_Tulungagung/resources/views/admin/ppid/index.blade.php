@@ -21,13 +21,13 @@
         <x-slot:toolbar>
             <x-ui.toolbar>
                 <form action="{{ route('admin.ppid.index') }}" method="GET" class="flex gap-2">
-                    <input type="text" name="search" placeholder="Search documents..." value="{{ request('search') }}" class="form-input rounded-md border-gray-300">
-                    <x-ui.button type="submit" variant="secondary">Search</x-ui.button>
+                    <input type="text" name="search" placeholder="Cari documents..." value="{{ request('search') }}" class="form-input rounded-md border-gray-300">
+                    <x-ui.button type="submit" variant="secondary">Cari</x-ui.button>
                 </form>
             </x-ui.toolbar>
         </x-slot:toolbar>
 
-        <x-ui.table :headers="['Title', 'Category', 'Status', 'Actions']">
+        <x-ui.table :headers="['Title', 'Category', 'Status', 'Aksi']">
             @forelse($ppids as $document)
                 <tr>
                     <td class="px-6 py-4">{{ $document->title }}</td>

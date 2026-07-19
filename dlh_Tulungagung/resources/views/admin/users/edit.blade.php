@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
-@section('title', 'Edit User')
-@section('subtitle', 'Update user information and permissions.')
+@section('title', 'Ubah Pengguna')
+@section('subtitle', 'Perbarui user information and permissions.')
 
 @section('breadcrumb')
     <x-admin.breadcrumb :items="[
@@ -20,8 +20,8 @@
             @include('admin.users._form', ['user' => $user, 'roles' => $roles])
 
             <div class="d-flex flex-wrap gap-2 mt-4">
-                <button type="submit" class="btn btn-primary">Save changes</button>
-                <a href="{{ route('admin.users.index') }}" class="btn btn-outline-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary">Simpan changes</button>
+                <a href="{{ route('admin.users.index') }}" class="btn btn-outline-secondary">Batal</a>
             </div>
         </form>
     </x-admin.card>

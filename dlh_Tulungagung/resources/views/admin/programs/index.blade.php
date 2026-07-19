@@ -30,12 +30,12 @@
                         <td class="px-3 py-2">{{ $program->status }}</td>
                         <td class="px-3 py-2">{{ optional($program->published_at)->format('Y-m-d') }}</td>
                         <td class="px-3 py-2">
-                            <a href="{{ route('admin.programs.show', $program) }}" class="me-2">View</a>
+                            <a href="{{ route('admin.programs.show', $program) }}" class="me-2">Lihat</a>
                             <a href="{{ route('admin.programs.edit', $program) }}" class="me-2">Edit</a>
                             <form action="{{ route('admin.programs.destroy', $program) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-link p-0 text-danger">Delete</button>
+                                <button type="submit" class="btn btn-link p-0 text-danger">Hapus</button>
                             </form>
                         </td>
                     </tr>

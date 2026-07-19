@@ -24,12 +24,49 @@ class GalleryController extends BaseCrudController
 
     public function store(Request $request, Redirector $redirect)
     {
-        return parent::store($request, $redirect);
+        $data = method_exists($request, 'validated') ? $request->validated() : $request->all();
+
+        if ($request->hasFile('image')) {
+            $data['cover_image'] = $request->file('image')->store('galleries', 'public');
+        }
+
+        $gallery = $this->service()->create($data);
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                $path = $file->store('galleries/items', 'public');
+                $gallery->items()->create([
+                    'image' => $path,
+                    'caption' => $file->getClientOriginalName(),
+                ]);
+            }
+        }
+
+        return $redirect->route($this->routePrefix() . '.index')->with('success', 'Created successfully.');
     }
 
-    public function update(Request $request, $gallery, Redirector $redirect)
+    public function update(Request $request, $id, Redirector $redirect)
     {
-        return parent::update($request, $gallery, $redirect);
+        $gallery = $this->resolveModel($id);
+        $data = method_exists($request, 'validated') ? $request->validated() : $request->all();
+
+        if ($request->hasFile('image')) {
+            $data['cover_image'] = $request->file('image')->store('galleries', 'public');
+        }
+
+        $this->service()->update($gallery, $data);
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                $path = $file->store('galleries/items', 'public');
+                $gallery->items()->create([
+                    'image' => $path,
+                    'caption' => $file->getClientOriginalName(),
+                ]);
+            }
+        }
+
+        return $redirect->route($this->routePrefix() . '.index')->with('success', 'Updated successfully.');
     }
 
     protected function service()

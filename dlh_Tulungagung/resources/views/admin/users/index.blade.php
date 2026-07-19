@@ -36,7 +36,7 @@
                     <th scope="col">Phone</th>
                     <th scope="col">Status</th>
                     <th scope="col">Last login</th>
-                    <th scope="col" class="text-end">Actions</th>
+                    <th scope="col" class="text-end">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -55,16 +55,16 @@
                         <td class="text-end">
                             <div class="d-flex justify-content-end gap-2 flex-wrap">
                                 @can('view', $user)
-                                    <a href="{{ route('admin.users.show', $user) }}" class="btn btn-sm btn-outline-secondary">View</a>
+                                    <a href="{{ route('admin.users.show', $user) }}" class="btn btn-sm btn-outline-secondary">Lihat</a>
                                 @endcan
                                 @can('update', $user)
                                     <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-sm btn-outline-primary">Edit</a>
                                 @endcan
                                 @can('delete', $user)
-                                    <form action="{{ route('admin.users.destroy', $user) }}" method="POST" onsubmit="return confirm('Delete this user?');" class="d-inline">
+                                    <form action="{{ route('admin.users.destroy', $user) }}" method="POST" onsubmit="return confirm('Hapus this user?');" class="d-inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">Hapus</button>
                                     </form>
                                 @endcan
                             </div>

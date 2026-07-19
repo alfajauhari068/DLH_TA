@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', 'Edit Setting')
-@section('subtitle', 'Update website setting value.')
+@section('subtitle', 'Perbarui website setting value.')
 
 @section('breadcrumb')
     <x-ui.breadcrumb :items="[
@@ -43,8 +43,8 @@
             </div>
 
             <div class="flex justify-end gap-3 pt-4">
-                <x-ui.button type="button" href="{{ route('admin.settings.index') }}" variant="secondary">Cancel</x-ui.button>
-                <x-ui.button type="submit" variant="primary">Update</x-ui.button>
+                <x-ui.button type="button" href="{{ route('admin.settings.index') }}" variant="secondary">Batal</x-ui.button>
+                <x-ui.button type="submit" variant="primary">Perbarui</x-ui.button>
             </div>
         </form>
     </x-ui.card>

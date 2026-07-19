@@ -1,4 +1,4 @@
 <div class="flex items-center gap-2">
-    <button type="submit" class="btn btn-primary">Save</button>
-    <a href="{{ url()->previous() }}" class="btn btn-secondary">Cancel</a>
+    <button type="submit" class="btn btn-primary">Simpan</button>
+    <a href="{{ url()->previous() }}" class="btn btn-secondary">Batal</a>
 </div>

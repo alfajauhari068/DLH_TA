@@ -48,7 +48,12 @@ class CrudQuery
             $dir = 'desc';
         }
 
-        $query->orderBy($sort, $dir);
+        $table = $query->getModel()->getTable();
+        if (Schema::hasColumn($table, $sort)) {
+            $query->orderBy($sort, $dir);
+        } else {
+            $query->orderBy('id', $dir);
+        }
 
         return $query;
     }

@@ -31,12 +31,12 @@
                         <td class="px-3 py-2">{{ $service->status }}</td>
                         <td class="px-3 py-2">{{ optional($service->published_at)->format('Y-m-d') }}</td>
                         <td class="px-3 py-2">
-                            <a href="{{ route('admin.services.show', $service) }}" class="me-2">View</a>
+                            <a href="{{ route('admin.services.show', $service) }}" class="me-2 text-decoration-none">Lihat</a>
                             <a href="{{ route('admin.services.edit', $service) }}" class="me-2">Edit</a>
                             <form action="{{ route('admin.services.destroy', $service) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-link p-0 text-danger">Delete</button>
+                                <button type="submit" class="btn btn-link p-0 text-danger">Hapus</button>
                             </form>
                         </td>
                     </tr>

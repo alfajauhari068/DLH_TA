@@ -28,7 +28,7 @@
         <div class="flex-1 flex flex-col min-w-0 overflow-hidden relative">
             
             <!-- Topbar -->
-            <header class="bg-white border-b border-surface-border sticky top-0 z-30">
+            <header class="bg-white/80 backdrop-blur-md border-b border-surface-border sticky top-0 z-30">
                 <x-admin.topbar />
             </header>
 
@@ -37,13 +37,13 @@
                 <main id="main-content" class="p-6 md:p-8 max-w-7xl mx-auto w-full">
                     
                     <!-- Page Header -->
-                    <div class="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div class="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
                         <div>
                             @hasSection('section')
                                 <div class="text-primary font-medium text-sm tracking-wider uppercase mb-1">@yield('section')</div>
                             @endif
                             <x-ui.heading size="title">@yield('title', 'Dashboard')</x-ui.heading>
-                            <x-ui.text size="body" color="text-muted">@yield('subtitle', 'Manage DLH Tulungagung services and content in one central interface.')</x-ui.text>
+                            <x-ui.text size="body" color="text-muted">@yield('subtitle', 'Kelola layanan dan konten Dinas Lingkungan Hidup Kabupaten Tulungagung dalam satu antarmuka terpusat.')</x-ui.text>
                         </div>
                         
                         <div class="flex items-center gap-3">
@@ -52,7 +52,7 @@
                     </div>
 
                     @if (View::hasSection('breadcrumb'))
-                        <div class="mb-6">
+                        <div class="mb-8">
                             @yield('breadcrumb')
                         </div>
                     @endif
@@ -83,5 +83,7 @@
 
     <!-- Mobile Overlay -->
     <div class="fixed inset-0 bg-gray-900/50 z-40 lg:hidden hidden pointer-events-none" id="mobile-sidebar-overlay" aria-hidden="true"></div>
+    
+    @stack('scripts')
 </body>
 </html>

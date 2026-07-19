@@ -8,12 +8,18 @@
         :breadcrumbs="[['label' => $page->title]]"
     />
 
-    <section class="py-16">
-        <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-sm p-6 md:p-10 border border-gray-100">
-                <article class="prose prose-lg max-w-none text-gray-700">
-                    {!! $page->content !!}
-                </article>
+    <section class="py-5 bg-light">
+        <div class="container py-4">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                        <div class="card-body p-4 p-md-5">
+                            <article class="prose prose-lg max-w-none text-gray-800" style="line-height: 1.8;">
+                                {!! $page->content !!}
+                            </article>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

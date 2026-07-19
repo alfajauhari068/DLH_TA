@@ -4,7 +4,7 @@
 @section('subtitle', 'Recover or permanently remove removed programs.')
 
 @section('content')
-    <x-admin.card title="Deleted programs">
+    <x-admin.card title="Hapusd programs">
         @if($programs->isEmpty())
             <p class="mb-0">No trashed programs.</p>
         @else
@@ -15,12 +15,12 @@
                         <div>
                             <form action="{{ route('admin.programs.restore', $program->id) }}" method="POST" class="d-inline">
                                 @csrf
-                                <button class="btn btn-sm btn-outline-success">Restore</button>
+                                <button class="btn btn-sm btn-outline-success">Pulihkan</button>
                             </form>
-                            <form action="{{ route('admin.programs.forceDelete', $program->id) }}" method="POST" class="d-inline">
+                            <form action="{{ route('admin.programs.forceHapus', $program->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-sm btn-outline-danger">Delete permanently</button>
+                                <button class="btn btn-sm btn-outline-danger">Hapus permanently</button>
                             </form>
                         </div>
                     </li>

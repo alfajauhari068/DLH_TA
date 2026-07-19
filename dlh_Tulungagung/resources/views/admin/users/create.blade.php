@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Create User')
+@section('title', 'Tambah Pengguna')
 @section('subtitle', 'Add a new administrator or operator account.')
 
 @section('breadcrumb')
@@ -19,7 +19,7 @@
 
             <div class="d-flex flex-wrap gap-2 mt-4">
                 <button type="submit" class="btn btn-primary">Create user</button>
-                <a href="{{ route('admin.users.index') }}" class="btn btn-outline-secondary">Cancel</a>
+                <a href="{{ route('admin.users.index') }}" class="btn btn-outline-secondary">Batal</a>
             </div>
         </form>
     </x-admin.card>

@@ -28,8 +28,9 @@ class UserController extends Controller
     public function create(): View
     {
         $this->authorize('create', \App\Models\User::class);
+        $roles = \App\Models\Role::all();
 
-        return view('admin.users.create');
+        return view('admin.users.create', compact('roles'));
     }
 
     public function store(StoreUserRequest $request): RedirectResponse
@@ -53,8 +54,9 @@ class UserController extends Controller
         \App\Models\User $user
     ): View {
         $this->authorize('update', $user);
+        $roles = \App\Models\Role::all();
 
-        return view('admin.users.edit', compact('user'));
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     public function update(UpdateUserRequest $request, \App\Models\User $user): RedirectResponse

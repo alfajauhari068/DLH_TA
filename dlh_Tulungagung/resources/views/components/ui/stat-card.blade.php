@@ -4,38 +4,47 @@
     'description' => null,
     'icon' => null,
     'variant' => 'primary', // primary, success, warning, danger, info
+    'color' => null, // fallback for index.blade.php bug
     'trend' => null, // 'up', 'down', or null
     'trendValue' => null,
 ])
 
 @php
+    $selectedVariant = $color ?? $variant ?? 'primary';
     $colorClasses = [
-        'primary' => 'text-primary bg-primary/10',
-        'success' => 'text-success bg-success/10',
-        'warning' => 'text-warning bg-warning/10',
-        'danger' => 'text-danger bg-danger/10',
-        'info' => 'text-info bg-info/10',
-    ][$variant] ?? 'text-primary bg-primary/10';
+        'primary' => 'text-primary bg-primary/10 border-primary/20',
+        'success' => 'text-success bg-success/10 border-success/20',
+        'warning' => 'text-warning bg-warning/10 border-warning/20',
+        'danger' => 'text-danger bg-danger/10 border-danger/20',
+        'info' => 'text-info bg-info/10 border-info/20',
+    ][$selectedVariant] ?? 'text-primary bg-primary/10 border-primary/20';
 @endphp
 
-<div {{ $attributes->merge(['class' => 'bg-white rounded-2xl shadow-sm border border-gray-100 p-4 hover:shadow-md transition-shadow duration-200 h-[88px] flex items-center justify-between overflow-hidden relative']) }}>
-    <div class="flex items-center gap-3 w-full">
+<div {{ $attributes->merge(['class' => 'bg-white/95 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-100 p-5 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between gap-4 overflow-hidden relative group min-h-[160px] max-h-[240px]']) }}>
+    <div class="flex justify-between items-start w-full">
+        <div class="flex-grow min-w-0">
+            <h4 class="text-sm font-medium text-gray-500 mb-2 truncate" title="{{ $title }}">{{ $title }}</h4>
+            <div class="text-4xl font-bold text-gray-900 leading-none tracking-tight truncate" title="{{ $value }}">{{ $value }}</div>
+        </div>
+
         @if($icon)
-            <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 {{ $colorClasses }}">
+            <div class="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 border transition-transform duration-300 group-hover:scale-110 {{ $colorClasses }}">
                 <i class="bi bi-{{ $icon }} text-xl"></i>
             </div>
         @endif
-        
-        <div class="flex-grow min-w-0 flex flex-col justify-center">
-            <h4 class="text-[14px] font-semibold text-gray-500 mb-0.5 truncate" title="{{ $title }}">{{ $title }}</h4>
-            <div class="text-[24px] font-bold text-gray-900 leading-none truncate" title="{{ $value }}">{{ $value }}</div>
-        </div>
-
-        @if($trend && $trendValue)
-            <div class="flex items-center gap-1 text-xs font-medium shrink-0 px-2 py-1 rounded-full {{ $trend === 'up' ? 'text-success bg-success/10' : 'text-danger bg-danger/10' }}">
-                <i class="bi bi-arrow-{{ $trend === 'up' ? 'up' : 'down' }}-short"></i>
-                <span>{{ $trendValue }}</span>
-            </div>
-        @endif
     </div>
+
+    @if(($trend && $trendValue) || $description)
+        <div class="flex items-center justify-between border-t border-gray-50 pt-3 mt-1 text-xs">
+            @if($description)
+                <span class="text-gray-500 truncate">{{ $description }}</span>
+            @endif
+            @if($trend && $trendValue)
+                <div class="flex items-center gap-1 font-semibold shrink-0 px-2 py-0.5 rounded-full {{ $trend === 'up' ? 'text-success bg-success/5' : 'text-danger bg-danger/5' }}">
+                    <i class="bi bi-arrow-{{ $trend === 'up' ? 'up' : 'down' }}-short"></i>
+                    <span>{{ $trendValue }}</span>
+                </div>
+            @endif
+        </div>
+    @endif
 </div>

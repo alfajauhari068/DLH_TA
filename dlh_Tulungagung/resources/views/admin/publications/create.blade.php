@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1 class="text-xl font-semibold">Create Publication</h1>
+    <h1 class="text-xl font-semibold">Tambah Publikasi</h1>
 
     <form action="{{ route('admin.publications.store') }}" method="POST" enctype="multipart/form-data">
         @csrf

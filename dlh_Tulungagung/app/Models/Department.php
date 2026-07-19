@@ -13,5 +13,10 @@ class Department extends Model
     protected $fillable = [
         'name',
         'description',
+        'parent_id',
     ];
+
+    public function parent() { return $this->belongsTo(Department::class, 'parent_id'); }
+    public function children() { return $this->hasMany(Department::class, 'parent_id'); }
+    public function positions() { return $this->hasMany(Position::class); }
 }

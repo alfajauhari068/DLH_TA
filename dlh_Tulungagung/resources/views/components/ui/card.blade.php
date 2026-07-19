@@ -9,7 +9,7 @@
     'emptyDesc' => 'Data untuk bagian ini belum tersedia.',
 ])
 
-<div {{ $attributes->merge(['class' => 'bg-white rounded-2xl shadow-sm border border-gray-100 flex flex-col transition-shadow duration-200 hover:shadow-md overflow-hidden relative']) }}>
+<div {{ $attributes->merge(['class' => 'bg-white/95 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-100 flex flex-col transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 overflow-hidden relative']) }}>
     
     @if($loading)
         <div class="absolute inset-0 bg-white/70 backdrop-blur-[2px] z-20 flex items-center justify-center">
@@ -26,7 +26,7 @@
                 {{ $header }}
             @else
                 <div>
-                    <h3 class="text-base font-semibold text-gray-900 m-0 leading-tight">{{ $title }}</h3>
+                    <h3 class="text-lg font-bold text-gray-900 m-0 leading-tight">{{ $title }}</h3>
                     @if($subtitle)
                         <p class="text-sm text-gray-500 mt-1 mb-0">{{ $subtitle }}</p>
                     @endif

@@ -19,12 +19,15 @@ module.exports = {
         muted: 'var(--muted)',
       },
       borderRadius: {
+        'lg': '0.75rem',
         'xl': '1rem',
         '2xl': '1.5rem',
+        '3xl': '2rem',
       },
       boxShadow: {
-        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
-        'hover': '0 10px 40px -4px rgba(0, 0, 0, 0.08)',
+        'soft': '0 4px 24px -2px rgba(0, 0, 0, 0.04)',
+        'hover': '0 12px 40px -4px rgba(0, 0, 0, 0.08)',
+        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.03)',
       },
       animation: {
         'fade-in': 'fadeIn 300ms ease-out',

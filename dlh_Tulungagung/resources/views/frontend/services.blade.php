@@ -9,40 +9,57 @@
         :breadcrumbs="[['label' => 'Layanan']]"
     />
 
-    <section class="py-16">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <section class="py-5 bg-light">
+        <div class="container py-4">
+            <div class="row g-4 justify-content-center">
                 @forelse($services as $service)
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 group flex flex-col h-full">
-                        <div class="p-6 flex-1 flex flex-col">
-                            <div class="w-16 h-16 bg-primary/10 text-primary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                                <i class="bi bi-{{ $service->icon ?? 'tools' }} text-3xl"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-3 group-hover:text-primary transition-colors">{{ $service->title }}</h3>
-                            <p class="text-gray-600 mb-6 flex-1">{{ Str::limit($service->description, 120) }}</p>
-                            
-                            @if($service->link)
-                                <a href="{{ $service->link }}" class="inline-flex items-center gap-2 text-primary font-semibold hover:text-primary-dark transition-colors mt-auto">
-                                    Akses Layanan
-                                    <i class="bi bi-arrow-right"></i>
-                                </a>
-                            @else
-                                <span class="inline-flex items-center gap-2 text-gray-400 font-semibold mt-auto">
-                                    Info di Kantor
-                                </span>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card h-100 border-0 shadow-sm rounded-4 group transition-all hover-lift overflow-hidden">
+                            @if($service->thumbnail)
+                                <img src="{{ asset('storage/' . $service->thumbnail) }}" class="card-img-top object-fit-cover group-hover-scale transition-all" style="height: 200px;" alt="{{ $service->title }}">
                             @endif
+                            <div class="card-body p-4 p-xl-5 d-flex flex-column">
+                                <div class="bg-success bg-opacity-10 text-success rounded-circle d-flex align-items-center justify-content-center mb-4 group-hover-scale transition-all" style="width: 64px; height: 64px;">
+                                    @if($service->icon && Str::contains($service->icon, ['.jpg', '.jpeg', '.png', '.webp', '.svg', '.gif']))
+                                        <img src="{{ asset('storage/' . $service->icon) }}" class="rounded-circle" style="width: 32px; height: 32px; object-fit: contain;" alt="Icon">
+                                    @else
+                                        <i class="bi bi-{{ $service->icon ?? 'tools' }} fs-3"></i>
+                                    @endif
+                                </div>
+                                <h3 class="h4 fw-bold text-dark mb-3 group-hover-text-success transition-all">{{ $service->title }}</h3>
+                                <p class="text-muted mb-4 flex-grow-1">{{ $service->summary ?? Str::limit(strip_tags($service->description), 120) }}</p>
+                                
+                                @if($service->slug)
+                                    <a href="{{ route('services.detail', $service->slug) }}" class="text-success fw-bold text-decoration-none d-flex align-items-center gap-2 group-hover-translate-x transition-all mt-auto">
+                                        Selengkapnya
+                                        <i class="bi bi-arrow-right"></i>
+                                    </a>
+                                @else
+                                    <span class="text-muted fw-semibold mt-auto d-flex align-items-center gap-2">
+                                        <i class="bi bi-info-circle"></i> Info di Kantor
+                                    </span>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 @empty
-                    <div class="col-span-3 text-center py-12">
-                        <div class="w-20 h-20 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="bi bi-info-circle text-3xl"></i>
+                    <div class="col-12 text-center py-5">
+                        <div class="bg-white rounded-circle d-inline-flex align-items-center justify-content-center text-muted shadow-sm mb-4" style="width: 80px; height: 80px;">
+                            <i class="bi bi-info-circle fs-1"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-700 mb-2">Belum Ada Layanan</h3>
-                        <p class="text-gray-500">Saat ini belum ada data layanan yang dipublikasikan.</p>
+                        <h3 class="h4 fw-bold text-dark mb-2">Belum Ada Layanan</h3>
+                        <p class="text-muted">Saat ini belum ada data layanan yang dipublikasikan.</p>
                     </div>
                 @endforelse
             </div>
         </div>
     </section>
+
+    <style>
+        .transition-all { transition: all 0.4s ease; }
+        .hover-lift:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.08) !important; }
+        .group:hover .group-hover-scale { transform: scale(1.1); }
+        .group:hover .group-hover-translate-x { transform: translateX(5px); }
+        .group:hover .group-hover-text-success { color: var(--bs-success) !important; }
+    </style>
 @endsection

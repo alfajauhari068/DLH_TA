@@ -19,6 +19,7 @@ class StoreGalleryRequest extends FormRequest
             'description' => ['nullable', 'string'],
             'thumbnail' => ['nullable', 'image'],
             'image' => ['nullable', 'image'],
+            'images.*' => ['nullable', 'image', 'max:2048'],
             'status' => ['required', 'integer'],
             'sort_order' => ['nullable', 'integer'],
             'published_at' => ['nullable', 'date'],

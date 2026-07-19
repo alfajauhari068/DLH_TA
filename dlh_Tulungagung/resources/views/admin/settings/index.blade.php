@@ -12,7 +12,7 @@
 
 @section('content')
     <x-ui.card>
-        <x-ui.table :headers="['Key', 'Value', 'Group', 'Actions']">
+        <x-ui.table :headers="['Key', 'Value', 'Group', 'Aksi']">
             @forelse($settings as $setting)
                 <tr>
                     <td class="px-6 py-4 font-medium">{{ $setting->key }}</td>

@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use App\Traits\HasMedia;
+
 class Official extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, HasMedia;
 
     public $timestamps = false;
     protected $fillable = [
@@ -24,4 +26,6 @@ class Official extends Model
         'display_order',
         'status',
     ];
+
+    public function positionRelation() { return $this->belongsTo(Position::class, 'position_id'); }
 }

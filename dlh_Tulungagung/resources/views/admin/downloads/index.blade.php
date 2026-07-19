@@ -32,12 +32,12 @@
                         <td class="px-3 py-2">{{ $download->status }}</td>
                         <td class="px-3 py-2">{{ $download->downloads }}</td>
                         <td class="px-3 py-2">
-                            <a href="{{ route('admin.downloads.show', $download) }}" class="me-2">View</a>
+                            <a href="{{ route('admin.downloads.show', $download) }}" class="me-2">Lihat</a>
                             <a href="{{ route('admin.downloads.edit', $download) }}" class="me-2">Edit</a>
                             <form action="{{ route('admin.downloads.destroy', $download) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-link p-0 text-danger">Delete</button>
+                                <button type="submit" class="btn btn-link p-0 text-danger">Hapus</button>
                             </form>
                         </td>
                     </tr>
