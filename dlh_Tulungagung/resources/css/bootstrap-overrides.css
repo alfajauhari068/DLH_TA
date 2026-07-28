@@ -1,0 +1,35 @@
+/* Bootstrap 5 Design Token Overrides */
+
+.navbar {
+  min-height: var(--navbar-height);
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.btn-primary:hover, .btn-primary:focus {
+  background-color: var(--primary-green);
+  border-color: var(--primary-green);
+}
+
+.bg-primary {
+  background-color: var(--primary) !important;
+}
+
+.text-primary {
+  color: var(--primary) !important;
+}
+
+.dropdown-menu {
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--gray-100);
+}
+
+.modal-content {
+  border-radius: var(--radius-3xl);
+  border: none;
+  box-shadow: var(--shadow-xl);
+}

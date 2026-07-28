@@ -50,8 +50,13 @@
 
                 <div class="mb-4">
                     <label for="url" class="block text-sm font-medium text-gray-700 mb-1">Tujuan URL <span class="text-red-500">*</span></label>
-                    <input type="text" name="url" id="url" value="{{ old('url', '/') }}" required class="form-input w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring focus:ring-emerald-200 focus:ring-opacity-50">
-                    <p class="text-xs text-gray-500 mt-1">Bisa berupa path relatif (misal: `/profil`) atau URL absolut (misal: `https://google.com`).</p>
+                    <input type="text" list="url_options" name="url" id="url" value="{{ old('url', '/') }}" required class="form-input w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring focus:ring-emerald-200 focus:ring-opacity-50">
+                    <datalist id="url_options">
+                        @foreach($availableUrls as $urlValue => $urlLabel)
+                            <option value="{{ $urlValue }}">{{ $urlLabel }}</option>
+                        @endforeach
+                    </datalist>
+                    <p class="text-xs text-gray-500 mt-1">Pilih dari daftar URL yang tersedia (termasuk Halaman Statis), atau ketik manual path/URL lainnya.</p>
                     @error('url') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
 

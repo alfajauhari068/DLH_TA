@@ -1,57 +1,74 @@
 @extends('layouts.admin')
 
 @section('title', 'Pages')
-@section('subtitle', 'Manage static pages for the website.')
-
-@section('actions')
-    @can('create', App\Models\Page::class)
-        <x-ui.button href="{{ route('admin.pages.create') }}" variant="primary">Tambah Halaman</x-ui.button>
-    @endcan
-@endsection
-
-@section('breadcrumb')
-    <x-ui.breadcrumb :items="[
-        ['label' => 'Dashboard', 'url' => route('dashboard')],
-        ['label' => 'Pages']
-    ]" />
-@endsection
 
 @section('content')
-    <x-ui.card>
-        <x-slot:toolbar>
-            <x-ui.toolbar>
-                <form action="{{ route('admin.pages.index') }}" method="GET" class="flex gap-2">
-                    <input type="text" name="search" placeholder="Cari pages..." value="{{ request('search') }}" class="form-input rounded-md border-gray-300">
-                    <x-ui.button type="submit" variant="secondary">Cari</x-ui.button>
-                </form>
-            </x-ui.toolbar>
-        </x-slot:toolbar>
+<x-admin.index.layout>
 
-        <x-ui.table :headers="['Title', 'Slug', 'Status', 'Aksi']">
-            @forelse($pages as $page)
-                <tr>
-                    <td class="px-6 py-4">{{ $page->title }}</td>
-                    <td class="px-6 py-4">{{ $page->slug }}</td>
+    <x-slot:breadcrumb>
+        <div class="text-sm text-gray-500 mb-2">
+            Dashboard / <span class="text-gray-700 font-medium">Pages</span>
+        </div>
+    </x-slot:breadcrumb>
+
+    <x-slot:header>
+        <x-admin.index.header 
+            title="Pages" 
+            subtitle="Manage static pages for the website." 
+            actionUrl="{{ auth()->user()->can('create', App\Models\Page::class) ? route('admin.pages.create') : null }}" 
+            actionText="Tambah Halaman" />
+    </x-slot:header>
+
+    <x-slot:toolbar>
+        <x-admin.index.toolbar 
+            :action="route('admin.pages.index')" 
+            searchPlaceholder="Search pages..." 
+            :hasStatus="true"
+            :statuses="['1' => 'Published', '0' => 'Draft']"
+            :hasSort="true" 
+            :hasDate="false" />
+    </x-slot:toolbar>
+
+    @if($pages->isEmpty())
+        <x-admin.index.empty 
+            title="Belum ada Halaman" 
+            description="Tambahkan halaman statis baru untuk website Anda." 
+            actionUrl="{{ auth()->user()->can('create', App\Models\Page::class) ? route('admin.pages.create') : null }}" 
+            actionText="Tambah Halaman" 
+            icon="bi-file-text" />
+    @else
+        <x-admin.index.table>
+            <x-slot:head>
+                <th class="px-6 py-3">Title</th>
+                <th class="px-6 py-3">Slug</th>
+                <th class="px-6 py-3">Status</th>
+                <th class="px-6 py-3 text-right">Aksi</th>
+            </x-slot:head>
+            @foreach($pages as $page)
+                <tr class="hover:bg-gray-50 transition-colors">
+                    <td class="px-6 py-4 font-medium">{{ $page->title }}</td>
+                    <td class="px-6 py-4 text-gray-500">{{ $page->slug }}</td>
                     <td class="px-6 py-4">
-                        <span class="px-2 py-1 text-xs font-semibold rounded-full {{ $page->status ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800' }}">
-                            {{ $page->status ? 'Published' : 'Draft' }}
-                        </span>
+                        @if($page->status)
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Published</span>
+                        @else
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">Draft</span>
+                        @endif
                     </td>
                     <td class="px-6 py-4 text-right">
+                        <a href="{{ route('page', $page->slug) }}" target="_blank" class="text-gray-500 hover:text-gray-700 mr-3" title="View"><i class="bi bi-eye"></i></a>
                         @can('update', $page)
-                            <a href="{{ route('admin.pages.edit', $page) }}" class="text-primary hover:underline">Edit</a>
+                            <a href="{{ route('admin.pages.edit', $page) }}" class="text-blue-600 hover:text-blue-900">Edit</a>
                         @endcan
                     </td>
                 </tr>
-            @empty
-                <x-slot:empty>
-                    <div class="text-center py-8 text-gray-500">No pages found.</div>
-                </x-slot:empty>
-            @endforelse
-        </x-ui.table>
+            @endforeach
+        </x-admin.index.table>
 
         <x-slot:pagination>
-            {{ $pages->links() }}
+            {{ $pages->withQueryString()->links() }}
         </x-slot:pagination>
-    </x-ui.card>
+    @endif
+
+</x-admin.index.layout>
 @endsection

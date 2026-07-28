@@ -1,60 +1,57 @@
-<section class="section-spacing bg-white">
-    <div class="container">
-        <div class="row mb-5 text-center">
-            <div class="col-12">
-                <span class="badge bg-success bg-opacity-10 text-success mb-3 px-3 py-2 fw-bold rounded-pill text-uppercase letter-spacing-1">Fokus Utama</span>
-                <h2 class="display-5 fw-bolder mb-3 text-dark">Layanan Publik DLH</h2>
-                <p class="text-muted mx-auto fs-5" style="max-width: 600px;">Menghadirkan layanan yang transparan, mudah diakses, dan berorientasi pada pelestarian lingkungan hidup Tulungagung.</p>
-            </div>
+<section class="relative py-14 md:py-20 lg:py-28 bg-surface-green overflow-hidden">
+    <!-- Subtle Pattern -->
+    <div class="absolute inset-0 opacity-[0.03] pointer-events-none bg-dot-pattern"></div>
+
+    <div class="container px-4 relative z-10">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+            <span class="inline-block px-4 py-2 bg-white text-primary font-bold text-xs uppercase tracking-widest rounded-full mb-6 shadow-sm border border-primary/10">Fokus Utama</span>
+            <h2 class="text-4xl lg:text-5xl font-black text-gray-900 mb-6 leading-tight">Layanan Publik DLH</h2>
+            <p class="text-gray-500 text-lg leading-relaxed">Akses cepat layanan terpadu yang transparan, mudah, dan berorientasi pada pelestarian lingkungan.</p>
         </div>
-        <div class="row g-4 justify-content-center">
+        
+        <!-- Adaptive Government Service Launcher Grid -->
+        <div class="grid gap-3 sm:gap-4 md:gap-6 w-full max-w-7xl mx-auto place-content-center" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr));">
             
-            <x-guest.service-card 
+            <x-guest.service-launcher-card 
                 href="{{ url('/halaman/tupoksi') }}" 
                 icon="bi-journal-check" 
                 title="Tupoksi" 
-                description="Panduan komprehensif mengenai Tugas Pokok dan Fungsi Dinas Lingkungan Hidup dalam menjaga keseimbangan ekosistem daerah." 
-                image="{{ asset('images/tupoksi.png') }}"
+                subtitle="Tugas Pokok & Fungsi"
             />
 
-            <x-guest.service-card 
-                href="{{ url('/halaman/alur-pelayanan') }}" 
+            <x-guest.service-launcher-card 
+                href="{{ url('/layanan') }}" 
                 icon="bi-diagram-3" 
                 title="Alur Pelayanan" 
-                description="Prosedur terintegrasi layanan masyarakat mulai dari pengaduan, perizinan, hingga penanganan isu lingkungan secara responsif." 
-                image="{{ asset('images/alur-pelayanan.png') }}"
+                subtitle="Prosedur Terpadu"
             />
 
-            <x-guest.service-card 
-                href="{{ url('/halaman/ppid') }}" 
+            <x-guest.service-launcher-card 
+                href="{{ url('http://ppid.tulungagung.go.id/') }}" 
                 icon="bi-info-circle" 
                 title="PPID" 
-                description="Pusat Informasi Publik yang menjamin transparansi data dan dokumentasi publik terkait kebijakan tata ruang hijau." 
-                image="{{ asset('images/PPID.png') }}"
+                subtitle="Informasi Publik"
             />
 
-            <x-guest.service-card 
+            <x-guest.service-launcher-card 
                 href="{{ url('/halaman/struktur-organisasi') }}" 
                 icon="bi-people" 
-                title="Struktur Organisasi" 
-                description="Mengenal lebih dekat tim profesional di balik inisiatif hijau dan operasional strategis Dinas Lingkungan Hidup." 
-                image="{{ asset('images/Struktur_Organisasi.png') }}"
+                title="Organisasi" 
+                subtitle="Struktur Dinas"
             />
 
-            <x-guest.service-card 
+            <x-guest.service-launcher-card 
                 href="{{ url('/kontak') }}" 
                 icon="bi-headset" 
-                title="Layanan Kontak" 
-                description="Pusat bantuan responsif 24/7 untuk mendukung pelaporan masalah lingkungan dan konsultasi masyarakat." 
-                image="https://images.unsplash.com/photo-1596524430615-b46475ddff6e?q=80&w=800&auto=format&fit=crop"
+                title="Pengaduan" 
+                subtitle="Laporan Masyarakat"
             />
 
-            <x-guest.service-card 
+            <x-guest.service-launcher-card 
                 href="{{ url('/halaman/maklumat-pelayanan') }}" 
                 icon="bi-shield-check" 
                 title="Maklumat" 
-                description="Komitmen teguh kami dalam menyajikan pelayanan prima, akuntabel, dan bebas pungutan liar bagi seluruh masyarakat." 
-                image="{{ asset('images/Maklumat.png') }}"
+                subtitle="Komitmen Kami"
             />
 
         </div>

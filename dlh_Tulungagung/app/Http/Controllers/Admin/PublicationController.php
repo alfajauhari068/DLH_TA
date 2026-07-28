@@ -65,6 +65,24 @@ class PublicationController extends BaseCrudController
         return 'admin.publications';
     }
 
+    public function show($id)
+    {
+        $publication = $this->resolveModel($id);
+        $this->authorize('view', $publication);
+
+        $related = Publication::where('category', $publication->category)
+            ->where('id', '!=', $publication->id)
+            ->where('status', 'published')
+            ->latest('published_at')
+            ->take(3)
+            ->get();
+
+        return view($this->viewPath() . '.show', [
+            $this->singularVar() => $publication,
+            'related' => $related,
+        ]);
+    }
+
     protected function singularVar(): string
     {
         return 'publication';

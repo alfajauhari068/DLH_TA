@@ -12,16 +12,6 @@ class CrudFilter
     {
         $table = $query->getModel()->getTable();
 
-        if ($status = $request->query('status')) {
-            $query->where('status', $status);
-        }
-
-        if ($category = $request->query('category')) {
-            if (Schema::hasColumn($table, 'service_category')) {
-                $query->where('service_category', $category);
-            }
-        }
-
         if ($type = $request->query('type')) {
             if (Schema::hasColumn($table, 'service_type')) {
                 $query->where('service_type', $type);

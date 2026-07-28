@@ -17,10 +17,10 @@
 
     @stack('head')
 </head>
-<body class="bg-surface-muted text-gray-800 font-sans antialiased overflow-hidden">
+<body class="bg-surface-muted text-gray-800 font-sans antialiased overflow-hidden bg-grid-pattern bg-noise">
     <a class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-white focus:text-primary" href="#main-content">Skip to main content</a>
 
-    <div class="flex h-screen w-full">
+    <div class="flex h-screen w-full relative z-10">
         <!-- Sidebar -->
         <x-admin.sidebar />
 

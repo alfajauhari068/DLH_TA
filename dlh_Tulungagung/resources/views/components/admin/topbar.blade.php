@@ -18,10 +18,29 @@
     </div>
 
     <!-- Right section -->
-    <div class="flex items-center gap-3 shrink-0">
+    <div class="flex items-center gap-2 md:gap-3 shrink-0">
         
+        <!-- Quick Add (New) -->
+        <a href="{{ route('admin.news.create') }}" class="hidden md:flex items-center gap-2 px-3 h-10 rounded-xl bg-gradient-to-r from-primary-green to-emerald-500 text-white hover:shadow-lg hover:shadow-emerald-500/20 hover:-translate-y-0.5 transition-all font-semibold text-sm" title="Quick Add">
+            <i class="bi bi-plus-lg"></i>
+            <span>Add New</span>
+        </a>
+
+        <div class="h-8 w-px bg-gray-200 mx-1 hidden sm:block"></div>
+
+        <!-- Theme Toggle -->
+        <button type="button" class="relative w-10 h-10 rounded-xl bg-surface-muted text-gray-500 hover:bg-gray-200 hover:text-gray-900 flex items-center justify-center transition-colors" title="Toggle Theme">
+            <i class="bi bi-moon-stars text-lg"></i>
+        </button>
+
+        <!-- Messages -->
+        <button type="button" class="relative w-10 h-10 rounded-xl bg-surface-muted text-gray-500 hover:bg-gray-200 hover:text-gray-900 flex items-center justify-center transition-colors" title="Messages">
+            <i class="bi bi-chat-text text-lg"></i>
+            <span class="absolute top-2 right-2 w-2.5 h-2.5 bg-blue-500 rounded-full border-2 border-white"></span>
+        </button>
+
         <!-- Notifications -->
-        <button type="button" class="relative w-10 h-10 rounded-xl bg-gray-50 text-gray-500 hover:bg-gray-100 hover:text-gray-900 flex items-center justify-center transition-colors" aria-label="Notifications" title="Notifications">
+        <button type="button" class="relative w-10 h-10 rounded-xl bg-surface-muted text-gray-500 hover:bg-gray-200 hover:text-gray-900 flex items-center justify-center transition-colors" aria-label="Notifications" title="Notifications">
             <i class="bi bi-bell text-lg"></i>
             <span class="absolute top-2 right-2 w-2.5 h-2.5 bg-danger rounded-full border-2 border-white"></span>
         </button>
@@ -30,13 +49,13 @@
 
         <!-- Profile Dropdown (Native Implementation) -->
         <div class="relative" id="profile-dropdown-container">
-            <button class="flex items-center gap-3 p-1 rounded-2xl hover:bg-primary/5 transition-colors focus:outline-none" type="button" id="profileDropdownBtn" aria-expanded="false">
-                <div class="w-10 h-10 rounded-xl bg-primary/10 text-primary font-bold flex items-center justify-center shrink-0">
+            <button class="flex items-center gap-3 p-1 rounded-2xl hover:bg-gray-50 transition-colors focus:outline-none" type="button" id="profileDropdownBtn" aria-expanded="false">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-green to-emerald-700 text-white font-bold flex items-center justify-center shrink-0">
                     {{ strtoupper(substr(auth()->user()->name ?? 'A', 0, 1)) }}
                 </div>
-                <div class="hidden sm:block text-left">
-                    <p class="text-sm font-semibold text-gray-900 leading-none mb-1">{{ auth()->user()->name ?? 'Administrator' }}</p>
-                    <p class="text-xs text-muted leading-none">Admin</p>
+                <div class="hidden md:block text-left pr-2">
+                    <p class="text-[13px] font-bold text-gray-900 leading-tight">{{ auth()->user()->name ?? 'Administrator' }}</p>
+                    <p class="text-[11px] font-medium text-emerald-600 uppercase tracking-wider">Admin</p>
                 </div>
                 <i class="bi bi-chevron-down text-gray-400 text-sm hidden sm:block transition-transform duration-300" id="profileDropdownIcon"></i>
             </button>

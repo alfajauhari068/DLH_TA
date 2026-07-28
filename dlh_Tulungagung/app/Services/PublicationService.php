@@ -19,6 +19,56 @@ class PublicationService extends ModuleService
         ]);
     }
 
+    public function create(array $data)
+    {
+        $cover = $data['cover_file'] ?? null;
+        $document = $data['document_file'] ?? null;
+        
+        // Remove uploaded files from data to prevent storing temp paths
+        if ($cover instanceof UploadedFile) {
+            unset($data['cover_file']);
+        }
+        if ($document instanceof UploadedFile) {
+            unset($data['document_file']);
+        }
+
+        $model = parent::create($data);
+
+        if ($cover instanceof UploadedFile) {
+            $this->uploadCover($model, $cover);
+        }
+        if ($document instanceof UploadedFile) {
+            $this->uploadDocument($model, $document);
+        }
+
+        return $model;
+    }
+
+    public function update($model, array $data)
+    {
+        $cover = $data['cover_file'] ?? null;
+        $document = $data['document_file'] ?? null;
+        
+        // Remove uploaded files from data to prevent storing temp paths
+        if ($cover instanceof UploadedFile) {
+            unset($data['cover_file']);
+        }
+        if ($document instanceof UploadedFile) {
+            unset($data['document_file']);
+        }
+
+        $model = parent::update($model, $data);
+
+        if ($cover instanceof UploadedFile) {
+            $this->uploadCover($model, $cover);
+        }
+        if ($document instanceof UploadedFile) {
+            $this->uploadDocument($model, $document);
+        }
+
+        return $model;
+    }
+
     public function uploadCover(Publication $publication, UploadedFile $file): array
     {
         $mediaService = app(MediaService::class);

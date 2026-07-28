@@ -47,8 +47,7 @@
                 <!-- Content -->
                 <div>
                     <label for="content" class="block text-sm font-semibold text-gray-700 mb-2">Content</label>
-                    <textarea name="content" id="content" rows="10" class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all @error('content') border-red-500 @enderror">{{ old('content') }}</textarea>
-                    @error('content') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
+                    <x-admin.form.tinymce-editor name="content" id="content" :value="old('content')" height="400" />
                 </div>
             </x-admin.form.card>
         </div>
@@ -89,17 +88,6 @@
             });
         }
     });
-    </script>
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-    <script>
-        tinymce.init({
-            selector: '#content',
-            height: 400,
-            plugins: 'advlist autolink lists link charmap preview searchreplace visualblocks code fullscreen insertdatetime table wordcount',
-            toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
-            menubar: false,
-            branding: false
-        });
     </script>
     @endpush
 @endsection

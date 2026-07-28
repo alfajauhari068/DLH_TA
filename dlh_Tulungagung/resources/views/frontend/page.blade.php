@@ -3,24 +3,28 @@
 @section('title', $page->title . ' | DLH Tulungagung')
 
 @section('content')
-    <x-hero 
+    <x-guest.hero-banner 
         :title="$page->title" 
         :breadcrumbs="[['label' => $page->title]]"
     />
 
-    <section class="py-5 bg-light">
-        <div class="container py-4">
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
-                        <div class="card-body p-4 p-md-5">
-                            <article class="prose prose-lg max-w-none text-gray-800" style="line-height: 1.8;">
-                                {!! $page->content !!}
-                            </article>
-                        </div>
-                    </div>
+    <x-guest.page-container>
+        <x-guest.page-layout :hasSidebar="false">
+            <x-slot name="main">
+                <x-guest.content-card>
+                    {!! $page->content !!}
+                </x-guest.content-card>
+                
+                <div class="mt-8 border-t border-gray-100 pt-8 flex items-center justify-end">
+                    <x-guest.share-buttons :title="$page->title" />
                 </div>
-            </div>
-        </div>
-    </section>
+            </x-slot>
+        </x-guest.page-layout>
+    </x-guest.page-container>
+
+    <x-guest.cta-banner 
+        title="Dapatkan Informasi Lainnya" 
+        subtitle="Jelajahi berbagai program, layanan publik, dan berita terbaru kami." 
+        :primaryAction="['url' => route('services'), 'label' => 'Layanan Publik', 'icon' => 'bi-card-list']" 
+    />
 @endsection

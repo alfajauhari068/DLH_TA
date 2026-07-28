@@ -14,6 +14,8 @@
 
     @include('guest.sections.statistics')
 
+    @include('guest.sections.archives')
+
     @include('guest.sections.cta')
 </main>
 @endsection

@@ -1,61 +1,72 @@
-<nav id="main-navbar" class="navbar navbar-expand-lg fixed-top transition-all py-3 bg-white shadow-sm" style="transition: all 0.3s ease;">
-    <div class="container">
+<nav id="main-navbar" class="navbar navbar-expand-lg fixed-top transition-all duration-300 min-h-[72px] border-b border-black/5 z-[1030]">
+    <!-- Background blur separated to prevent CSS stacking context bug on offcanvas -->
+    <div class="absolute inset-0 bg-white/90 backdrop-blur-md -z-10"></div>
+    <div class="container px-4">
         <!-- Logo -->
-        <a href="{{ url('/') }}" class="navbar-brand d-flex align-items-center gap-3">
+        <a href="{{ url('/') }}" class="navbar-brand d-flex align-items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-xl" aria-label="Beranda">
             @if(!empty($globalSettings['logo']))
-                <img src="{{ asset('storage/' . $globalSettings['logo']) }}" alt="Logo" height="45" class="drop-shadow-sm">
+                <img src="{{ asset('storage/' . $globalSettings['logo']) }}" alt="Logo" fetchpriority="high" decoding="async" class="h-[32px] md:h-[36px] w-auto drop-shadow-sm transition-opacity duration-300 group-hover:opacity-80">
             @else
-                <img src="{{ asset('images/icon-dinas.png') }}" alt="Logo" style="height: 45px; width: auto; max-width: 100%; object-fit: contain;" class="drop-shadow-sm" onerror="this.src='https://placehold.co/48x48/1e7e34/ffffff?text=DLH'">
+                <img src="{{ asset('images/icon-dinas.png') }}" alt="Logo" fetchpriority="high" decoding="async" class="h-[32px] md:h-[36px] w-auto drop-shadow-sm transition-opacity duration-300 group-hover:opacity-80" onerror="this.src='https://placehold.co/36x36/146C43/ffffff?text=DLH'">
             @endif
             <div class="d-flex flex-column justify-content-center">
-                <h1 class="h6 mb-0 fw-bolder text-dark" style="letter-spacing: 0.5px;">{{ $globalSettings['site_name'] ?? 'DLH' }}</h1>
-                <small class="text-success fw-bold" style="font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase;">Kabupaten Tulungagung</small>
+                <h5 class="text-xs font-black text-gray-800 mb-0 tracking-tight">{{ $globalSettings['site_name'] ?? 'DINAS LINGKUNGAN HIDUP' }}</h5>
+                <small class="text-primary font-bold text-[10px]">Kabupaten Tulungagung</small>
             </div>
         </a>
 
         <!-- Mobile Toggle -->
-        <button class="navbar-toggler border-0 shadow-none bg-light rounded-circle p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+        <button class="navbar-toggler border-0 shadow-none bg-gray-50 rounded-full w-11 h-11 flex lg:hidden items-center justify-center focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <!-- Menu Desktop & Offcanvas -->
-        <div class="offcanvas offcanvas-end border-0 shadow" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-            <div class="offcanvas-header bg-light border-bottom">
-                <h5 class="offcanvas-title fw-bold" id="offcanvasNavbarLabel">Menu Navigasi</h5>
-                <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <div class="offcanvas-lg offcanvas-end border-0 shadow-2xl" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header bg-gray-50 border-b border-gray-100">
+                <h5 class="offcanvas-title font-black text-gray-900" id="offcanvasNavbarLabel">Menu Navigasi</h5>
+                <button type="button" class="btn-close shadow-none w-11 h-11 flex items-center justify-center p-0 rounded-full hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" data-bs-dismiss="offcanvas" aria-label="Close menu"></button>
             </div>
             <div class="offcanvas-body align-items-center">
-                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 gap-1">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-4 gap-4 md:gap-8">
                     @if(isset($globalHeaderMenu))
                         @foreach($globalHeaderMenu as $menuItem)
                             @if($menuItem->children->count() > 0)
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle fw-medium px-3 rounded-pill hover-bg-light transition-all" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle text-sm font-medium px-4 py-2 rounded-full transition-all duration-300 hover:bg-light-green hover:text-primary hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         {{ $menuItem->title }}
                                     </a>
-                                    <ul class="dropdown-menu border-0 shadow-lg rounded-4 p-2 mt-2">
+                                    <ul class="dropdown-menu border-0 shadow-elevation-2 rounded-2xl p-2 mt-3 animate-fade-up">
                                         @foreach($menuItem->children as $child)
-                                            <li><a class="dropdown-item rounded-3 py-2 px-3 fw-medium transition-all hover-text-primary" href="{{ Str::startsWith($child->url, ['http://', 'https://']) ? $child->url : url($child->url) }}" target="{{ $child->target }}">{{ $child->title }}</a></li>
+                                            <li><a class="dropdown-item rounded-xl py-2.5 px-4 text-sm font-medium text-gray-700 transition-all hover:bg-light-green hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" href="{{ Str::startsWith($child->url, ['http://', 'https://']) ? $child->url : url($child->url) }}" target="{{ $child->target }}">{{ $child->title }}</a></li>
                                         @endforeach
                                     </ul>
                                 </li>
                             @else
                                 <li class="nav-item">
-                                    <a class="nav-link fw-medium px-3 rounded-pill transition-all {{ request()->is(ltrim($menuItem->url, '/')) ? 'active bg-primary bg-opacity-10 text-primary' : 'hover-bg-light text-dark' }}" href="{{ Str::startsWith($menuItem->url, ['http://', 'https://']) ? $menuItem->url : url($menuItem->url) }}" target="{{ $menuItem->target }}">{{ $menuItem->title }}</a>
+                                    <a class="nav-link text-sm font-medium tracking-normal px-4 py-2 rounded-full transition-colors duration-300 {{ request()->is(ltrim($menuItem->url, '/')) ? 'bg-light-green text-primary' : 'hover:bg-light-green hover:text-primary text-gray-700' }} focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" href="{{ Str::startsWith($menuItem->url, ['http://', 'https://']) ? $menuItem->url : url($menuItem->url) }}" target="{{ $menuItem->target }}">{{ $menuItem->title }}</a>
                                 </li>
                             @endif
                         @endforeach
                     @endif
                 </ul>
-                <form class="d-flex mt-3 mt-lg-0 position-relative" role="search" action="{{ url('/search') }}" method="GET">
+                
+                <form class="d-flex mt-4 mt-lg-0 position-relative group" role="search" action="{{ url('/search') }}" method="GET">
                     <div class="input-group">
-                        <input class="form-control rounded-pill bg-light border-0 ps-4 pe-5 shadow-none" type="search" name="q" placeholder="Cari informasi..." aria-label="Search">
-                        <button class="btn border-0 position-absolute end-0 top-50 translate-middle-y z-3 text-muted hover-text-primary" type="submit"><i class="bi bi-search"></i></button>
+                        <input class="form-control rounded-full bg-gray-50 border border-gray-100 py-2.5 ps-5 pe-12 shadow-none transition-colors focus:bg-white focus:border-primary/30 focus:outline-none focus:ring-2 focus:ring-primary/20" style="width: 220px;" type="search" name="q" placeholder="Cari informasi..." aria-label="Search form">
+                        <button class="btn border-0 position-absolute end-0 top-50 translate-middle-y z-3 text-gray-400 group-hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-full w-10 h-10 flex items-center justify-center" type="submit" aria-label="Submit search">
+                            <i class="bi bi-search text-lg" aria-hidden="true"></i>
+                        </button>
                     </div>
                 </form>
-                <div class="ms-lg-3 mt-3 mt-lg-0 d-flex gap-2">
-                    <a href="https://www.lapor.go.id/" target="_blank" class="btn btn-danger fw-bold rounded-pill px-4 shadow-sm hover-lift transition-all"><i class="bi bi-megaphone-fill me-1"></i> LAPOR!</a>
-                    <a href="{{ route('login') }}" class="btn btn-light rounded-circle shadow-sm hover-lift text-primary border transition-all" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;" title="Login Admin"><i class="bi bi-box-arrow-in-right"></i></a>
+                
+                <div class="ms-lg-4 mt-4 mt-lg-0 d-flex gap-3 align-items-center mb-6 lg:mb-0">
+                    <a href="https://www.lapor.go.id/" target="_blank" class="flex items-center justify-center w-11 h-11 bg-gray-50 rounded-full text-danger hover:bg-danger/10 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-danger focus:ring-offset-2" aria-label="Layanan Pengaduan LAPOR!" title="LAPOR!">
+                        <i class="bi bi-megaphone-fill text-lg" aria-hidden="true"></i>
+                    </a>
+                    
+                    <a href="{{ route('login') }}" class="flex items-center justify-center w-11 h-11 bg-gray-50 rounded-full text-gray-500 hover:bg-primary/10 hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" aria-label="Login Administrator" title="Login Admin">
+                        <i class="bi bi-person-fill text-lg" aria-hidden="true"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -63,30 +74,34 @@
 </nav>
 
 <!-- Spacer -->
-<div style="height: 80px;"></div>
+<div style="height: 72px;"></div>
 
 <style>
-.hover-bg-light:hover { background-color: #f8f9fa; }
-.hover-text-primary:hover { color: var(--bs-primary) !important; background-color: rgba(var(--bs-primary-rgb), 0.05); }
-.hover-lift:hover { transform: translateY(-2px); box-shadow: 0 6px 12px -4px rgba(0,0,0,0.15) !important; }
 .navbar.scrolled {
-    background-color: rgba(255, 255, 255, 0.95) !important;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 20px -5px rgba(0,0,0,0.1) !important;
-    padding-top: 0.5rem !important;
-    padding-bottom: 0.5rem !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+.navbar.scrolled > div.absolute {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(16px);
 }
 </style>
 
 @push('scripts')
 <script>
+    let ticking = false;
     window.addEventListener('scroll', function() {
-        const navbar = document.getElementById('main-navbar');
-        if (window.scrollY > 20) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                const navbar = document.getElementById('main-navbar');
+                if (window.scrollY > 20) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+                ticking = false;
+            });
+            ticking = true;
         }
-    });
+    }, { passive: true });
 </script>
 @endpush

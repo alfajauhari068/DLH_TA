@@ -20,7 +20,7 @@
     ][$selectedVariant] ?? 'text-primary bg-primary/10 border-primary/20';
 @endphp
 
-<div {{ $attributes->merge(['class' => 'bg-white/95 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-100 p-5 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between gap-4 overflow-hidden relative group min-h-[160px] max-h-[240px]']) }}>
+<div {{ $attributes->merge(['class' => 'bg-white border border-gray-100 rounded-3xl p-6 shadow-soft hover:shadow-hover hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between gap-4 overflow-hidden relative group min-h-[160px] max-h-[240px]']) }}>
     <div class="flex justify-between items-start w-full">
         <div class="flex-grow min-w-0">
             <h4 class="text-sm font-medium text-gray-500 mb-2 truncate" title="{{ $title }}">{{ $title }}</h4>

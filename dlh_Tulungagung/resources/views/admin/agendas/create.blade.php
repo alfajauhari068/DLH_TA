@@ -82,7 +82,7 @@
         </div>
 
         <div class="lg:col-span-4 space-y-6">
-            <x-admin.form.publish-card :model="null" :statusOptions="['upcoming' => 'Upcoming', 'ongoing' => 'Ongoing', 'completed' => 'Completed', 'cancelled' => 'Batalled']" />
+            <x-admin.form.publish-card :model="null" :statusOptions="['planned' => 'Planned', 'ongoing' => 'Ongoing', 'completed' => 'Completed', 'cancelled' => 'Cancelled']" />
             
             <x-admin.form.card title="Aksi" padding="p-6">
                 <div class="flex flex-col gap-3">

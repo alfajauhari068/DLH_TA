@@ -31,8 +31,7 @@
             <!-- Content -->
             <div>
                 <label for="content" class="block text-sm font-semibold text-gray-700 mb-2">Content</label>
-                <textarea name="content" id="content" rows="8" class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all @error('content') border-red-500 @enderror">{{ old('content', $publication->content ?? '') }}</textarea>
-                @error('content') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
+                <x-admin.form.tinymce-editor name="content" id="content" :value="old('content', $publication->content ?? '')" />
             </div>
         </x-admin.form.card>
 
@@ -42,12 +41,18 @@
                 <input type="file" name="document_file" id="document_file" accept=".pdf" class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all @error('document_file') border-red-500 @enderror">
                 
                 @if(isset($publication) && $publication->document_file)
+                    @php
+                        $isTemp = str_contains($publication->document_file, '.tmp') || str_contains($publication->document_file, 'php');
+                        $docUrl = $isTemp ? '#' : Storage::url($publication->document_file);
+                    @endphp
                     <div class="mt-3 p-3 bg-blue-50 border border-blue-100 rounded-lg flex items-center justify-between">
                         <div class="flex items-center text-sm text-blue-800">
                             <i class="bi bi-file-earmark-pdf text-xl mr-2"></i>
-                            <span class="font-medium truncate max-w-[200px]">{{ basename($publication->document_file) }}</span>
+                            <span class="font-medium truncate max-w-[200px]">{{ $isTemp ? 'Invalid Temporary File' : basename($publication->document_file) }}</span>
                         </div>
-                        <a href="{{ asset('storage/' . $publication->document_file) }}" target="_blank" class="text-xs font-bold text-blue-600 hover:text-blue-800 bg-white px-3 py-1 rounded-md border border-blue-200 shadow-sm transition-all hover:shadow">Lihat File</a>
+                        @if(!$isTemp)
+                            <a href="{{ $docUrl }}" target="_blank" class="text-xs font-bold text-blue-600 hover:text-blue-800 bg-white px-3 py-1 rounded-md border border-blue-200 shadow-sm transition-all hover:shadow">Lihat File</a>
+                        @endif
                     </div>
                 @endif
                 
@@ -115,16 +120,5 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
-</script>
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-<script>
-    tinymce.init({
-        selector: '#content',
-        height: 300,
-        plugins: 'advlist autolink lists link charmap preview searchreplace visualblocks code fullscreen insertdatetime table wordcount',
-        toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
-        menubar: false,
-        branding: false
-    });
 </script>
 @endpush

@@ -1,137 +1,137 @@
-<section class="section-spacing bg-light overflow-hidden position-relative">
-    <!-- Subtle Background Elements -->
-    <div class="position-absolute top-0 end-0 w-50 h-100 opacity-25" style="background-image: radial-gradient(circle at 2px 2px, rgba(0,0,0,0.05) 1px, transparent 0); background-size: 32px 32px;"></div>
-
-    <div class="container position-relative z-2">
-        <div class="row align-items-center g-5">
+<section class="relative py-14 md:py-20 lg:py-28 bg-[#DCFCE7] overflow-hidden">
+    <div class="container relative z-10 px-4">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <!-- Left Side: Large Environmental Image -->
-            <div class="col-lg-6 position-relative">
-                <div class="position-relative rounded-4 overflow-hidden shadow-lg" style="aspect-ratio: 4/5;">
-                    <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1000&auto=format&fit=crop" alt="Lingkungan Hijau Tulungagung" class="w-100 h-100 object-fit-cover">
-                    <!-- Image Gradient Overlay for text if needed, or just pure image -->
-                    <div class="position-absolute bottom-0 start-0 w-100 p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);">
-                        <h4 class="text-white fw-bold mb-1">Inisiatif Hijau 2026</h4>
-                        <p class="text-white-75 small mb-0"><i class="bi bi-geo-alt me-1"></i> Kabupaten Tulungagung</p>
+            <div class="lg:col-span-5 relative h-full min-h-[500px]">
+                <div class="absolute inset-0 rounded-[32px] overflow-hidden shadow-sm bg-gray-100">
+                    <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1000&auto=format&fit=crop" alt="Lingkungan Hijau Tulungagung" loading="lazy" decoding="async" class="w-full h-full object-cover">
+                    <!-- Image Gradient Overlay -->
+                    <div class="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-gray-900/90 to-transparent">
+                        <h4 class="text-white text-2xl font-bold mb-2">Inisiatif Hijau 2026</h4>
+                        <p class="text-white/80 text-sm font-medium"><i class="bi bi-geo-alt-fill text-accent me-2"></i>Kabupaten Tulungagung</p>
                     </div>
                 </div>
                 
-                <!-- Floating decorative element -->
-                <div class="position-absolute bg-white rounded-circle shadow-lg d-flex align-items-center justify-content-center float-animation-1" style="width: 100px; height: 100px; top: -30px; right: -30px;">
-                    <div class="bg-success bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
-                        <i class="bi bi-globe-americas text-success fs-1"></i>
+                <!-- Attached decorative element -->
+                <div class="absolute -top-6 -right-6 w-24 h-24 bg-white/95 rounded-full shadow-md flex items-center justify-center z-20">
+                    <div class="w-16 h-16 bg-light-green rounded-full flex items-center justify-center">
+                        <i class="bi bi-globe-americas text-primary text-3xl"></i>
                     </div>
                 </div>
             </div>
 
             <!-- Right Side: Overlapping Infographic Dashboard -->
-            <div class="col-lg-6">
-                <div class="mb-5">
-                    <span class="badge bg-success bg-opacity-10 text-success mb-3 px-3 py-2 fw-bold rounded-pill text-uppercase letter-spacing-1">Dampak Nyata</span>
-                    <h2 class="display-5 fw-bolder mb-3 text-dark" style="line-height: 1.2;">Capaian Strategis Lingkungan Hidup</h2>
-                    <p class="text-muted fs-5 mb-0">Angka dan data yang merepresentasikan dedikasi nyata kami dalam membangun ekosistem Tulungagung yang asri dan berkelanjutan.</p>
+            <div class="lg:col-span-7">
+                <div class="mb-10">
+                    <span class="inline-block px-4 py-2 bg-white text-primary font-bold text-xs uppercase tracking-widest rounded-full mb-6 shadow-sm border border-primary/10">Dampak Nyata</span>
+                    <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-6 leading-tight">Capaian Strategis Lingkungan Hidup</h2>
+                    <p class="text-lg text-gray-500 leading-relaxed">Angka dan data yang merepresentasikan dedikasi nyata kami dalam membangun ekosistem Tulungagung yang asri dan berkelanjutan.</p>
                 </div>
 
                 <!-- Infographic Grid -->
-                <div class="row g-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <!-- Stat 1: Mini chart -->
-                    <div class="col-sm-6">
-                        <div class="bg-white p-4 rounded-4 shadow-sm border border-light h-100 hover-lift transition-all position-relative overflow-hidden group">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <div class="bg-success bg-opacity-10 text-success rounded-3 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
-                                    <i class="bi bi-tree fs-5"></i>
+                    <x-guest.statistic-card 
+                        icon="bi-tree-fill" 
+                        value="45" 
+                        label="Program Ruang Hijau" 
+                        suffix="+" 
+                        colorTheme="light-green" 
+                        textColor="primary">
+                        <span class="px-3 py-1 bg-light-green text-primary text-xs font-bold rounded-full">+12%</span>
+                        <x-slot name="chart">
+                            <div class="bg-gray-50 rounded-xl p-3 mt-2 border border-gray-100">
+                                <div class="flex items-end gap-1.5 h-10 w-full">
+                                    <div class="bg-primary/20 hover:bg-primary/40 rounded-t-sm w-full h-[40%] transition-colors cursor-pointer"></div>
+                                    <div class="bg-primary/40 hover:bg-primary/60 rounded-t-sm w-full h-[60%] transition-colors cursor-pointer"></div>
+                                    <div class="bg-primary hover:bg-primary/80 rounded-t-sm w-full h-[100%] transition-colors cursor-pointer shadow-sm relative group/bar">
+                                        <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover/bar:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Q3</div>
+                                    </div>
+                                    <div class="bg-primary/60 hover:bg-primary/80 rounded-t-sm w-full h-[70%] transition-colors cursor-pointer"></div>
+                                    <div class="bg-primary/30 hover:bg-primary/50 rounded-t-sm w-full h-[40%] transition-colors cursor-pointer"></div>
                                 </div>
-                                <span class="badge bg-success bg-opacity-10 text-success">+12% thn ini</span>
                             </div>
-                            <h3 class="display-6 fw-bolder text-dark mb-1">45+</h3>
-                            <p class="text-muted fw-medium mb-3">Program Ruang Hijau</p>
-                            <!-- Fake Mini Chart -->
-                            <div class="d-flex align-items-end gap-1 mt-auto" style="height: 30px;">
-                                <div class="bg-success opacity-50 rounded-top w-100 group-hover-grow transition-all" style="height: 40%;"></div>
-                                <div class="bg-success opacity-75 rounded-top w-100 group-hover-grow transition-all" style="height: 60%;"></div>
-                                <div class="bg-success rounded-top w-100 group-hover-grow transition-all" style="height: 100%;"></div>
-                                <div class="bg-success opacity-50 rounded-top w-100 group-hover-grow transition-all" style="height: 70%;"></div>
-                                <div class="bg-success opacity-25 rounded-top w-100 group-hover-grow transition-all" style="height: 40%;"></div>
-                            </div>
-                        </div>
-                    </div>
+                        </x-slot>
+                    </x-guest.statistic-card>
 
                     <!-- Stat 2: Progress -->
-                    <div class="col-sm-6">
-                        <div class="bg-white p-4 rounded-4 shadow-sm border border-light h-100 hover-lift transition-all position-relative overflow-hidden group">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <div class="bg-primary bg-opacity-10 text-primary rounded-3 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
-                                    <i class="bi bi-emoji-smile fs-5"></i>
-                                </div>
-                                <i class="bi bi-graph-up-arrow text-primary opacity-50 fs-4"></i>
+                    <x-guest.statistic-card 
+                        icon="bi-emoji-smile-fill" 
+                        value="98" 
+                        label="Indeks Kepuasan" 
+                        suffix="%" 
+                        colorTheme="blue-50" 
+                        textColor="blue-500">
+                        <i class="bi bi-graph-up-arrow text-blue-200 text-2xl"></i>
+                        <x-slot name="chart">
+                            <div class="w-full h-2.5 bg-blue-50 rounded-full mt-2 overflow-hidden">
+                                <div class="h-full bg-blue-500 rounded-full w-0 transition-all duration-1000 ease-out progress-fill" data-target="98%"></div>
                             </div>
-                            <h3 class="display-6 fw-bolder text-dark mb-1">98%</h3>
-                            <p class="text-muted fw-medium mb-3">Indeks Kepuasan</p>
-                            <div class="progress mt-auto bg-primary bg-opacity-10" style="height: 8px;">
-                                <div class="progress-bar bg-primary group-hover-fill transition-all" role="progressbar" style="width: 0%" data-target="98%" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                    </div>
+                        </x-slot>
+                    </x-guest.statistic-card>
 
                     <!-- Stat 3: People -->
-                    <div class="col-sm-6">
-                        <div class="bg-white p-4 rounded-4 shadow-sm border border-light h-100 hover-lift transition-all">
-                            <div class="d-flex align-items-center gap-3 mb-3">
-                                <div class="bg-warning bg-opacity-10 text-warning rounded-circle d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
-                                    <i class="bi bi-people-fill fs-5"></i>
-                                </div>
-                                <h3 class="display-6 fw-bolder text-dark mb-0">120<span class="text-warning">+</span></h3>
-                            </div>
-                            <p class="text-muted fw-medium mb-0">Aparatur & Tenaga Ahli</p>
-                        </div>
-                    </div>
+                    <x-guest.statistic-card 
+                        icon="bi-people-fill" 
+                        value="120" 
+                        label="Aparatur & Tenaga Ahli" 
+                        suffix="+" 
+                        colorTheme="orange-50" 
+                        textColor="orange-500">
+                    </x-guest.statistic-card>
 
                     <!-- Stat 4: Awards -->
-                    <div class="col-sm-6">
-                        <div class="bg-white p-4 rounded-4 shadow-sm border border-light h-100 hover-lift transition-all">
-                            <div class="d-flex align-items-center gap-3 mb-3">
-                                <div class="bg-info bg-opacity-10 text-info rounded-circle d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
-                                    <i class="bi bi-award-fill fs-5"></i>
-                                </div>
-                                <h3 class="display-6 fw-bolder text-dark mb-0">15</h3>
-                            </div>
-                            <p class="text-muted fw-medium mb-0">Penghargaan Nasional</p>
-                        </div>
-                    </div>
+                    <x-guest.statistic-card 
+                        icon="bi-award-fill" 
+                        value="15" 
+                        label="Penghargaan Nasional" 
+                        colorTheme="purple-50" 
+                        textColor="purple-500">
+                    </x-guest.statistic-card>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<style>
-    .hover-lift:hover { transform: translateY(-5px); box-shadow: 0 15px 30px -5px rgba(0,0,0,0.1) !important; }
-    .transition-all { transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-    .group:hover .group-hover-grow { height: 100% !important; }
-    .group:hover .group-hover-fill { width: 98% !important; }
-    @keyframes float1 {
-        0% { transform: translateY(0px) rotate(0deg); }
-        50% { transform: translateY(-15px) rotate(5deg); }
-        100% { transform: translateY(0px) rotate(0deg); }
-    }
-    .float-animation-1 { animation: float1 6s ease-in-out infinite; }
-</style>
-
 @push('scripts')
 <script>
-    // Simple animation for progress bars when scrolling into view
     document.addEventListener("DOMContentLoaded", function() {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const progressBars = entry.target.querySelectorAll('.progress-bar');
+                    // Progress bars
+                    const progressBars = entry.target.querySelectorAll('.progress-fill');
                     progressBars.forEach(bar => {
                         bar.style.width = bar.getAttribute('data-target');
                     });
+                    
+                    // Counters
+                    const counters = entry.target.querySelectorAll('.counter');
+                    counters.forEach(counter => {
+                        const target = +counter.getAttribute('data-target');
+                        const duration = 2000;
+                        const step = target / (duration / 16);
+                        let current = 0;
+                        
+                        const updateCounter = () => {
+                            current += step;
+                            if (current < target) {
+                                counter.innerText = Math.ceil(current);
+                                requestAnimationFrame(updateCounter);
+                            } else {
+                                counter.innerText = target;
+                            }
+                        };
+                        updateCounter();
+                    });
+                    
+                    observer.unobserve(entry.target);
                 }
             });
-        });
+        }, { threshold: 0.2 });
         
-        document.querySelectorAll('.section-spacing').forEach(section => {
+        document.querySelectorAll('section').forEach(section => {
             observer.observe(section);
         });
     });

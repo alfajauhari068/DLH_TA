@@ -43,6 +43,8 @@ class AuthServiceProvider extends ServiceProvider
         \App\Models\Department::class => \App\Policies\DepartmentPolicy::class,
         \App\Models\Position::class => \App\Policies\PositionPolicy::class,
         \App\Models\Official::class => \App\Policies\OfficialPolicy::class,
+        \App\Models\Agenda::class => \App\Policies\AgendaPolicy::class,
+        \App\Models\SkmScore::class => \App\Policies\SkmScorePolicy::class,
     ];
 
     /**

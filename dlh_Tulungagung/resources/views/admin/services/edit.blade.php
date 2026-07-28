@@ -48,8 +48,7 @@
                 <!-- Description -->
                 <div>
                     <label for="description" class="block text-sm font-semibold text-gray-700 mb-2">Description</label>
-                    <textarea name="description" id="description" rows="10" class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all @error('description') border-red-500 @enderror">{{ old('description', $service->description) }}</textarea>
-                    @error('description') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
+                    <x-admin.form.tinymce-editor name="description" id="description" :value="old('description', $service->description)" height="300" />
                 </div>
             </x-admin.form.card>
 
@@ -69,14 +68,12 @@
 
                 <div class="mb-6">
                     <label for="requirements" class="block text-sm font-semibold text-gray-700 mb-2">Requirements</label>
-                    <textarea name="requirements" id="requirements" rows="4" class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all @error('requirements') border-red-500 @enderror">{{ old('requirements', $service->requirements) }}</textarea>
-                    @error('requirements') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
+                    <x-admin.form.tinymce-editor name="requirements" id="requirements" :value="old('requirements', $service->requirements)" height="300" />
                 </div>
 
                 <div>
                     <label for="workflow" class="block text-sm font-semibold text-gray-700 mb-2">Workflow / Procedure</label>
-                    <textarea name="workflow" id="workflow" rows="4" class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all @error('workflow') border-red-500 @enderror">{{ old('workflow', $service->workflow) }}</textarea>
-                    @error('workflow') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
+                    <x-admin.form.tinymce-editor name="workflow" id="workflow" :value="old('workflow', $service->workflow)" height="300" />
                 </div>
             </x-admin.form.card>
 
@@ -184,17 +181,6 @@
             });
         }
     });
-    </script>
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-    <script>
-        tinymce.init({
-            selector: '#description, #requirements, #workflow',
-            height: 300,
-            plugins: 'advlist autolink lists link charmap preview searchreplace visualblocks code fullscreen insertdatetime table wordcount',
-            toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
-            menubar: false,
-            branding: false
-        });
     </script>
     @endpush
 @endsection

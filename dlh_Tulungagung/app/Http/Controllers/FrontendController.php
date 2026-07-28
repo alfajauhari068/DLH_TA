@@ -22,7 +22,9 @@ class FrontendController extends Controller
         $featuredServices = \App\Models\Service::where('is_featured', 1)->where('status', 'published')->take(4)->get();
         $programs = \App\Models\Program::latest('published_at')->take(3)->get();
         
-        return view('guest.home', compact('latestNews', 'galleries', 'featuredServices', 'programs'));
+        $archives = \App\Models\Publication::where('status', 'published')->latest('published_at')->take(3)->get();
+        
+        return view('guest.home', compact('latestNews', 'galleries', 'featuredServices', 'programs', 'archives'));
     }
 
     public function profile()
@@ -65,6 +67,30 @@ class FrontendController extends Controller
         return view('frontend.gallery-detail', compact('gallery'));
     }
 
+    public function publications()
+    {
+        $publications = \App\Models\Publication::where('status', 'published')
+            ->latest('published_at')
+            ->paginate(12);
+        return view('frontend.publications', compact('publications'));
+    }
+
+    public function publicationDetail($slug)
+    {
+        $publication = \App\Models\Publication::where('slug', $slug)
+            ->where('status', 'published')
+            ->firstOrFail();
+
+        $related = \App\Models\Publication::where('category', $publication->category)
+            ->where('id', '!=', $publication->id)
+            ->where('status', 'published')
+            ->latest('published_at')
+            ->take(3)
+            ->get();
+
+        return view('frontend.publication-detail', compact('publication', 'related'));
+    }
+
     public function documents()
     {
         $documents = Download::latest()->paginate(15);
@@ -97,9 +123,9 @@ class FrontendController extends Controller
 
     public function officials()
     {
-        $departments = Department::with(['officials.position', 'children.officials.position'])
+        $departments = Department::with(['officials.positionRelation', 'children.officials.positionRelation'])
             ->whereNull('parent_id')
-            ->orderBy('sort_order', 'asc')
+            ->orderBy('name', 'asc')
             ->get();
             
         return view('frontend.officials', compact('departments'));

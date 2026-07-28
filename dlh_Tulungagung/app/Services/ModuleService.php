@@ -38,11 +38,14 @@ class ModuleService extends CrudService
 
     protected function handlePublishing(array &$data, ?Model $model = null): void
     {
-        if (isset($data['status']) && (int) $data['status'] === (config('cms.status.published') ?? 1)) {
+        $publishedStatus = config('cms.status.published') ?? 1;
+        $isPublished = isset($data['status']) && ($data['status'] === $publishedStatus || $data['status'] === 'published' || (int) $data['status'] === $publishedStatus);
+
+        if ($isPublished) {
             $data['published_at'] = $data['published_at'] ?? now();
         }
 
-        if ($model && empty($model->published_at) && isset($data['status']) && (int) $data['status'] === (config('cms.status.published') ?? 1)) {
+        if ($model && empty($model->published_at) && $isPublished) {
             $data['published_at'] = $data['published_at'] ?? now();
         }
     }

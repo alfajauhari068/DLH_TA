@@ -1,61 +1,28 @@
 @props(['href', 'icon', 'title', 'description', 'image' => 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=800&auto=format&fit=crop'])
 
-<div class="col-md-4 col-sm-6">
-    <a href="{{ $href }}" class="card border-0 rounded-4 h-100 text-decoration-none bg-dark position-relative overflow-hidden group shadow-sm" style="min-height: 280px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
-        <!-- Background Image -->
-        <div class="position-absolute top-0 start-0 w-100 h-100">
-            <img src="{{ $image }}" alt="{{ $title }}" class="w-100 h-100 object-fit-cover group-hover-scale transition-all">
+<div class="col-span-1 flex justify-center">
+    <a href="{{ $href }}" class="group relative flex flex-col w-full max-w-[400px] h-[480px] bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer border border-gray-100 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+        <!-- Top Image Area (Fixed 220px Height per Spec) -->
+        <div class="relative w-full h-[220px] overflow-hidden bg-gray-100 flex-shrink-0">
+            <img src="{{ $image }}" alt="{{ $title }}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-in-out">
+            <div class="absolute inset-0 bg-gray-900/10 group-hover:bg-transparent transition-colors duration-500"></div>
+            
+            <!-- Floating Icon Anchor -->
+            <div class="absolute -bottom-6 right-6 w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-primary shadow-md group-hover:bg-primary group-hover:text-white transition-colors duration-300 z-10 border border-gray-50" aria-hidden="true">
+                <i class="bi {{ $icon }} text-xl"></i>
+            </div>
         </div>
         
-        <!-- Gradient Overlay -->
-        <div class="position-absolute top-0 start-0 w-100 h-100 transition-all group-hover-overlay" style="background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%);"></div>
-
-        <!-- Content -->
-        <div class="card-body p-4 d-flex flex-column position-relative z-2 h-100 justify-content-end">
-            <!-- Icon floating top right -->
-            <div class="position-absolute top-0 end-0 m-4 rounded-circle d-flex align-items-center justify-content-center text-white" style="width: 40px; height: 40px; background: rgba(255,255,255,0.2); backdrop-filter: blur(4px);">
-                <i class="bi {{ $icon }} fs-5"></i>
-            </div>
-            
-            <div class="content-wrapper transition-all">
-                <h4 class="fw-bold mb-2 text-white">{{ $title }}</h4>
-                <p class="text-white-75 small mb-3 description-text" style="line-height: 1.5; max-height: 0; opacity: 0; overflow: hidden; transition: all 0.4s ease;">
-                    {{ $description }}
-                </p>
-                <div class="d-inline-flex align-items-center gap-2 text-success fw-bold text-uppercase small letter-spacing-1">
-                    <span>Pelajari</span>
-                    <i class="bi bi-arrow-right"></i>
-                </div>
+        <!-- Bottom Text Area -->
+        <div class="flex flex-col flex-grow p-8 bg-white relative z-0">
+            <h4 class="text-xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors duration-300">{{ $title }}</h4>
+            <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
+                {{ $description }}
+            </p>
+            <div class="mt-auto flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-widest">
+                <span>Pelajari Detail</span>
+                <i class="bi bi-arrow-right transform group-hover:translate-x-2 transition-transform duration-300" aria-hidden="true"></i>
             </div>
         </div>
     </a>
 </div>
-
-<style>
-    .transition-all { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-    .group-hover-scale { transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-    
-    .group:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
-    }
-    
-    .group:hover .group-hover-scale {
-        transform: scale(1.1);
-    }
-    
-    .group:hover .group-hover-overlay {
-        background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,0.4) 100%) !important;
-    }
-    
-    .group:hover .description-text {
-        max-height: 80px;
-        opacity: 1;
-        margin-bottom: 1rem !important;
-    }
-    
-    .group:hover .text-success {
-        color: #6ee7b7 !important; /* Lighter green on hover */
-    }
-    .letter-spacing-1 { letter-spacing: 1px; }
-</style>

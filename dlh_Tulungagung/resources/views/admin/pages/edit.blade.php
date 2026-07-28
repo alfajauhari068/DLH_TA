@@ -42,8 +42,7 @@
             <x-admin.form.card title="Content" padding="p-6">
                 <!-- Content TinyMCE -->
                 <div>
-                    <textarea name="content" id="content" rows="15" class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all @error('content') border-red-500 @enderror">{{ old('content', $page->content) }}</textarea>
-                    @error('content') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
+                    <x-admin.form.tinymce-editor name="content" id="content" :value="old('content', $page->content)" height="500" />
                 </div>
             </x-admin.form.card>
             
@@ -92,22 +91,6 @@
             }
         });
     });
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.3/tinymce.min.js" referrerpolicy="origin"></script>
-    <script>
-        tinymce.init({
-            selector: '#content',
-            height: 500,
-            plugins: 'advlist autolink lists link image charmap preview searchreplace visualblocks code fullscreen media table',
-            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media table | forecolor backcolor | fullscreen preview code',
-            toolbar_mode: 'sliding',
-            menubar: true,
-            branding: false,
-            images_upload_url: '{{ route("admin.media.upload") }}',
-            automatic_uploads: true,
-            relative_urls: false,
-            remove_script_host: false,
-        });
     </script>
     @endpush
 @endsection

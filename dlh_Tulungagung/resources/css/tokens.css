@@ -1,0 +1,85 @@
+/* DLH Tulungagung Centralized Design Tokens */
+:root {
+  /* Color Tokens */
+  --primary: #15803D;
+  --primary-dark: #14532D;
+  --primary-green: #16A34A;
+  --light-green: #DCFCE7;
+  --surface-green: #F0FDF4;
+  --accent: #F1C40F;
+  --background: #ffffff;
+  --white: #ffffff;
+  --gray-900: #111827;
+  --gray-700: #374151;
+  --gray-500: #6b7280;
+  --gray-100: #f3f4f6;
+  --danger: #dc3545;
+  --glass-bg: rgba(255, 255, 255, 0.88);
+  --glass-border: rgba(255, 255, 255, 0.20);
+
+  /* Spacing Scale Tokens */
+  --space-0: 0px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --space-28: 120px;
+  --space-40: 160px;
+
+  /* Typography Scale Tokens */
+  --font-sans: Inter, system-ui, -apple-system, sans-serif;
+  --font-display: 56px;
+  --font-h1: 44px;
+  --font-h2: 36px;
+  --font-h3: 24px;
+  --font-h4: 20px;
+  --font-body: 16px;
+  --font-small: 14px;
+  --font-caption: 12px;
+  --font-micro: 10px;
+
+  /* Border Radius Scale Tokens */
+  --radius-none: 0px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-3xl: 32px;
+  --radius-full: 9999px;
+
+  /* Shadow Scale Tokens */
+  --shadow-xs: 0 2px 8px rgba(0,0,0,0.04);
+  --shadow-sm: 0 8px 24px rgba(0,0,0,0.06);
+  --shadow-md: 0 16px 40px -4px rgba(0,0,0,0.08);
+  --shadow-xl: 0 32px 64px -12px rgba(0,0,0,0.12);
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.03);
+  --shadow-floating: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+  /* Elevation / Z-Index Tokens */
+  --z-base: 0;
+  --z-dropdown: 10;
+  --z-navbar: 20;
+  --z-modal: 30;
+  --z-toast: 40;
+
+  /* Backdrop Blur Tokens */
+  --blur-sm: 4px;
+  --blur-md: 12px;
+  --blur-xl: 24px;
+
+  /* Motion & Transition Tokens */
+  --transition-fast: 150ms ease-out;
+  --transition-normal: 300ms ease-out;
+  --transition-slow: 500ms ease-out;
+
+  /* Container & Layout Bounds Tokens */
+  --container-max-width: 1320px;
+  --container-padding: 16px;
+  --navbar-height: 72px;
+}

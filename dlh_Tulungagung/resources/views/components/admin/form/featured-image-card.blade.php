@@ -5,8 +5,11 @@
     if ($previewUrl) {
         $hasImage = true;
     } elseif ($model && isset($model->{$fieldName})) {
-        $hasImage = true;
-        $previewUrl = asset('storage/' . $model->{$fieldName});
+        $val = $model->{$fieldName};
+        if (!empty($val) && !str_contains($val, '.tmp') && !str_contains($val, 'php')) {
+            $hasImage = true;
+            $previewUrl = Storage::url($val);
+        }
     }
 @endphp
 

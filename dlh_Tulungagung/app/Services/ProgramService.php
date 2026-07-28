@@ -19,6 +19,38 @@ class ProgramService extends ModuleService
         ]);
     }
 
+    public function create(array $data)
+    {
+        $featuredImage = $data['featured_image'] ?? null;
+        if ($featuredImage instanceof UploadedFile) {
+            unset($data['featured_image']);
+        }
+
+        $model = parent::create($data);
+
+        if ($featuredImage instanceof UploadedFile) {
+            $this->uploadFeaturedImage($model, $featuredImage);
+        }
+
+        return $model;
+    }
+
+    public function update($model, array $data)
+    {
+        $featuredImage = $data['featured_image'] ?? null;
+        if ($featuredImage instanceof UploadedFile) {
+            unset($data['featured_image']);
+        }
+
+        $model = parent::update($model, $data);
+
+        if ($featuredImage instanceof UploadedFile) {
+            $this->uploadFeaturedImage($model, $featuredImage);
+        }
+
+        return $model;
+    }
+
     public function publish(Program $program): bool
     {
         $program->forceFill(['status' => 'published', 'published_at' => now()]);

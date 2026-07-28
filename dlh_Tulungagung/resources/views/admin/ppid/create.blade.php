@@ -26,10 +26,7 @@
 
             <div>
                 <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-                <textarea name="description" id="description" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm">{{ old('description') }}</textarea>
-                @error('description')
-                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                @enderror
+                <x-admin.form.tinymce-editor name="description" id="description" :value="old('description')" height="300" />
             </div>
             
             <div>

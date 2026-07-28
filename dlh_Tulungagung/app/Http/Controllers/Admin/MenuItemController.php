@@ -25,7 +25,31 @@ class MenuItemController extends Controller
             ->orderBy('order')
             ->get();
 
-        return view('admin.menus.items.create', compact('mainMenu', 'parentItem', 'parentOptions'));
+        // Get available URLs
+        $standardUrls = [
+            '/' => 'Beranda',
+            '/profil' => 'Profil / Tentang Kami',
+            '/layanan' => 'Layanan',
+            '/ppid' => 'PPID',
+            '/berita' => 'Berita',
+            '/galeri' => 'Galeri',
+            '/publikasi' => 'Publikasi',
+            '/dokumen' => 'Dokumen (Unduhan Khusus)',
+            '/kontak' => 'Kontak',
+            '/agenda' => 'Agenda',
+            '/skm' => 'SKM (Survei Kepuasan Masyarakat)',
+            '/struktur-organisasi' => 'Struktur Organisasi',
+        ];
+
+        $pages = \App\Models\Page::select('title', 'slug')->get();
+        $pageUrls = [];
+        foreach ($pages as $page) {
+            $pageUrls['/halaman/' . $page->slug] = 'Halaman: ' . $page->title;
+        }
+
+        $availableUrls = array_merge($standardUrls, $pageUrls);
+
+        return view('admin.menus.items.create', compact('mainMenu', 'parentItem', 'parentOptions', 'availableUrls'));
     }
 
     public function store(Request $request): RedirectResponse
@@ -65,7 +89,31 @@ class MenuItemController extends Controller
             ->orderBy('order')
             ->get();
 
-        return view('admin.menus.items.edit', compact('item', 'mainMenu', 'parentOptions'));
+        // Get available URLs
+        $standardUrls = [
+            '/' => 'Beranda',
+            '/profil' => 'Profil / Tentang Kami',
+            '/layanan' => 'Layanan',
+            '/ppid' => 'PPID',
+            '/berita' => 'Berita',
+            '/galeri' => 'Galeri',
+            '/publikasi' => 'Publikasi',
+            '/dokumen' => 'Dokumen (Unduhan Khusus)',
+            '/kontak' => 'Kontak',
+            '/agenda' => 'Agenda',
+            '/skm' => 'SKM (Survei Kepuasan Masyarakat)',
+            '/struktur-organisasi' => 'Struktur Organisasi',
+        ];
+
+        $pages = \App\Models\Page::select('title', 'slug')->get();
+        $pageUrls = [];
+        foreach ($pages as $page) {
+            $pageUrls['/halaman/' . $page->slug] = 'Halaman: ' . $page->title;
+        }
+
+        $availableUrls = array_merge($standardUrls, $pageUrls);
+
+        return view('admin.menus.items.edit', compact('item', 'mainMenu', 'parentOptions', 'availableUrls'));
     }
 
     public function update(Request $request, MenuItem $item): RedirectResponse

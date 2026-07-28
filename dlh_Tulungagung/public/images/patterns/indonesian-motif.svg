@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
+    <!-- Indonesian Kawung Motif Inspiration -->
+    <g fill="none" stroke="#000000" stroke-width="1.5" stroke-opacity="0.03">
+        <!-- Center diamond/cross -->
+        <path d="M30 15 L45 30 L30 45 L15 30 Z" />
+        <!-- Intersecting circular petals -->
+        <circle cx="0" cy="0" r="21" />
+        <circle cx="60" cy="0" r="21" />
+        <circle cx="0" cy="60" r="21" />
+        <circle cx="60" cy="60" r="21" />
+        <circle cx="30" cy="30" r="21" />
+    </g>
+</svg>

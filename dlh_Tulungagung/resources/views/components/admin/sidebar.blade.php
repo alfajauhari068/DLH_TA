@@ -44,13 +44,18 @@
 
     <!-- User Profile Card inside Sidebar -->
     <div class="px-2 py-2 border-b border-slate-800 bg-slate-900 shrink-0">
-        <div class="flex items-center gap-3 p-2 bg-slate-800 rounded-2xl border border-slate-700 shadow-soft">
-            <div class="w-10 h-10 rounded-xl bg-primary/20 text-emerald-400 font-bold flex items-center justify-center shrink-0">
+        <div class="flex items-center gap-3 p-2 bg-slate-800/50 rounded-2xl border border-slate-700/50 shadow-soft hover:bg-slate-800 transition-colors">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-green to-emerald-700 text-white font-bold flex items-center justify-center shrink-0 shadow-lg relative">
                 {{ strtoupper(substr(auth()->user()->name ?? 'A', 0, 1)) }}
+                <div class="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 border-2 border-slate-900 rounded-full"></div>
             </div>
             <div class="min-w-0 flex-1">
                 <h5 class="text-[11px] font-bold text-white truncate leading-tight">{{ auth()->user()->name ?? 'Administrator' }}</h5>
-                <span class="text-[9px] font-semibold text-emerald-400 uppercase tracking-wider">{{ auth()->user()->role->name ?? 'Admin' }}</span>
+                <div class="flex items-center gap-1.5 mt-0.5">
+                    <span class="text-[9px] font-semibold text-emerald-400 uppercase tracking-wider">{{ auth()->user()->role->name ?? 'Admin' }}</span>
+                    <span class="w-1 h-1 rounded-full bg-slate-600"></span>
+                    <span class="text-[9px] text-slate-400">Online</span>
+                </div>
             </div>
         </div>
     </div>
@@ -76,8 +81,8 @@
                             @if($user && $user->hasPermission($item['permission']))
                                 @php 
                                     $isActive = isset($item['route']) ? request()->routeIs($item['route'] . '*') : false; 
-                                    $iconClass = $isActive ? 'text-white' : 'text-slate-400 group-hover:text-white transition-colors duration-300';
-                                    $bgClass = $isActive ? 'bg-emerald-600 text-white shadow-sm shadow-emerald-600/20' : 'text-slate-400 hover:bg-slate-800 hover:text-white';
+                                    $iconClass = $isActive ? 'text-emerald-400' : 'text-slate-400 group-hover:text-emerald-400 transition-colors duration-300';
+                                    $bgClass = $isActive ? 'bg-gradient-to-r from-emerald-600/20 to-transparent text-white border-l-4 border-emerald-500' : 'text-slate-400 hover:bg-slate-800/50 hover:text-white border-l-4 border-transparent';
                                     $href = isset($item['url']) ? $item['url'] : route($item['route']);
                                     $target = isset($item['url']) ? '_blank' : '_self';
                                 @endphp
@@ -85,20 +90,16 @@
                                     <a href="{{ $href }}" target="{{ $target }}"
                                        role="menuitem" 
                                        data-menu-label="{{ $item['label'] }}"
-                                       class="group flex items-center gap-3 px-4 py-2.5 rounded-2xl transition-all duration-300 hover:translate-x-1 {{ $bgClass }}"
+                                       class="group flex items-center gap-3 px-3 py-2.5 rounded-r-2xl transition-all duration-300 hover:translate-x-1 {{ $bgClass }}"
                                        {{ $isActive ? 'aria-current="page"' : '' }}>
                                         
                                         <i class="bi bi-{{ $item['icon'] }} text-md transition-colors {{ $iconClass }}"></i>
-                                        <span class="text-xs truncate flex-1">{{ $item['label'] }}</span>
+                                        <span class="text-xs truncate flex-1 font-medium">{{ $item['label'] }}</span>
                                         
                                         @if($item['badge'])
-                                            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full {{ $isActive ? 'bg-white text-emerald-700 shadow-sm' : 'bg-slate-800 text-slate-400' }}">
+                                            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full {{ $isActive ? 'bg-emerald-500/20 text-emerald-400 shadow-sm' : 'bg-slate-800 text-slate-400' }}">
                                                 {{ $item['badge'] }}
                                             </span>
-                                        @endif
-
-                                        @if($isActive && !$item['badge'])
-                                            <div class="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.6)]"></div>
                                         @endif
                                     </a>
                                 </li>

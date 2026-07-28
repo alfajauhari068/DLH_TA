@@ -69,8 +69,7 @@
                 <!-- Biography -->
                 <div>
                     <label for="biography" class="block text-sm font-semibold text-gray-700 mb-2">Biography</label>
-                    <textarea name="biography" id="biography" rows="6" class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all @error('biography') border-red-500 @enderror">{{ old('biography') }}</textarea>
-                    @error('biography') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
+                    <x-admin.form.tinymce-editor name="biography" id="biography" :value="old('biography')" height="300" />
                 </div>
             </x-admin.form.card>
         </div>
@@ -91,17 +90,5 @@
         </div>
     </form>
 
-    @push('scripts')
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-    <script>
-        tinymce.init({
-            selector: '#biography',
-            height: 300,
-            plugins: 'advlist autolink lists link charmap preview searchreplace visualblocks code',
-            toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
-            menubar: false,
-            branding: false
-        });
-    </script>
     @endpush
 @endsection

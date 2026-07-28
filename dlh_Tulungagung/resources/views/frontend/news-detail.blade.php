@@ -3,41 +3,98 @@
 @section('title', $newsItem->title . ' | DLH Tulungagung')
 
 @section('content')
-    <x-hero 
+    <x-guest.hero-banner 
         :title="$newsItem->title" 
-        :breadcrumbs="[['url' => url('/berita'), 'label' => 'Berita'], ['label' => 'Detail']]"
+        :breadcrumbs="[['url' => url('/berita'), 'label' => 'Berita'], ['label' => Str::limit($newsItem->title, 30)]]"
+        :badge="$newsItem->category?->name ?? 'Berita'"
+        :background="$newsItem->thumbnail ? Storage::url($newsItem->thumbnail) : null"
     />
 
-    <section class="py-16">
-        <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-sm p-6 md:p-10 border border-gray-100">
-                <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500 mb-8 border-b border-gray-100 pb-6">
-                    <span class="flex items-center gap-2">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                        {{ $newsItem->published_at ? \Carbon\Carbon::parse($newsItem->published_at)->translatedFormat('d F Y') : '-' }}
-                    </span>
-                    @if($newsItem->categories && $newsItem->categories->count() > 0)
-                        <span class="flex items-center gap-2">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
-                            {{ $newsItem->categories->first()->name }}
-                        </span>
-                    @endif
-                    @if($newsItem->author)
-                        <span class="flex items-center gap-2">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                            {{ $newsItem->author->name }}
-                        </span>
-                    @endif
-                </div>
+    <x-guest.information-strip 
+        :items="[
+            ['label' => 'Tanggal Publish', 'value' => $newsItem->published_at ? \Carbon\Carbon::parse($newsItem->published_at)->translatedFormat('d F Y') : '-', 'icon' => 'bi-calendar3'],
+            ['label' => 'Kategori', 'value' => $newsItem->category?->name ?? 'Berita Umum', 'icon' => 'bi-folder'],
+            ['label' => 'Penulis', 'value' => $newsItem->author?->name ?? 'Admin', 'icon' => 'bi-person'],
+            ['label' => 'Dilihat', 'value' => $newsItem->views_count ?? 0 . ' Kali', 'icon' => 'bi-eye'],
+        ]"
+    />
 
-                @if($newsItem->featured_image)
-                    <img src="{{ $newsItem->image_url }}" alt="{{ $newsItem->title }}" class="w-full h-auto rounded-xl mb-8 object-cover max-h-[500px]">
-                @endif
-
-                <article class="prose prose-lg max-w-none text-gray-700">
+    <x-guest.page-container>
+        <x-guest.page-layout>
+            <x-slot name="main">
+                <x-guest.content-card>
                     {!! $newsItem->content !!}
-                </article>
-            </div>
-        </div>
-    </section>
+                </x-guest.content-card>
+
+                <div class="mt-8 border-t border-gray-100 pt-8 flex items-center justify-between">
+                    <div class="flex items-center gap-2 text-sm text-gray-500">
+                        <i class="bi bi-tags"></i>
+                        <span>Tags:</span>
+                        <!-- Tags could go here -->
+                        <span class="px-3 py-1 bg-gray-50 rounded-full text-xs border border-gray-100">{{ $newsItem->category?->name ?? 'Umum' }}</span>
+                    </div>
+                    
+                    <x-guest.share-buttons :title="$newsItem->title" />
+                </div>
+            </x-slot>
+
+            <x-slot name="sidebar">
+                <x-guest.sidebar-card title="Bagikan Artikel" icon="bi-share">
+                    <x-guest.share-buttons :title="$newsItem->title" />
+                </x-guest.sidebar-card>
+
+                @if($newsItem->author)
+                    <x-guest.sidebar-card title="Penulis" icon="bi-person-badge">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 text-xl shrink-0">
+                                <i class="bi bi-person"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">{{ $newsItem->author->name }}</h4>
+                                <p class="text-sm text-gray-500">Administrator</p>
+                            </div>
+                        </div>
+                    </x-guest.sidebar-card>
+                @endif
+            </x-slot>
+        </x-guest.page-layout>
+
+        <!-- Related News -->
+        @php
+            $related = \App\Models\News::where('category_id', $newsItem->category_id)
+                ->where('id', '!=', $newsItem->id)
+                ->where('status', 'published')
+                ->latest('published_at')
+                ->take(3)
+                ->get();
+        @endphp
+
+        @if($related->isNotEmpty())
+            <x-guest.related-section>
+                <x-slot name="header">
+                    <x-guest.section-header title="Berita Terkait" icon="bi-newspaper" :action="['url' => route('news'), 'label' => 'Lihat Semua']" />
+                </x-slot>
+                
+                @foreach($related as $item)
+                    <x-guest.related-card 
+                        :url="route('news.detail', $item->slug)"
+                        :title="$item->title"
+                        :summary="$item->summary"
+                        :thumbnail="$item->thumbnail ? Storage::url($item->thumbnail) : null"
+                        :badge="$item->category?->name ?? 'Berita'"
+                        :date="$item->published_at ? \Carbon\Carbon::parse($item->published_at)->format('d M Y') : null"
+                        :author="$item->author?->name"
+                        fallbackIcon="bi-newspaper"
+                    />
+                @endforeach
+            </x-guest.related-section>
+        @endif
+
+    </x-guest.page-container>
+
+    <x-guest.cta-banner 
+        title="Dapatkan Informasi Lingkungan Lainnya" 
+        subtitle="Lihat galeri, dokumen publik, dan layanan kami." 
+        :primaryAction="['url' => route('services'), 'label' => 'Layanan Publik', 'icon' => 'bi-card-list']" 
+    />
 @endsection

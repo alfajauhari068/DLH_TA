@@ -1,93 +1,104 @@
-<section class="bg-dark position-relative overflow-hidden pt-5">
-    <div class="container pt-5 pb-4">
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4 gap-3">
-            <div>
-                <span class="badge bg-white bg-opacity-10 text-white mb-3 px-3 py-2 fw-bold rounded-pill text-uppercase letter-spacing-1">Galeri Visual</span>
-                <h2 class="display-5 fw-bolder mb-0 text-white">Bingkai Lestari</h2>
-                <p class="text-white-50 fs-5 mt-2 mb-0">Dokumentasi langkah nyata kami untuk bumi Tulungagung.</p>
+<section class="relative overflow-hidden py-14 md:py-20 lg:py-28 bg-[#F8FAFC]">
+    
+    <!-- Top SVG Divider (Organic Wave) -->
+    <div class="absolute top-0 left-0 w-full overflow-hidden leading-[0] z-0 pointer-events-none rotate-180">
+        <svg class="relative block w-full h-[40px] md:h-[60px] lg:h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" fill="#ffffff"></path>
+        </svg>
+    </div>
+
+    <!-- Ambient Glow Top Left -->
+    <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+
+    <div class="container relative z-10 px-4 mt-8">
+        <!-- Section Header -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
+            <div class="max-w-2xl">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 text-gray-700 text-xs font-bold uppercase tracking-widest mb-4 shadow-sm">
+                    <i class="bi bi-images text-primary" aria-hidden="true"></i> Galeri Visual
+                </div>
+                <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-4">Bingkai Lestari</h2>
+                <p class="text-gray-500 text-lg md:text-xl font-medium">Dokumentasi langkah nyata kami untuk bumi Tulungagung.</p>
             </div>
-            <a href="{{ url('/galeri') }}" class="btn btn-outline-light fw-bold rounded-pill px-4 py-2 hover-bg-white transition-all">
-                Semua Galeri <i class="bi bi-arrow-right ms-2"></i>
+            <a href="{{ url('/galeri') }}" class="group inline-flex items-center gap-2 px-8 py-3.5 bg-gray-900 text-white font-black rounded-full hover:bg-primary transition-colors duration-300 shadow-elevation-1 hover:shadow-elevation-2 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                Lihat Semua <i class="bi bi-arrow-right transform group-hover:translate-x-1 transition-transform" aria-hidden="true"></i>
             </a>
         </div>
-    </div>
-    
-    <!-- Edge-to-edge / Full bleed asymmetrical gallery -->
-    <div class="container-fluid px-0">
-        <div class="row g-1">
-            @php
-                $displayGalleries = collect([]);
-                if (isset($galleries) && $galleries->count() > 0) {
-                    $displayGalleries = $galleries->take(5);
+
+        @php
+            $displayGalleries = collect([]);
+            if (isset($galleries) && $galleries->count() > 0) {
+                $displayGalleries = $galleries->take(5);
+            }
+            
+            $demoImages = [
+                'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=1200&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=800&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?q=80&w=800&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=800&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1503756234508-e32369269deb?q=80&w=800&auto=format&fit=crop'
+            ];
+
+            $needed = 5 - $displayGalleries->count();
+            if ($needed > 0) {
+                for ($i = 0; $i < $needed; $i++) {
+                    $displayGalleries->push((object)[
+                        'title' => 'Inisiatif Lingkungan ' . ($i + 1),
+                        'album_name' => 'Program Hijau',
+                        'image_url' => $demoImages[$i],
+                        'photos_count' => rand(5, 24)
+                    ]);
                 }
+            }
+        @endphp
+
+        <!-- Masonry Grid 1 Hero + 4 Small -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            
+            <!-- Large Featured Image -->
+            @php $first = $displayGalleries->first(); @endphp
+            <a href="{{ url('/galeri') }}" aria-label="Buka galeri {{ $first->title }}" class="block group relative rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-1 h-[400px] lg:h-[600px] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                <img src="{{ $first->image_url }}" alt="{{ $first->title }}" loading="lazy" decoding="async" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out">
                 
-                // Demo images from Unsplash for the Premium Eco feel
-                $demoImages = [
-                    'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=1000&auto=format&fit=crop',
-                    'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=1000&auto=format&fit=crop',
-                    'https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?q=80&w=1000&auto=format&fit=crop',
-                    'https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=1000&auto=format&fit=crop',
-                    'https://images.unsplash.com/photo-1503756234508-e32369269deb?q=80&w=1000&auto=format&fit=crop'
-                ];
-
-                $needed = 5 - $displayGalleries->count();
-                if ($needed > 0) {
-                    for ($i = 0; $i < $needed; $i++) {
-                        $displayGalleries->push((object)[
-                            'title' => 'Inisiatif Lingkungan ' . ($i + 1),
-                            'album_name' => 'Program Hijau',
-                            'image_url' => $demoImages[$i]
-                        ]);
-                    }
-                }
-            @endphp
-
-            <!-- Large Featured Image (Left side) -->
-            <div class="col-lg-6">
-                @php $first = $displayGalleries->first(); @endphp
-                <div class="position-relative overflow-hidden bg-dark group cursor-pointer w-100" style="height: 100%; min-height: 500px;">
-                    <img src="{{ $first->image_url }}" alt="{{ $first->title }}" class="w-100 h-100 object-fit-cover group-hover-scale transition-all opacity-75">
-                    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-end p-5 transition-all group-hover-overlay" style="background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 60%);">
-                        <span class="badge bg-success mb-3 align-self-start px-3 py-2 rounded-pill fw-bold text-uppercase letter-spacing-1">{{ $first->album_name ?? 'Dokumentasi' }}</span>
-                        <h3 class="text-white display-6 fw-bolder mb-0 text-shadow group-hover-translate-up transition-all">{{ $first->title }}</h3>
+                <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-500"></div>
+                
+                <!-- Hover Counter & Icon -->
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 transform scale-90 group-hover:scale-100 z-20">
+                    <div class="w-24 h-24 bg-white/30 rounded-full flex flex-col items-center justify-center text-white border border-white/30 shadow-glass backdrop-blur-sm">
+                        <i class="bi bi-images text-2xl mb-1" aria-hidden="true"></i>
+                        <span class="text-xs font-bold tracking-widest">{{ $first->photos_count ?? rand(5,15) }} FOTO</span>
                     </div>
                 </div>
-            </div>
 
-            <!-- Right side grid (2x2) -->
-            <div class="col-lg-6">
-                <div class="row g-1 h-100">
-                    @foreach($displayGalleries->skip(1)->take(4) as $item)
-                    <div class="col-6">
-                        <div class="position-relative overflow-hidden bg-dark group cursor-pointer w-100 h-100" style="min-height: 250px;">
-                            <img src="{{ $item->image_url }}" alt="{{ $item->title }}" class="w-100 h-100 object-fit-cover group-hover-scale transition-all opacity-75">
-                            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-end p-4 transition-all group-hover-overlay" style="background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%);">
-                                <h4 class="text-white fs-5 fw-bold mb-1 text-shadow group-hover-translate-up transition-all">{{ Str::limit($item->title, 40) }}</h4>
-                                <p class="text-white-50 small mb-0 fw-medium group-hover-translate-up-delay transition-all"><i class="bi bi-folder2-open me-1"></i> {{ $item->album_name ?? 'Dokumentasi' }}</p>
-                            </div>
+                <div class="absolute inset-0 z-10 p-8 flex flex-col justify-end transform transition-transform duration-500">
+                    <span class="inline-block px-4 py-1.5 bg-primary text-white text-xs font-bold rounded-full mb-3 self-start shadow-sm">{{ $first->album_name ?? 'Dokumentasi' }}</span>
+                    <h3 class="text-3xl lg:text-4xl font-black text-white leading-tight transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">{{ $first->title }}</h3>
+                </div>
+            </a>
+
+            <!-- Grid 2x2 -->
+            <div class="grid grid-cols-2 gap-4 h-[400px] lg:h-[600px]">
+                @foreach($displayGalleries->skip(1)->take(4) as $item)
+                <a href="{{ url('/galeri') }}" aria-label="Buka galeri {{ $item->title }}" class="block group relative rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                    <img src="{{ $item->image_url }}" alt="{{ $item->title }}" loading="lazy" decoding="async" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out">
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-500"></div>
+
+                    <!-- Hover Counter -->
+                    <div class="absolute top-4 right-4 bg-white/30 backdrop-blur-sm px-3 py-1.5 rounded-full text-white text-xs font-bold border border-white/30 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-20 shadow-glass">
+                        <i class="bi bi-camera" aria-hidden="true"></i> {{ $item->photos_count ?? rand(3,10) }}
+                    </div>
+                    
+                    <div class="absolute inset-0 z-10 p-5 flex flex-col justify-end transform transition-transform duration-500">
+                        <h4 class="text-lg lg:text-xl font-bold text-white leading-tight transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 line-clamp-2">{{ $item->title }}</h4>
+                        <div class="overflow-hidden max-h-0 group-hover:max-h-10 transition-all duration-300 opacity-0 group-hover:opacity-100 mt-2">
+                            <span class="text-white/70 text-xs font-medium"><i class="bi bi-folder2-open me-1" aria-hidden="true"></i> {{ $item->album_name ?? 'Dokumentasi' }}</span>
                         </div>
                     </div>
-                    @endforeach
-                </div>
+                </a>
+                @endforeach
             </div>
-
+            
         </div>
     </div>
 </section>
-
-<style>
-    .transition-all { transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-    .group-hover-scale { transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
-    .group:hover .group-hover-scale { transform: scale(1.08); filter: brightness(1.1); }
-    .group:hover .group-hover-overlay { background: linear-gradient(to top, rgba(20, 92, 37, 0.95) 0%, rgba(0,0,0,0) 70%) !important; }
-    
-    .group-hover-translate-up { transform: translateY(10px); }
-    .group-hover-translate-up-delay { transform: translateY(15px); opacity: 0; }
-    
-    .group:hover .group-hover-translate-up { transform: translateY(0); }
-    .group:hover .group-hover-translate-up-delay { transform: translateY(0); opacity: 1; transition-delay: 0.1s; }
-    
-    .text-shadow { text-shadow: 0 4px 10px rgba(0,0,0,0.5); }
-    .letter-spacing-1 { letter-spacing: 1px; }
-    .hover-bg-white:hover { background-color: #fff !important; color: var(--bs-dark) !important; }
-</style>

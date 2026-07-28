@@ -23,6 +23,8 @@ Route::get('/berita', [FrontendController::class, 'news'])->name('news');
 Route::get('/berita/{slug}', [FrontendController::class, 'newsDetail'])->name('news.detail');
 Route::get('/galeri', [FrontendController::class, 'galleries'])->name('galleries');
 Route::get('/galeri/{slug}', [FrontendController::class, 'galleryDetail'])->name('galleries.detail');
+Route::get('/publikasi', [FrontendController::class, 'publications'])->name('publications');
+Route::get('/publikasi/{slug}', [FrontendController::class, 'publicationDetail'])->name('publications.detail');
 Route::get('/dokumen', [FrontendController::class, 'documents'])->name('documents');
 Route::get('/kontak', [FrontendController::class, 'contact'])->name('contact');
 Route::get('/halaman/{slug}', [FrontendController::class, 'page'])->name('page');

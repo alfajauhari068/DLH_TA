@@ -9,7 +9,7 @@
     'emptyDesc' => 'Data untuk bagian ini belum tersedia.',
 ])
 
-<div {{ $attributes->merge(['class' => 'bg-white/95 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-100 flex flex-col transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 overflow-hidden relative']) }}>
+<div {{ $attributes->merge(['class' => 'bg-white border border-gray-100 rounded-3xl shadow-soft flex flex-col transition-all duration-300 hover:shadow-hover hover:-translate-y-0.5 overflow-hidden relative']) }}>
     
     @if($loading)
         <div class="absolute inset-0 bg-white/70 backdrop-blur-[2px] z-20 flex items-center justify-center">
