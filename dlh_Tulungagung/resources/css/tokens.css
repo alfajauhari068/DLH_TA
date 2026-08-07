@@ -1,12 +1,12 @@
 /* DLH Tulungagung Centralized Design Tokens */
 :root {
   /* Color Tokens */
-  --primary: #15803D;
-  --primary-dark: #14532D;
-  --primary-green: #16A34A;
-  --light-green: #DCFCE7;
-  --surface-green: #F0FDF4;
-  --accent: #F1C40F;
+  --primary: #064e3b; /* Forest Green */
+  --primary-dark: #022c22;
+  --primary-green: #10b981; /* Nature Green */
+  --light-green: #d1fae5;
+  --surface-green: #ecfdf5; /* Soft Green */
+  --accent: #f59e0b; /* Warm Yellow */
   --background: #ffffff;
   --white: #ffffff;
   --gray-900: #111827;
@@ -14,8 +14,8 @@
   --gray-500: #6b7280;
   --gray-100: #f3f4f6;
   --danger: #dc3545;
-  --glass-bg: rgba(255, 255, 255, 0.88);
-  --glass-border: rgba(255, 255, 255, 0.20);
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.40);
 
   /* Spacing Scale Tokens */
   --space-0: 0px;

@@ -1,83 +1,77 @@
-<section class="relative py-14 md:py-20 lg:py-28 bg-[#F8FAFC] overflow-hidden">
-    <div class="container px-4 relative z-10">
+<section class="relative py-16 md:py-24 bg-white overflow-hidden">
+    <div class="max-w-7xl mx-auto px-5 md:px-6 lg:px-8 relative z-10">
         
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
-            <div class="max-w-2xl">
-                <span class="inline-block px-4 py-2 bg-white text-primary font-bold text-xs uppercase tracking-widest rounded-full mb-6 shadow-sm border border-gray-100">Jendela Informasi</span>
-                <h2 class="text-4xl lg:text-5xl font-black text-gray-900 mb-4 leading-tight">Kabar & Publikasi</h2>
-                <p class="text-gray-500 text-lg leading-relaxed">Rangkuman peristiwa, inovasi, dan langkah nyata kami dalam pelestarian lingkungan.</p>
+        <!-- HEADER SECTION -->
+        <div class="max-w-3xl mx-auto text-center mb-12 md:mb-16">
+            <div class="inline-flex items-center gap-2.5 px-6 py-2.5 bg-white text-primary font-bold text-[11px] tracking-widest uppercase rounded-full mb-6 shadow-sm border border-gray-200">
+                <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                JENDELA INFORMASI
             </div>
-            <a href="{{ url('/berita') }}" class="group inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-700 font-bold rounded-full border border-gray-200 hover:border-primary hover:text-primary transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5">
-                Arsip Berita <i class="bi bi-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
-            </a>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-black text-[#163020] mb-6 leading-tight">Kabar & Publikasi</h2>
+            <p class="text-gray-600 text-lg max-w-2xl mx-auto leading-8">Rangkuman peristiwa, inovasi, dan langkah nyata kami dalam pelestarian lingkungan.</p>
         </div>
 
+        <!-- CONTENT GRID -->
         @if(isset($latestNews) && $latestNews->count() > 0)
-            @php $featured = $latestNews->first(); @endphp
-            
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                <!-- Massive Featured Article (Left Side - 8 cols) -->
-                <div class="lg:col-span-8">
-                    <a href="{{ url('/berita/' . ($featured->slug ?? '')) }}" class="group relative block w-full h-[500px] lg:h-full min-h-[500px] rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
-                        <!-- Full bleed background -->
-                        <div class="absolute inset-0 z-0 bg-gray-100">
-                            <img src="{{ $featured->featured_image ? asset('storage/' . $featured->featured_image) : asset('images/default-news.jpg') }}" alt="{{ $featured->title }}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-8">
+                @foreach($latestNews->take(3) as $item)
+                    <!-- Premium News Card -->
+                    <a href="{{ url('/berita/' . ($item->slug ?? '')) }}" class="group relative flex flex-col bg-white rounded-[32px] shadow-[0_15px_40px_rgba(0,0,0,0.05)] hover:shadow-[0_30px_60px_rgba(0,0,0,0.10)] transition-all duration-300 hover:-translate-y-2 overflow-hidden border border-gray-100 h-full">
+                        
+                        <!-- Image Area -->
+                        <div class="w-full h-[240px] relative overflow-hidden shrink-0">
+                            <img src="{{ $item->featured_image ? asset('storage/' . $item->featured_image) : asset('images/default-news.jpg') }}" alt="{{ $item->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            
+                            <!-- Category Badge inside Image -->
+                            @if(isset($item->categories) && $item->categories->count() > 0)
+                                <div class="absolute top-5 left-5">
+                                    <span class="bg-white/90 backdrop-blur text-primary text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-full shadow-sm">
+                                        {{ $item->categories->first()->name }}
+                                    </span>
+                                </div>
+                            @endif
                         </div>
                         
-                        <!-- Rich Gradient Overlay -->
-                        <div class="absolute inset-0 z-10 bg-gradient-to-t from-gray-900 via-gray-900/50 to-transparent opacity-85 group-hover:opacity-95 transition-opacity duration-500"></div>
-
-                        <!-- Content -->
-                        <div class="absolute inset-0 z-20 p-8 md:p-10 flex flex-col justify-end">
-                            <div class="flex items-center gap-4 mb-4">
-                                @if(isset($featured->categories) && $featured->categories->count() > 0)
-                                    <span class="bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">{{ $featured->categories->first()->name }}</span>
-                                @endif
-                                <span class="text-white/80 font-medium text-sm flex items-center gap-2">
-                                    <i class="bi bi-calendar3" aria-hidden="true"></i> 
-                                    {{ isset($featured->published_at) ? \Carbon\Carbon::parse($featured->published_at)->translatedFormat('d F Y') : '-' }}
-                                </span>
+                        <!-- Content Area -->
+                        <div class="p-8 flex-grow flex flex-col">
+                            <div class="flex items-center gap-2 text-gray-400 text-xs mb-4 font-medium tracking-wide uppercase">
+                                <i class="bi bi-calendar3"></i>
+                                <span>{{ isset($item->published_at) ? \Carbon\Carbon::parse($item->published_at)->translatedFormat('d M Y') : '-' }}</span>
                             </div>
                             
-                            <h3 class="text-3xl md:text-4xl font-black text-white mb-4 leading-tight group-hover:text-light-green transition-colors duration-300 drop-shadow-md">
-                                {{ $featured->title }}
+                            <h3 class="text-xl md:text-2xl font-semibold text-gray-900 mb-3 group-hover:text-primary transition-colors duration-300 line-clamp-2 leading-snug">
+                                {{ $item->title }}
                             </h3>
                             
-                            <p class="text-white/80 text-lg line-clamp-2 md:line-clamp-3 leading-relaxed mb-6 max-w-2xl">
-                                {{ Str::limit($featured->summary ?? strip_tags($featured->content ?? ''), 180) }}
+                            <p class="text-gray-500 text-sm leading-7 line-clamp-3 mb-8">
+                                {{ Str::limit($item->summary ?? strip_tags($item->content ?? ''), 120) }}
                             </p>
                             
-                            <div class="inline-flex items-center gap-2 text-light-green font-bold uppercase tracking-widest text-xs group-hover:text-white transition-colors">
-                                Baca Artikel <i class="bi bi-arrow-right transform group-hover:translate-x-1 transition-transform" aria-hidden="true"></i>
+                            <!-- Footer Action -->
+                            <div class="mt-auto flex items-center gap-2 text-primary text-sm font-bold uppercase tracking-widest">
+                                Baca <i class="bi bi-arrow-right transform group-hover:translate-x-1.5 transition-transform duration-300"></i>
                             </div>
                         </div>
                     </a>
-                </div>
-
-                <!-- Secondary News Stack (Right Side - 4 cols) -->
-                <div class="lg:col-span-4 flex flex-col gap-6">
-                    @if($latestNews->count() > 1)
-                        @foreach($latestNews->skip(1)->take(3) as $item)
-                            <x-guest.news-card-mini 
-                                href="{{ url('/berita/' . ($item->slug ?? '')) }}"
-                                image="{{ $item->featured_image ? asset('storage/' . $item->featured_image) : asset('images/default-news.jpg') }}"
-                                title="{{ $item->title }}"
-                                publishedAt="{{ isset($item->published_at) ? \Carbon\Carbon::parse($item->published_at)->diffForHumans() : '-' }}"
-                                summary="{{ Str::limit($item->summary ?? strip_tags($item->content ?? ''), 80) }}"
-                            />
-                        @endforeach
-                    @endif
-                </div>
+                @endforeach
+            </div>
+            
+            <!-- BOTTOM CTA -->
+            <div class="mt-16 text-center">
+                <a href="{{ url('/berita') }}" class="inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-white text-primary font-medium text-base rounded-full border border-gray-200 shadow-sm hover:border-primary hover:bg-primary/5 hover:-translate-y-1 transition-all duration-300">
+                    Arsip Berita
+                    <i class="bi bi-arrow-right"></i>
+                </a>
             </div>
 
         @else
             <!-- Empty State -->
-            <div class="bg-white rounded-[32px] p-12 text-center flex flex-col justify-center items-center border border-gray-100 shadow-sm min-h-[400px]">
-                <div class="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center mb-6 shadow-sm">
-                    <i class="bi bi-journal-x text-gray-400 text-4xl"></i>
+            <div class="bg-white rounded-[32px] p-12 text-center flex flex-col justify-center items-center border border-gray-100 shadow-[0_15px_40px_rgba(0,0,0,0.05)] min-h-[300px]">
+                <div class="w-16 h-16 rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center mb-6">
+                    <i class="bi bi-journal-x text-gray-400 text-2xl"></i>
                 </div>
-                <h4 class="text-gray-900 font-black text-2xl mb-2">Belum Ada Publikasi</h4>
-                <p class="text-gray-500 text-lg">Informasi terbaru akan segera diperbarui.</p>
+                <h4 class="text-gray-900 font-semibold text-xl mb-2">Belum Ada Publikasi</h4>
+                <p class="text-gray-500 text-sm">Informasi terbaru akan segera diperbarui.</p>
             </div>
         @endif
         

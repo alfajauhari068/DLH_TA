@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Dashboard') | DLH Tulungagung CMS</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    @if (file_exists(public_path('build/manifest.json')))
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @else
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-        <script src="{{ asset('js/app.js') }}" defer></script>
-    @endif
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -85,5 +87,44 @@
     <div class="fixed inset-0 bg-gray-900/50 z-40 lg:hidden hidden pointer-events-none" id="mobile-sidebar-overlay" aria-hidden="true"></div>
     
     @stack('scripts')
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.getElementById('admin-sidebar');
+            const overlay = document.getElementById('mobile-sidebar-overlay');
+            const toggleBtns = document.querySelectorAll('[data-admin-toggle-sidebar]');
+
+            if (sidebar && overlay) {
+                const openSidebar = () => {
+                    sidebar.classList.remove('hidden');
+                    sidebar.classList.add('fixed', 'left-0', 'top-0', 'z-50', 'flex');
+                    overlay.classList.remove('hidden', 'pointer-events-none');
+                    // Add animation/transition feel
+                    setTimeout(() => {
+                        sidebar.classList.add('translate-x-0');
+                    }, 10);
+                };
+
+                const closeSidebar = () => {
+                    sidebar.classList.add('hidden');
+                    sidebar.classList.remove('fixed', 'left-0', 'top-0', 'z-50', 'flex');
+                    overlay.classList.add('hidden', 'pointer-events-none');
+                };
+
+                toggleBtns.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        if (sidebar.classList.contains('hidden')) {
+                            openSidebar();
+                        } else {
+                            closeSidebar();
+                        }
+                    });
+                });
+
+                overlay.addEventListener('click', closeSidebar);
+            }
+        });
+    </script>
 </body>
 </html>

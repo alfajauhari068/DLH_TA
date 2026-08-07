@@ -27,7 +27,7 @@
             :hasDate="false" />
     </x-slot:toolbar>
 
-    @if($skm_scores->isEmpty())
+    @if($skmScores->isEmpty())
         <x-admin.index.empty 
             title="Belum ada Nilai SKM" 
             description="Tambahkan rekapitulasi data Survei Kepuasan Masyarakat." 
@@ -43,7 +43,7 @@
                 <th class="px-6 py-3">Kategori Mutu</th>
                 <th class="px-6 py-3 text-right">Aksi</th>
             </x-slot:head>
-            @foreach($skm_scores as $skm)
+            @foreach($skmScores as $skm)
                 <tr class="hover:bg-gray-50 transition-colors">
                     <td class="px-6 py-4 font-bold text-center text-gray-900">{{ $skm->year }}</td>
                     <td class="px-6 py-4 text-gray-600">{{ $skm->period }}</td>
@@ -66,7 +66,7 @@
         </x-admin.index.table>
 
         <x-slot:pagination>
-            {{ $skm_scores->withQueryString()->links() }}
+            {{ $skmScores->withQueryString()->links() }}
         </x-slot:pagination>
     @endif
 

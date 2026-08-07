@@ -1,19 +1,25 @@
 @extends('layouts.app')
 
-@section('title', 'Struktur Organisasi | DLH Tulungagung')
+@section('title', 'Profil Pejabat | DLH Tulungagung')
 
 @section('content')
     <x-guest.hero-banner 
-        title="Struktur Organisasi" 
+        title="Profil Pejabat" 
         subtitle="Mengenal susunan pejabat dan struktur kepengurusan Dinas Lingkungan Hidup Kabupaten Tulungagung." 
-        :breadcrumbs="[['label' => 'Struktur Organisasi']]"
-        badge="Profil Instansi"
+        :breadcrumbs="[['label' => 'Profil Pejabat']]"
+        badge="Daftar Pejabat"
     />
 
     <x-guest.page-container>
         <x-guest.page-layout :hasSidebar="false">
             <x-slot name="main">
                 <div class="max-w-5xl mx-auto space-y-16">
+                    <div class="flex justify-end mb-6">
+                        <a href="{{ route('organization-structure') }}" class="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm rounded-full shadow transition-all duration-300">
+                            <i class="bi bi-diagram-3"></i>
+                            Lihat Bagan Struktur Organisasi
+                        </a>
+                    </div>
                     @if($departments->isEmpty())
                         <x-guest.empty-state 
                             icon="bi-diagram-3" 
@@ -26,7 +32,7 @@
                                 <div class="text-center max-w-3xl mx-auto">
                                     <h2 class="text-3xl font-bold text-gray-900 inline-block relative pb-3">
                                         {{ $department->name }}
-                                        <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-emerald-500 rounded-full"></span>
+                                        <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-primary-green rounded-full"></span>
                                     </h2>
                                     @if($department->description)
                                         <p class="text-gray-500 mt-4 leading-relaxed">{{ $department->description }}</p>
@@ -37,15 +43,15 @@
                                 @if($department->officials->count() > 0)
                                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
                                         @foreach($department->officials as $official)
-                                            <div class="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 text-center group hover:-translate-y-2">
-                                                <div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-6 border-4 border-emerald-50 shadow-inner">
+                                            <div class="bg-white/90 backdrop-blur-xl rounded-3xl p-8 border border-white/50 soft-shadow hover-lift transition-all duration-300 text-center group">
+                                                <div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-6 border-4 border-light-green shadow-inner">
                                                     <img src="{{ $official->photo ? asset('storage/' . $official->photo) : asset('images/default-avatar.png') }}" 
                                                          alt="{{ $official->name }}" 
                                                          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
                                                          onerror="this.src='https://ui-avatars.com/api/?name={{ urlencode($official->name) }}&background=059669&color=fff'">
                                                 </div>
                                                 <h3 class="text-lg font-bold text-gray-900 mb-1">{{ $official->name }}</h3>
-                                                <span class="block text-emerald-600 font-semibold text-sm mb-4">{{ $official->positionRelation->name ?? 'Pejabat' }}</span>
+                                                <span class="block text-primary-green font-semibold text-sm mb-4">{{ $official->positionRelation->name ?? 'Pejabat' }}</span>
                                                 
                                                 <div class="pt-4 border-t border-gray-50 flex flex-col gap-2 text-sm text-gray-500">
                                                     @if($official->email)
@@ -64,13 +70,13 @@
                                 @if($department->children->count() > 0)
                                     <div class="space-y-6 mt-12">
                                         @foreach($department->children as $child)
-                                            <div class="bg-white rounded-2xl p-6 md:p-8 border border-emerald-100 shadow-sm">
-                                                <h4 class="text-xl font-bold text-gray-900 mb-6 pl-4 border-l-4 border-emerald-500">{{ $child->name }}</h4>
+                                            <div class="bg-white/90 backdrop-blur-xl rounded-2xl p-6 md:p-8 border border-primary-green/20 soft-shadow">
+                                                <h4 class="text-xl font-bold text-gray-900 mb-6 pl-4 border-l-4 border-primary-green">{{ $child->name }}</h4>
                                                 
                                                 @if($child->officials->count() > 0)
                                                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                                         @foreach($child->officials as $official)
-                                                            <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-xl hover:bg-emerald-50 transition-colors border border-transparent hover:border-emerald-100">
+                                                            <div class="flex items-center gap-4 p-4 bg-white soft-shadow rounded-xl hover:bg-light-green/20 transition-colors border border-gray-100 hover:border-primary-green/20">
                                                                 <div class="w-16 h-16 rounded-full overflow-hidden shrink-0 shadow-sm border-2 border-white">
                                                                     <img src="{{ $official->photo ? asset('storage/' . $official->photo) : asset('images/default-avatar.png') }}" 
                                                                          alt="{{ $official->name }}" 
@@ -79,7 +85,7 @@
                                                                 </div>
                                                                 <div>
                                                                     <h5 class="font-bold text-gray-900 mb-0.5 text-sm">{{ $official->name }}</h5>
-                                                                    <span class="text-emerald-600 font-semibold text-xs">{{ $official->positionRelation->name ?? 'Staf' }}</span>
+                                                                    <span class="text-primary-green font-semibold text-xs">{{ $official->positionRelation->name ?? 'Staf' }}</span>
                                                                 </div>
                                                             </div>
                                                         @endforeach

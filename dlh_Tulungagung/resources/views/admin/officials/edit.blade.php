@@ -90,6 +90,4 @@
             </x-admin.form.card>
         </div>
     </form>
-
-    @endpush
 @endsection

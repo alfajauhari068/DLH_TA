@@ -24,7 +24,7 @@
                             :url="route('news.detail', $item->slug)"
                             :title="$item->title"
                             :summary="$item->summary"
-                            :thumbnail="$item->thumbnail ? Storage::url($item->thumbnail) : null"
+                            :thumbnail="$item->image_url"
                             :badge="$item->category?->name ?? 'Berita'"
                             :date="$item->published_at ? \Carbon\Carbon::parse($item->published_at)->format('d M Y') : null"
                             :author="$item->author?->name"

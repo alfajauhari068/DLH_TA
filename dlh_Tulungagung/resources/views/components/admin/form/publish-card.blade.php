@@ -38,11 +38,11 @@
                 @endif
                 <div class="flex justify-between items-center text-sm">
                     <span class="text-gray-500">Created:</span>
-                    <span class="font-medium text-gray-900">{{ $model->created_at->format('d M Y, H:i') }}</span>
+                    <span class="font-medium text-gray-900">{{ $model->created_at ? $model->created_at->format('d M Y, H:i') : '-' }}</span>
                 </div>
                 <div class="flex justify-between items-center text-sm">
                     <span class="text-gray-500">Last Updated:</span>
-                    <span class="font-medium text-gray-900">{{ $model->updated_at->format('d M Y, H:i') }}</span>
+                    <span class="font-medium text-gray-900">{{ $model->updated_at ? $model->updated_at->format('d M Y, H:i') : '-' }}</span>
                 </div>
             </div>
         @endif

@@ -22,8 +22,8 @@
                             </p>
                         </div>
                         <div class="lg:w-5/12 w-full">
-                            <div class="bg-white rounded-2xl p-6 shadow-sm border border-emerald-100">
-                                <h4 class="text-sm font-bold text-emerald-700 uppercase tracking-wider mb-4">Indikator Mutu Pelayanan</h4>
+                            <div class="bg-white/90 backdrop-blur-xl rounded-2xl p-6 soft-shadow border border-white/50">
+                                <h4 class="text-sm font-bold text-primary-dark uppercase tracking-wider mb-4">Indikator Mutu Pelayanan</h4>
                                 <div class="grid grid-cols-2 gap-3">
                                     <div class="bg-emerald-50 text-emerald-700 font-bold px-3 py-2 rounded-xl text-center text-sm border border-emerald-200">
                                         A: 88.31 - 100
@@ -42,11 +42,11 @@
                         </div>
                     </div>
 
-                    <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="bg-white/90 backdrop-blur-xl rounded-3xl soft-shadow border border-white/50 overflow-hidden">
                         <div class="overflow-x-auto">
                             <table class="w-full text-left border-collapse">
                                 <thead>
-                                    <tr class="bg-emerald-600 text-white">
+                                    <tr class="bg-primary-green text-white">
                                         <th class="py-5 px-6 font-semibold text-sm tracking-wider w-24">Tahun</th>
                                         <th class="py-5 px-6 font-semibold text-sm tracking-wider">Periode</th>
                                         <th class="py-5 px-6 font-semibold text-sm tracking-wider text-center">Nilai IKM</th>
@@ -57,7 +57,7 @@
                                 </thead>
                                 <tbody class="divide-y divide-gray-100">
                                     @forelse($skmScores as $skm)
-                                        <tr class="hover:bg-gray-50 transition-colors">
+                                        <tr class="hover:bg-light-green/30 transition-colors">
                                             <td class="py-4 px-6 font-bold text-gray-900 text-lg">{{ $skm->year }}</td>
                                             <td class="py-4 px-6 font-medium text-gray-600">{{ $skm->period }}</td>
                                             <td class="py-4 px-6 text-center">

@@ -1,23 +1,38 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('content')
-<x-ui.section bg="bg-background">
-    <x-ui.container>
+    <x-guest.hero-banner 
+        title="Hasil Pencarian" 
+        subtitle="Cari informasi, berita, atau layanan." 
+        :breadcrumbs="[['label' => 'Pencarian']]"
+        badge="Pencarian Sistem"
+    />
+
+    <x-guest.page-container>
         <div class="max-w-3xl mx-auto mb-12 text-center">
-            <x-ui.badge class="mb-4">Pencarian Sistem</x-ui.badge>
-            <h1 class="text-4xl font-black text-gray-900 mb-6">Hasil Pencarian</h1>
-            <x-ui.search placeholder="Cari informasi, berita, atau layanan..." action="{{ url('/search') }}" />
+            <form action="{{ url('/search') }}" method="GET" class="relative">
+                <input type="text" name="q" placeholder="Cari informasi, berita, atau layanan..." class="w-full bg-white/90 backdrop-blur-md rounded-full py-4 pl-6 pr-16 soft-shadow border border-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-green focus:border-transparent transition-all" value="{{ request('q') }}">
+                <button type="submit" class="absolute right-2 top-2 bottom-2 bg-primary-green text-white rounded-full w-12 flex items-center justify-center hover:bg-primary-dark transition-colors">
+                    <i class="bi bi-search"></i>
+                </button>
+            </form>
         </div>
 
-        @if (isset() && ->count() > 0)
-            <x-ui.grid cols="grid-cols-1 md:grid-cols-2 lg:grid-cols-3" gap="gap-8">
-                @foreach ( as )
-                    <x-card-news :news="" />
+        @if (isset($results) && $results->count() > 0)
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                @foreach ($results as $result)
+                    <x-guest.related-card 
+                        :url="route('news.detail', $result->slug ?? '')"
+                        :title="$result->title"
+                        :summary="$result->summary ?? ''"
+                        :thumbnail="$result->thumbnail ? Storage::url($result->thumbnail) : null"
+                        badge="Hasil"
+                        fallbackIcon="bi-newspaper"
+                    />
                 @endforeach
-            </x-ui.grid>
+            </div>
         @else
-            <x-ui.empty title="Hasil Tidak Ditemukan" description="Maaf, informasi yang Anda cari tidak ditemukan. Coba gunakan kata kunci lain." />
+            <x-guest.empty-state title="Hasil Tidak Ditemukan" description="Maaf, informasi yang Anda cari tidak ditemukan. Coba gunakan kata kunci lain." icon="bi-search" />
         @endif
-    </x-ui.container>
-</x-ui.section>
+    </x-guest.page-container>
 @endsection

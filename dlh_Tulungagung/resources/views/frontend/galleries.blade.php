@@ -25,7 +25,7 @@
                                 :url="route('galleries.detail', $item->slug)"
                                 :title="$item->name"
                                 :summary="$item->description"
-                                :thumbnail="$item->thumbnail ? Storage::url($item->thumbnail) : null"
+                                :thumbnail="$item->image_url"
                                 badge="Album Galeri"
                                 fallbackIcon="bi-images"
                             />

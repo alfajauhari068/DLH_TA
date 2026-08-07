@@ -7,7 +7,7 @@
         :title="$newsItem->title" 
         :breadcrumbs="[['url' => url('/berita'), 'label' => 'Berita'], ['label' => Str::limit($newsItem->title, 30)]]"
         :badge="$newsItem->category?->name ?? 'Berita'"
-        :background="$newsItem->thumbnail ? Storage::url($newsItem->thumbnail) : null"
+        :background="$newsItem->image_url"
     />
 
     <x-guest.information-strip 
@@ -31,7 +31,7 @@
                         <i class="bi bi-tags"></i>
                         <span>Tags:</span>
                         <!-- Tags could go here -->
-                        <span class="px-3 py-1 bg-gray-50 rounded-full text-xs border border-gray-100">{{ $newsItem->category?->name ?? 'Umum' }}</span>
+                        <span class="px-3 py-1 bg-surface-green text-primary-dark rounded-full text-xs border border-primary-green/20">{{ $newsItem->category?->name ?? 'Umum' }}</span>
                     </div>
                     
                     <x-guest.share-buttons :title="$newsItem->title" />
@@ -46,7 +46,7 @@
                 @if($newsItem->author)
                     <x-guest.sidebar-card title="Penulis" icon="bi-person-badge">
                         <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 text-xl shrink-0">
+                            <div class="w-12 h-12 bg-light-green rounded-full flex items-center justify-center text-primary-green text-xl shrink-0 drop-shadow-sm">
                                 <i class="bi bi-person"></i>
                             </div>
                             <div>
@@ -80,7 +80,7 @@
                         :url="route('news.detail', $item->slug)"
                         :title="$item->title"
                         :summary="$item->summary"
-                        :thumbnail="$item->thumbnail ? Storage::url($item->thumbnail) : null"
+                        :thumbnail="$item->image_url"
                         :badge="$item->category?->name ?? 'Berita'"
                         :date="$item->published_at ? \Carbon\Carbon::parse($item->published_at)->format('d M Y') : null"
                         :author="$item->author?->name"

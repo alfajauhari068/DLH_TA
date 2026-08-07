@@ -14,10 +14,13 @@
             ['label' => 'Dokumen PPID', 'url' => 'https://ppid.tulungagung.go.id/', 'permission' => 'PPID.View', 'icon' => 'envelope-open', 'badge' => null],
             ['label' => 'Program', 'route' => 'admin.programs.index', 'permission' => 'Program.View', 'icon' => 'briefcase', 'badge' => null],
         ],
+        'Tampilan Website' => [
+            ['label' => 'Hero Homepage', 'route' => 'admin.hero.index', 'permission' => 'Settings.View', 'icon' => 'image', 'badge' => \App\Models\HeroSection::count()],
+        ],
         'Data Master' => [
             ['label' => 'Layanan Publik', 'route' => 'admin.services.index', 'permission' => 'Service.View', 'icon' => 'tools', 'badge' => \App\Models\Service::count()],
             ['label' => 'Survei Kepuasan (SKM)', 'route' => 'admin.skm-scores.index', 'permission' => 'Settings.View', 'icon' => 'bar-chart-line', 'badge' => \App\Models\SkmScore::count()],
-            ['label' => 'Struktur Bidang', 'route' => 'admin.departments.index', 'permission' => 'Settings.View', 'icon' => 'diagram-3', 'badge' => null],
+            ['label' => 'Struktur Organisasi', 'route' => 'admin.organization-structure.edit', 'permission' => 'Settings.View', 'icon' => 'diagram-3', 'badge' => null],
             ['label' => 'Master Jabatan', 'route' => 'admin.positions.index', 'permission' => 'Settings.View', 'icon' => 'person-badge', 'badge' => null],
             ['label' => 'Data Pejabat', 'route' => 'admin.officials.index', 'permission' => 'Settings.View', 'icon' => 'person-lines-fill', 'badge' => null],
             ['label' => 'Halaman Statis', 'route' => 'admin.pages.index', 'permission' => 'Page.View', 'icon' => 'file-earmark-text', 'badge' => null],
@@ -30,7 +33,7 @@
     ];
 @endphp
 
-<aside {{ $attributes->merge(['class' => 'w-[280px] shrink-0 bg-slate-900 border-r border-slate-800 flex-shrink-0 hidden lg:flex flex-col h-screen sticky top-0 transition-all duration-300 z-40']) }} role="navigation" aria-label="Primary navigation">
+<aside {{ $attributes->merge(['class' => 'w-[280px] shrink-0 bg-slate-900 border-r border-slate-800 flex-shrink-0 hidden lg:flex flex-col h-screen sticky top-0 transition-all duration-300 z-40']) }} id="admin-sidebar" role="navigation" aria-label="Primary navigation">
     <!-- Sidebar Header / Logo -->
     <div class="h-[72px] px-6 flex items-center border-b border-slate-800 shrink-0">
         <a href="{{ route('dashboard') }}" class="flex items-center gap-3 no-underline group w-full min-w-0">

@@ -19,8 +19,8 @@
                         <x-guest.section-header title="Informasi Kontak" icon="bi-headset" />
                         
                         <div class="space-y-6 mt-8">
-                            <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-2xl border border-gray-100 hover:border-emerald-200 transition-colors">
-                                <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center shrink-0">
+                            <div class="flex items-start gap-4 p-4 bg-white rounded-2xl border border-gray-100 hover:border-primary-green hover-lift soft-shadow transition-all">
+                                <div class="w-12 h-12 bg-light-green text-primary-green rounded-xl flex items-center justify-center shrink-0">
                                     <i class="bi bi-geo-alt text-xl"></i>
                                 </div>
                                 <div>
@@ -29,8 +29,8 @@
                                 </div>
                             </div>
 
-                            <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-2xl border border-gray-100 hover:border-emerald-200 transition-colors">
-                                <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center shrink-0">
+                            <div class="flex items-start gap-4 p-4 bg-white rounded-2xl border border-gray-100 hover:border-blue-500 hover-lift soft-shadow transition-all">
+                                <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center shrink-0">
                                     <i class="bi bi-telephone text-xl"></i>
                                 </div>
                                 <div>
@@ -39,8 +39,8 @@
                                 </div>
                             </div>
 
-                            <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-2xl border border-gray-100 hover:border-emerald-200 transition-colors">
-                                <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center shrink-0">
+                            <div class="flex items-start gap-4 p-4 bg-white rounded-2xl border border-gray-100 hover:border-purple-500 hover-lift soft-shadow transition-all">
+                                <div class="w-12 h-12 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center shrink-0">
                                     <i class="bi bi-envelope text-xl"></i>
                                 </div>
                                 <div>
@@ -52,7 +52,7 @@
                     </div>
 
                     <!-- Form Pesan -->
-                    <div class="bg-white rounded-3xl shadow-lg border border-gray-100 p-8">
+                    <div class="bg-white/90 backdrop-blur-xl rounded-[32px] soft-shadow border border-white/50 p-8">
                         <h3 class="text-2xl font-bold text-gray-900 mb-2">Kirim Pesan</h3>
                         <p class="text-gray-500 text-sm mb-6">Punya pertanyaan atau pengaduan? Kirim pesan langsung kepada kami.</p>
                         
@@ -60,17 +60,17 @@
                             @csrf
                             <div>
                                 <label class="block text-sm font-bold text-gray-700 mb-2">Nama Lengkap</label>
-                                <input type="text" name="name" class="w-full rounded-xl border-gray-300 focus:border-emerald-500 focus:ring focus:ring-emerald-200 transition-shadow bg-gray-50 focus:bg-white px-4 py-3" required placeholder="Masukkan nama lengkap">
+                                <input type="text" name="name" class="w-full rounded-xl border-gray-300 focus:border-primary-green focus:ring focus:ring-primary-green/20 transition-shadow bg-surface-green focus:bg-white px-4 py-3" required placeholder="Masukkan nama lengkap">
                             </div>
                             <div>
                                 <label class="block text-sm font-bold text-gray-700 mb-2">Email</label>
-                                <input type="email" name="email" class="w-full rounded-xl border-gray-300 focus:border-emerald-500 focus:ring focus:ring-emerald-200 transition-shadow bg-gray-50 focus:bg-white px-4 py-3" required placeholder="Masukkan alamat email">
+                                <input type="email" name="email" class="w-full rounded-xl border-gray-300 focus:border-primary-green focus:ring focus:ring-primary-green/20 transition-shadow bg-surface-green focus:bg-white px-4 py-3" required placeholder="Masukkan alamat email">
                             </div>
                             <div>
                                 <label class="block text-sm font-bold text-gray-700 mb-2">Pesan</label>
-                                <textarea name="message" rows="4" class="w-full rounded-xl border-gray-300 focus:border-emerald-500 focus:ring focus:ring-emerald-200 transition-shadow bg-gray-50 focus:bg-white px-4 py-3 resize-none" required placeholder="Tuliskan pesan Anda di sini..."></textarea>
+                                <textarea name="message" rows="4" class="w-full rounded-xl border-gray-300 focus:border-primary-green focus:ring focus:ring-primary-green/20 transition-shadow bg-surface-green focus:bg-white px-4 py-3 resize-none" required placeholder="Tuliskan pesan Anda di sini..."></textarea>
                             </div>
-                            <button type="submit" class="w-full bg-emerald-600 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-emerald-200 hover:bg-emerald-700 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2">
+                            <button type="submit" class="w-full bg-primary-green text-white font-bold py-3.5 rounded-xl shadow-lg shadow-primary-green/20 hover:bg-primary-dark hover-lift transition-all flex items-center justify-center gap-2">
                                 <i class="bi bi-send-fill"></i>
                                 Kirim Pesan Sekarang
                             </button>

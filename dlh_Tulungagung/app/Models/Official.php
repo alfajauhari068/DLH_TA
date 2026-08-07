@@ -13,6 +13,11 @@ class Official extends Model
     use HasFactory, SoftDeletes, HasMedia;
 
     public $timestamps = false;
+    
+    protected $attributes = [
+        'position' => '',
+    ];
+
     protected $fillable = [
         'department_id',
         'position_id',

@@ -20,7 +20,7 @@
                     }
                 </style>
                 <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-white/5 blur-3xl"></div>
-                <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-emerald-500/20 blur-3xl"></div>
+                <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-light-green/20 blur-3xl"></div>
             @endif
 
             <div class="relative px-6 py-12 md:py-16 md:px-12 lg:px-20 flex flex-col md:flex-row items-center justify-between gap-10">
@@ -29,7 +29,7 @@
                         {{ $title }}
                     </h2>
                     @if($subtitle)
-                        <p class="text-lg md:text-xl text-emerald-100/90 font-medium">
+                        <p class="text-lg md:text-xl text-light-green font-medium">
                             {{ $subtitle }}
                         </p>
                     @endif
@@ -37,7 +37,7 @@
 
                 <div class="flex flex-col sm:flex-row items-center gap-4 w-full md:w-auto shrink-0">
                     @if($primaryAction)
-                        <a href="{{ $primaryAction['url'] }}" class="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-white text-emerald-900 hover:bg-gray-50 hover:scale-[1.02] transition-all rounded-xl font-bold text-lg shadow-xl shadow-black/10">
+                        <a href="{{ $primaryAction['url'] }}" class="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary-dark hover:bg-gray-50 hover-lift soft-shadow transition-all rounded-xl font-bold text-lg">
                             @if(isset($primaryAction['icon']))
                                 <i class="bi {{ $primaryAction['icon'] }}"></i>
                             @endif
@@ -46,7 +46,7 @@
                     @endif
 
                     @if($secondaryAction)
-                        <a href="{{ $secondaryAction['url'] }}" class="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-emerald-800/50 hover:bg-emerald-800/80 text-white border border-emerald-400/30 backdrop-blur-sm transition-all rounded-xl font-bold text-lg">
+                        <a href="{{ $secondaryAction['url'] }}" class="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-white/10 hover:bg-white/20 text-white border border-white/30 backdrop-blur-sm transition-all rounded-xl font-bold text-lg">
                             @if(isset($secondaryAction['icon']))
                                 <i class="bi {{ $secondaryAction['icon'] }}"></i>
                             @endif

@@ -7,7 +7,7 @@
 ])
 
 <figure class="w-full m-0 group">
-    <div class="{{ $aspect }} {{ $rounded }} overflow-hidden bg-gray-100 relative shadow-sm border border-gray-100">
+    <div class="{{ $aspect }} {{ $rounded }} overflow-hidden bg-surface-green relative soft-shadow border border-white/50">
         <!-- Blur Placeholder -->
         <div class="absolute inset-0 bg-gray-200 animate-pulse"></div>
         

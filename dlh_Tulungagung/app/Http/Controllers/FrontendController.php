@@ -11,12 +11,18 @@ use App\Models\Agenda;
 use App\Models\SkmScore;
 use App\Models\Department;
 use App\Models\Official;
+use App\Models\OrganizationStructure;
+use App\Models\HeroSection;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
 {
     public function home()
     {
+        $heroes = HeroSection::where('is_active', true)
+            ->orderBy('sort_order')
+            ->get();
+
         $latestNews = News::with('categories')->latest('published_at')->take(3)->get();
         $galleries = Gallery::latest()->take(4)->get();
         $featuredServices = \App\Models\Service::where('is_featured', 1)->where('status', 'published')->take(4)->get();
@@ -24,7 +30,7 @@ class FrontendController extends Controller
         
         $archives = \App\Models\Publication::where('status', 'published')->latest('published_at')->take(3)->get();
         
-        return view('guest.home', compact('latestNews', 'galleries', 'featuredServices', 'programs', 'archives'));
+        return view('guest.home', compact('heroes', 'latestNews', 'galleries', 'featuredServices', 'programs', 'archives'));
     }
 
     public function profile()
@@ -129,6 +135,12 @@ class FrontendController extends Controller
             ->get();
             
         return view('frontend.officials', compact('departments'));
+    }
+
+    public function organizationStructure()
+    {
+        $structure = OrganizationStructure::first();
+        return view('frontend.organization-structure', compact('structure'));
     }
 
     public function ppid()

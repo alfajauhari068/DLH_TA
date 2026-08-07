@@ -26,7 +26,7 @@
             <x-slot name="main">
                 <x-guest.content-card>
                     @if($publication->summary)
-                        <div class="lead mb-8 text-xl text-gray-600 font-medium border-l-4 border-emerald-500 pl-4 py-1">
+                        <div class="lead mb-8 text-xl text-gray-600 font-medium border-l-4 border-primary-green pl-4 py-1">
                             {{ $publication->summary }}
                         </div>
                     @endif
@@ -73,7 +73,7 @@
 
                 @if($publication->document_file && !str_contains($publication->document_file, '.tmp') && !str_contains($publication->document_file, 'php'))
                     <x-guest.sidebar-card title="Pratinjau Mini" icon="bi-file-earmark-text">
-                        <div class="rounded-xl overflow-hidden border border-gray-200 bg-gray-50 h-[400px]">
+                        <div class="rounded-xl overflow-hidden border border-gray-200 bg-surface-green h-[400px]">
                             <iframe src="{{ Storage::url($publication->document_file) }}#toolbar=0&navpanes=0&scrollbar=0" class="w-full h-full" title="PDF Preview"></iframe>
                         </div>
                     </x-guest.sidebar-card>

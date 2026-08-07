@@ -22,21 +22,21 @@
                         />
                     @else
                         @foreach($agendas as $agenda)
-                            <div class="bg-white border border-gray-100 shadow-sm rounded-2xl overflow-hidden group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                            <div class="bg-white/90 backdrop-blur-xl border border-white/50 soft-shadow rounded-[24px] overflow-hidden group hover-lift transition-all duration-300">
                                 <div class="flex flex-col md:flex-row">
-                                    <div class="md:w-48 bg-emerald-50/50 flex flex-col justify-center items-center p-6 text-center border-b md:border-b-0 md:border-r border-emerald-100/50">
-                                        <span class="block text-emerald-600 font-black text-5xl mb-1">{{ \Carbon\Carbon::parse($agenda->start_date)->format('d') }}</span>
-                                        <span class="block text-emerald-700 uppercase font-bold tracking-widest text-sm">{{ \Carbon\Carbon::parse($agenda->start_date)->translatedFormat('M Y') }}</span>
+                                    <div class="md:w-48 bg-light-green/30 flex flex-col justify-center items-center p-6 text-center border-b md:border-b-0 md:border-r border-primary-green/20">
+                                        <span class="block text-primary-green font-black text-5xl mb-1">{{ \Carbon\Carbon::parse($agenda->start_date)->format('d') }}</span>
+                                        <span class="block text-primary-dark uppercase font-bold tracking-widest text-sm">{{ \Carbon\Carbon::parse($agenda->start_date)->translatedFormat('M Y') }}</span>
                                         
                                         @if(\Carbon\Carbon::parse($agenda->end_date)->gt(\Carbon\Carbon::parse($agenda->start_date)))
-                                            <span class="mt-3 px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-bold whitespace-nowrap border border-emerald-200">
+                                            <span class="mt-3 px-3 py-1 bg-light-green text-primary-dark rounded-full text-xs font-bold whitespace-nowrap border border-primary-green/20">
                                                 s/d {{ \Carbon\Carbon::parse($agenda->end_date)->format('d M') }}
                                             </span>
                                         @endif
                                     </div>
                                     <div class="p-6 md:p-8 flex-1 flex flex-col justify-center">
                                         <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-4">
-                                            <h3 class="text-xl font-bold text-gray-900 group-hover:text-emerald-700 transition-colors">{{ $agenda->title }}</h3>
+                                            <h3 class="text-xl font-bold text-gray-900 group-hover:text-primary-green transition-colors">{{ $agenda->title }}</h3>
                                             
                                             <div class="shrink-0">
                                                 @if(\Carbon\Carbon::now()->lt(\Carbon\Carbon::parse($agenda->start_date)))

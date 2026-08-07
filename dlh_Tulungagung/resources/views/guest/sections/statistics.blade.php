@@ -1,5 +1,15 @@
-<section class="relative py-14 md:py-20 lg:py-28 bg-[#DCFCE7] overflow-hidden">
-    <div class="container relative z-10 px-4">
+<section class="relative py-14 md:py-20 lg:py-28 bg-primary-dark overflow-hidden">
+    <!-- Top SVG Divider (Organic Wave) -->
+    <div class="absolute top-0 left-0 w-full overflow-hidden leading-[0] z-0 pointer-events-none rotate-180">
+        <svg class="relative block w-full h-[40px] md:h-[60px] lg:h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" fill="var(--surface-green)"></path>
+        </svg>
+    </div>
+
+    <!-- Organic noise pattern overlay -->
+    <div class="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none bg-noise-pattern"></div>
+
+    <div class="container relative z-10 px-4 mt-8">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <!-- Left Side: Large Environmental Image -->
             <div class="lg:col-span-5 relative h-full min-h-[500px]">
@@ -13,9 +23,9 @@
                 </div>
                 
                 <!-- Attached decorative element -->
-                <div class="absolute -top-6 -right-6 w-24 h-24 bg-white/95 rounded-full shadow-md flex items-center justify-center z-20">
-                    <div class="w-16 h-16 bg-light-green rounded-full flex items-center justify-center">
-                        <i class="bi bi-globe-americas text-primary text-3xl"></i>
+                <div class="absolute -top-6 -right-6 w-24 h-24 bg-white/10 backdrop-blur-md rounded-full shadow-glass flex items-center justify-center z-20 border border-white/20">
+                    <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
+                        <i class="bi bi-globe-americas text-white text-3xl drop-shadow"></i>
                     </div>
                 </div>
             </div>
@@ -23,9 +33,9 @@
             <!-- Right Side: Overlapping Infographic Dashboard -->
             <div class="lg:col-span-7">
                 <div class="mb-10">
-                    <span class="inline-block px-4 py-2 bg-white text-primary font-bold text-xs uppercase tracking-widest rounded-full mb-6 shadow-sm border border-primary/10">Dampak Nyata</span>
-                    <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-6 leading-tight">Capaian Strategis Lingkungan Hidup</h2>
-                    <p class="text-lg text-gray-500 leading-relaxed">Angka dan data yang merepresentasikan dedikasi nyata kami dalam membangun ekosistem Tulungagung yang asri dan berkelanjutan.</p>
+                    <span class="inline-block px-4 py-2 bg-white/10 text-white font-bold text-xs uppercase tracking-widest rounded-full mb-6 border border-white/20">Dampak Nyata</span>
+                    <h2 class="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">Capaian Strategis Lingkungan Hidup</h2>
+                    <p class="text-lg text-white/70 leading-relaxed">Angka dan data yang merepresentasikan dedikasi nyata kami dalam membangun ekosistem Tulungagung yang asri dan berkelanjutan.</p>
                 </div>
 
                 <!-- Infographic Grid -->

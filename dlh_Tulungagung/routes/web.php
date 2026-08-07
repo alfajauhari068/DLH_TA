@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\GalleryController;
+use App\Http\Controllers\Admin\OrganizationStructureController;
+use App\Http\Controllers\Admin\HeroSectionController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PpidController;
@@ -32,7 +34,8 @@ Route::get('/halaman/{slug}', [FrontendController::class, 'page'])->name('page')
 Route::get('/layanan/{slug}', [FrontendController::class, 'serviceDetail'])->name('services.detail');
 Route::get('/agenda', [FrontendController::class, 'agendas'])->name('agendas');
 Route::get('/skm', [FrontendController::class, 'skm'])->name('skm');
-Route::get('/struktur-organisasi', [FrontendController::class, 'officials'])->name('officials');
+Route::get('/struktur-organisasi', [FrontendController::class, 'organizationStructure'])->name('organization-structure');
+Route::get('/profil-pejabat', [FrontendController::class, 'officials'])->name('officials');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
@@ -46,7 +49,14 @@ Route::middleware('auth')->group(function () {
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::prefix('admin')->name('admin.')->group(function () {
-        Route::resource('users', UserController::class);
+            // Organization Structure Document CMS
+            Route::get('organization-structure', [OrganizationStructureController::class, 'edit'])->name('organization-structure.edit');
+            Route::post('organization-structure', [OrganizationStructureController::class, 'update'])->name('organization-structure.update');
+
+            // Hero Management
+            Route::resource('hero', HeroSectionController::class);
+
+            Route::resource('users', UserController::class);
         Route::resource('news', NewsController::class);
         Route::get('news/trash', [NewsController::class, 'trash'])->name('news.trash');
         Route::post('news/{id}/restore', [NewsController::class, 'restore'])->name('news.restore');

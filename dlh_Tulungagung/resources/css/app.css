@@ -87,6 +87,15 @@
             transform: scale(1);
         }
     }
+
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-20px);
+        }
+    }
 }
 
 @utility page-background {
@@ -94,17 +103,44 @@
 }
 
 .eco-global-bg {
-    background-color: #FCFDFC !important;
+    background-color: var(--surface-green) !important;
     background-image:
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.015'/%3E%3C/svg%3E"),
-        url('/images/patterns/svg-pattern.svg'),
-        linear-gradient(180deg, #FCFDFC 0%, #F6FAF7 100%) !important;
-    background-repeat: repeat, repeat, no-repeat !important;
-    background-position: top left, center center, top center !important;
-    background-attachment: fixed, fixed, fixed !important;
-    background-size: 200px 200px, 400px auto, 100% 100% !important;
-    background-blend-mode: normal, multiply, normal !important;
-    opacity: 0.99; /* Force blending context */
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E"),
+        linear-gradient(180deg, var(--surface-green) 0%, #ffffff 100%) !important;
+    background-repeat: repeat, no-repeat !important;
+    background-position: top left, top center !important;
+    background-attachment: fixed, fixed !important;
+    background-size: 200px 200px, 100% 100% !important;
+    background-blend-mode: normal, normal !important;
+}
+
+@utility glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--blur-md));
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-glass);
+}
+
+@utility hover-lift {
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-md);
+    }
+}
+
+@utility soft-shadow {
+    box-shadow: var(--shadow-sm);
+}
+
+@utility organic-divider {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='1' d='M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,149.3C672,149,768,203,864,224C960,245,1056,235,1152,197.3C1248,160,1344,96,1392,64L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    width: 100%;
+    height: 120px;
 }
 
 @utility section-background {

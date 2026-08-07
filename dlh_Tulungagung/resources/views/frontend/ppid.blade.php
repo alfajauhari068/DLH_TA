@@ -22,26 +22,26 @@
                         </p>
                     </x-guest.content-card>
 
-                    <div class="bg-emerald-50/50 rounded-2xl p-8 border border-emerald-100/50">
-                        <h3 class="text-2xl font-bold text-emerald-900 mb-6 flex items-center gap-2">
-                            <i class="bi bi-shield-check text-emerald-600"></i>
+                    <div class="bg-white/90 backdrop-blur-xl rounded-[32px] p-8 border border-white/50 soft-shadow">
+                        <h3 class="text-2xl font-bold text-primary-dark mb-6 flex items-center gap-2">
+                            <i class="bi bi-shield-check text-primary-green"></i>
                             Asas Keterbukaan Informasi
                         </h3>
                         <ul class="space-y-6">
                             <li class="flex items-start gap-4">
-                                <div class="w-8 h-8 rounded-full bg-emerald-200/50 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
+                                <div class="w-8 h-8 rounded-full bg-light-green text-primary-green flex items-center justify-center shrink-0 mt-0.5">
                                     <i class="bi bi-check-lg"></i>
                                 </div>
                                 <span class="text-gray-700 leading-relaxed font-medium">Setiap Informasi Publik bersifat terbuka dan dapat diakses oleh setiap Pengguna Informasi Publik.</span>
                             </li>
                             <li class="flex items-start gap-4">
-                                <div class="w-8 h-8 rounded-full bg-emerald-200/50 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
+                                <div class="w-8 h-8 rounded-full bg-light-green text-primary-green flex items-center justify-center shrink-0 mt-0.5">
                                     <i class="bi bi-check-lg"></i>
                                 </div>
                                 <span class="text-gray-700 leading-relaxed font-medium">Informasi Publik yang dikecualikan bersifat ketat dan terbatas.</span>
                             </li>
                             <li class="flex items-start gap-4">
-                                <div class="w-8 h-8 rounded-full bg-emerald-200/50 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
+                                <div class="w-8 h-8 rounded-full bg-light-green text-primary-green flex items-center justify-center shrink-0 mt-0.5">
                                     <i class="bi bi-check-lg"></i>
                                 </div>
                                 <span class="text-gray-700 leading-relaxed font-medium">Setiap Informasi Publik harus dapat diperoleh setiap Pemohon dengan cepat, tepat waktu, biaya ringan, dan cara sederhana.</span>
@@ -59,11 +59,11 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative mt-8">
                         <!-- Connecting Line (Desktop) -->
-                        <div class="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-emerald-100 -z-10"></div>
+                        <div class="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-primary-green/20 -z-10"></div>
                         
                         <!-- Step 1 -->
                         <div class="text-center group">
-                            <div class="w-24 h-24 bg-white border-4 border-emerald-100 text-emerald-600 rounded-2xl flex flex-col items-center justify-center mx-auto mb-6 relative shadow-lg group-hover:-translate-y-2 transition-all duration-300">
+                            <div class="w-24 h-24 bg-white/90 backdrop-blur-xl border-4 border-primary-green/20 text-primary-green rounded-[24px] flex flex-col items-center justify-center mx-auto mb-6 relative soft-shadow group-hover:-translate-y-2 transition-all duration-300">
                                 <span class="text-3xl font-black">1</span>
                             </div>
                             <h4 class="font-bold text-gray-900 mb-3 text-xl">Mengisi Formulir</h4>
@@ -72,7 +72,7 @@
                         
                         <!-- Step 2 -->
                         <div class="text-center group">
-                            <div class="w-24 h-24 bg-white border-4 border-emerald-100 text-emerald-600 rounded-2xl flex flex-col items-center justify-center mx-auto mb-6 relative shadow-lg group-hover:-translate-y-2 transition-all duration-300">
+                            <div class="w-24 h-24 bg-white/90 backdrop-blur-xl border-4 border-primary-green/20 text-primary-green rounded-[24px] flex flex-col items-center justify-center mx-auto mb-6 relative soft-shadow group-hover:-translate-y-2 transition-all duration-300">
                                 <span class="text-3xl font-black">2</span>
                             </div>
                             <h4 class="font-bold text-gray-900 mb-3 text-xl">Pencatatan</h4>
@@ -81,7 +81,7 @@
                         
                         <!-- Step 3 -->
                         <div class="text-center group">
-                            <div class="w-24 h-24 bg-white border-4 border-emerald-100 text-emerald-600 rounded-2xl flex flex-col items-center justify-center mx-auto mb-6 relative shadow-lg group-hover:-translate-y-2 transition-all duration-300">
+                            <div class="w-24 h-24 bg-white/90 backdrop-blur-xl border-4 border-primary-green/20 text-primary-green rounded-[24px] flex flex-col items-center justify-center mx-auto mb-6 relative soft-shadow group-hover:-translate-y-2 transition-all duration-300">
                                 <span class="text-3xl font-black">3</span>
                             </div>
                             <h4 class="font-bold text-gray-900 mb-3 text-xl">Proses</h4>
@@ -90,7 +90,7 @@
                         
                         <!-- Step 4 -->
                         <div class="text-center group">
-                            <div class="w-24 h-24 bg-white border-4 border-emerald-100 text-emerald-600 rounded-2xl flex flex-col items-center justify-center mx-auto mb-6 relative shadow-lg group-hover:-translate-y-2 transition-all duration-300">
+                            <div class="w-24 h-24 bg-white/90 backdrop-blur-xl border-4 border-primary-green/20 text-primary-green rounded-[24px] flex flex-col items-center justify-center mx-auto mb-6 relative soft-shadow group-hover:-translate-y-2 transition-all duration-300">
                                 <span class="text-3xl font-black">4</span>
                             </div>
                             <h4 class="font-bold text-gray-900 mb-3 text-xl">Pemberitahuan</h4>

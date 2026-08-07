@@ -5,6 +5,7 @@
 @section('content')
 <main class="min-h-screen">
     @include('guest.sections.hero')
+    @include('guest.sections.hero-stats')
 
     @include('guest.sections.services')
 

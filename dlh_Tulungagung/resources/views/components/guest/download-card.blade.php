@@ -11,24 +11,24 @@
     'icon' => 'bi-file-earmark-pdf'
 ])
 
-<div class="bg-white rounded-2xl shadow-sm hover:shadow-lg border border-gray-100 p-6 transition-all duration-300 group flex flex-col md:flex-row gap-6 items-center">
+<div class="bg-white/90 backdrop-blur-xl rounded-[24px] soft-shadow hover-lift border border-white/50 p-6 transition-all duration-300 group flex flex-col md:flex-row gap-6 items-center">
     
     @if($thumbnail)
         <div class="w-full md:w-32 h-40 md:h-32 bg-gray-50 rounded-xl overflow-hidden shrink-0 border border-gray-200">
             <img src="{{ $thumbnail }}" alt="Thumbnail" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
         </div>
     @else
-        <div class="w-16 h-16 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+        <div class="w-16 h-16 rounded-2xl bg-light-green text-primary-green flex items-center justify-center shrink-0">
             <i class="bi {{ $icon }} text-3xl"></i>
         </div>
     @endif
 
     <div class="flex-1 text-center md:text-left space-y-2">
-        <h3 class="text-lg font-bold text-gray-900 line-clamp-2 group-hover:text-emerald-700 transition-colors">
+        <h3 class="text-lg font-bold text-gray-900 line-clamp-2 group-hover:text-primary-green transition-colors">
             {{ $title }}
         </h3>
         <div class="flex flex-wrap justify-center md:justify-start items-center gap-3 text-sm text-gray-500">
-            <span class="inline-flex items-center gap-1 font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md">
+            <span class="inline-flex items-center gap-1 font-medium text-primary-green bg-light-green px-2 py-0.5 rounded-md">
                 {{ $type }}
             </span>
             @if($size)

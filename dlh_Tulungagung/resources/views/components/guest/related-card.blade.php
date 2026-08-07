@@ -9,7 +9,7 @@
     'fallbackIcon' => 'bi-file-text'
 ])
 
-<a href="{{ $url }}" class="group bg-[#F0FDF4] rounded-2xl shadow-md hover:shadow-xl hover:shadow-primary/5 border border-primary/10 overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1.5 h-full focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+<a href="{{ $url }}" class="group bg-white/60 backdrop-blur-sm rounded-[24px] border border-white hover:border-white/50 hover:bg-white/90 hover:soft-shadow hover-lift overflow-hidden flex flex-col transition-all duration-300 h-full focus:outline-none focus:ring-2 focus:ring-primary-green focus:ring-offset-2">
     <div class="relative h-48 bg-gray-50 overflow-hidden flex-shrink-0">
         @if($thumbnail)
             <img src="{{ $thumbnail }}" alt="{{ $title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
@@ -31,7 +31,7 @@
     </div>
 
     <div class="p-5 flex-1 flex flex-col">
-        <h4 class="text-lg font-bold text-gray-900 line-clamp-2 mb-2 group-hover:text-primary transition-colors">
+        <h4 class="text-lg font-bold text-gray-900 line-clamp-2 mb-2 group-hover:text-primary-green transition-colors">
             {{ $title }}
         </h4>
         

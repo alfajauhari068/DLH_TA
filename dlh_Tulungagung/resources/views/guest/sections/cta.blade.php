@@ -1,4 +1,4 @@
-<section class="relative pt-14 pb-20 md:pt-20 md:pb-28 lg:pt-28 lg:pb-40 overflow-hidden bg-gradient-to-br from-primary-green to-primary">
+<section class="relative pt-14 pb-20 md:pt-20 md:pb-28 lg:pt-28 lg:pb-40 overflow-hidden bg-primary-dark">
     <!-- Abstract Organic SVG Blobs / Floating Shapes -->
     <div class="absolute top-0 right-0 -mr-40 -mt-40 w-[600px] h-[600px] bg-accent/20 rounded-full blur-[100px] pointer-events-none"></div>
     <div class="absolute bottom-0 left-0 -ml-40 -mb-40 w-[600px] h-[600px] bg-white/10 rounded-full blur-[100px] pointer-events-none"></div>
@@ -28,8 +28,8 @@
                 </p>
                 
                 <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="{{ url('/kontak') }}" class="group relative flex items-center justify-center gap-3 bg-white text-primary font-bold px-8 py-4 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary">
-                        <div class="absolute inset-0 bg-gray-100 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
+                    <a href="{{ url('/kontak') }}" class="group relative flex items-center justify-center gap-3 bg-accent text-primary-dark font-black px-8 py-4 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary">
+                        <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
                         <i class="bi bi-chat-dots-fill text-xl relative z-10" aria-hidden="true"></i> 
                         <span class="relative z-10">Hubungi Kami</span>
                     </a>
