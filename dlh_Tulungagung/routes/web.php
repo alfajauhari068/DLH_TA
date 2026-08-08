@@ -79,7 +79,7 @@ Route::middleware('auth')->group(function () {
         Route::delete('services/{id}/force-delete', [ServiceController::class, 'forceDelete'])->name('services.forceDelete');
         Route::resource('ppid', PpidController::class);
         Route::resource('pages', PageController::class);
-        Route::resource('settings', SettingController::class)->only(['index', 'edit', 'update']);
+        Route::resource('settings', SettingController::class);
         
         Route::get('menus', [\App\Http\Controllers\Admin\MenuController::class, 'index'])->name('menus.index');
         Route::resource('menu-items', \App\Http\Controllers\Admin\MenuItemController::class)

@@ -15,8 +15,8 @@
         <x-admin.index.header 
             title="Website Settings" 
             subtitle="Configure global application settings." 
-            actionUrl="" 
-            actionText="" />
+            actionUrl="{{ route('admin.settings.create') }}" 
+            actionText="Tambah Setting" />
     </x-slot:header>
 
     <x-slot:toolbar>
@@ -31,8 +31,8 @@
         <x-admin.index.empty 
             title="No Settings Found" 
             description="Configuration keys are not currently available." 
-            actionUrl="" 
-            actionText="" 
+            actionUrl="{{ route('admin.settings.create') }}" 
+            actionText="Tambah Setting" 
             icon="bi-gear" />
     @else
         <x-admin.index.table>
@@ -53,9 +53,16 @@
                             {{ Str::title(str_replace('_', ' ', $setting->group ?? 'general')) }}
                         </span>
                     </td>
-                    <td class="px-6 py-4 text-right">
+                    <td class="px-6 py-4 text-right flex items-center justify-end gap-3 border-0">
                         @can('update', $setting)
-                            <a href="{{ route('admin.settings.edit', $setting) }}" class="text-blue-600 hover:text-blue-900">Edit</a>
+                            <a href="{{ route('admin.settings.edit', $setting) }}" class="text-blue-600 hover:text-blue-900 font-medium">Edit</a>
+                        @endcan
+                        @can('delete', $setting)
+                            <form action="{{ route('admin.settings.destroy', $setting) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus setting ini?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-red-600 hover:text-red-900 bg-transparent border-0 p-0 font-medium cursor-pointer">Hapus</button>
+                            </form>
                         @endcan
                     </td>
                 </tr>

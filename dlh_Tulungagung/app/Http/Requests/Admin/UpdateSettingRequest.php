@@ -16,6 +16,7 @@ class UpdateSettingRequest extends FormRequest
         return [
             'key' => ['required', 'string', 'max:255'],
             'value' => ['nullable', 'string'],
+            'group' => ['nullable', 'string', 'max:255'],
         ];
     }
 }

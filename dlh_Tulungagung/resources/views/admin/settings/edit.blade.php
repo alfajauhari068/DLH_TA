@@ -42,6 +42,16 @@
                 @enderror
             </div>
 
+            <div>
+                <label for="group" class="block text-sm font-medium text-gray-700">Group / Kategori</label>
+                <div class="mt-1">
+                    <input type="text" name="group" id="group" value="{{ old('group', $setting->group) }}" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm">
+                </div>
+                @error('group')
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                @enderror
+            </div>
+
             <div class="flex justify-end gap-3 pt-4">
                 <x-ui.button type="button" href="{{ route('admin.settings.index') }}" variant="secondary">Batal</x-ui.button>
                 <x-ui.button type="submit" variant="primary">Perbarui</x-ui.button>

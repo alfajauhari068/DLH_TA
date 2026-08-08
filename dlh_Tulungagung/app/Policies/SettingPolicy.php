@@ -21,4 +21,14 @@ class SettingPolicy
     {
         return $user->hasPermission('Settings.Update');
     }
+
+    public function create(User $user): bool
+    {
+        return $user->hasPermission('Settings.Update');
+    }
+
+    public function delete(User $user, Setting $setting): bool
+    {
+        return $user->hasPermission('Settings.Update');
+    }
 }

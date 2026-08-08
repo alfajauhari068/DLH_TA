@@ -25,6 +25,28 @@ class SettingController extends Controller
         return view('admin.settings.index', compact('settings'));
     }
 
+    public function create(): View
+    {
+        $this->authorize('create', Setting::class);
+
+        return view('admin.settings.create');
+    }
+
+    public function store(Request $request): RedirectResponse
+    {
+        $this->authorize('create', Setting::class);
+
+        $validated = $request->validate([
+            'key' => ['required', 'string', 'max:255', 'unique:settings,key'],
+            'value' => ['nullable', 'string'],
+            'group' => ['nullable', 'string', 'max:255'],
+        ]);
+
+        Setting::create($validated);
+
+        return redirect()->route('admin.settings.index')->with('success', 'Setting created successfully.');
+    }
+
     public function edit(Setting $setting): View
     {
         $this->authorize('update', $setting);
@@ -39,5 +61,14 @@ class SettingController extends Controller
         $this->settingService->update($setting, $request->validated());
 
         return redirect()->route('admin.settings.index')->with('success', 'Setting updated successfully.');
+    }
+
+    public function destroy(Setting $setting): RedirectResponse
+    {
+        $this->authorize('delete', $setting);
+
+        $setting->delete();
+
+        return redirect()->route('admin.settings.index')->with('success', 'Setting deleted successfully.');
     }
 }
