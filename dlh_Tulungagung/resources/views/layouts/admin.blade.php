@@ -26,6 +26,9 @@
         <!-- Sidebar -->
         <x-admin.sidebar />
 
+        <!-- Mobile Overlay -->
+        <div class="fixed inset-0 bg-gray-900/50 z-40 lg:hidden hidden pointer-events-none" id="mobile-sidebar-overlay" aria-hidden="true"></div>
+
         <!-- Content Shell -->
         <div class="flex-1 flex flex-col min-w-0 overflow-hidden relative">
             
@@ -83,8 +86,7 @@
         </div>
     </div>
 
-    <!-- Mobile Overlay -->
-    <div class="fixed inset-0 bg-gray-900/50 z-40 lg:hidden hidden pointer-events-none" id="mobile-sidebar-overlay" aria-hidden="true"></div>
+    <!-- Mobile Overlay moved inside flex container -->
     
     @stack('scripts')
     
@@ -123,6 +125,15 @@
                 });
 
                 overlay.addEventListener('click', closeSidebar);
+
+                // Auto-close sidebar on mobile menu link click
+                document.querySelectorAll('#admin-sidebar a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (window.innerWidth <= 1024) {
+                            closeSidebar();
+                        }
+                    });
+                });
             }
         });
     </script>
