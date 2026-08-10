@@ -12,7 +12,7 @@
     <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link class="styles-sheet" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     @stack('styles')
 </head>
 <body class="d-flex flex-column min-vh-100 text-gray-800 font-sans antialiased eco-global-bg">
@@ -21,8 +21,11 @@
 
     @yield('content')
 
+    <x-bottom-nav />
+
     @include('layouts.footer')
 
     @stack('scripts')
 </body>
 </html>
+

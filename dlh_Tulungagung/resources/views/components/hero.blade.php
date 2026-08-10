@@ -5,7 +5,7 @@
     'bgImage' => null
 ])
 
-<section class="relative pt-28 pb-20 overflow-hidden rounded-b-3xl shadow-elevation-1 mb-12">
+<section class="relative pt-16 pb-12 md:pt-28 md:pb-20 overflow-hidden rounded-b-3xl shadow-elevation-1 mb-6 md:mb-12 min-h-[220px] md:min-h-[360px] flex align-items-center">
     <!-- Layer 1: Forest Image -->
     @php
         $heroImages = [
@@ -55,7 +55,7 @@
     <!-- Layer 5: Leaves Decoration (Abstract Grid/Dots) -->
     <div class="absolute inset-0 z-20 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 32px 32px;"></div>
     
-    <div class="absolute inset-x-0 bottom-0 z-20 pointer-events-none">
+    <div class="absolute inset-x-0 bottom-0 z-20 pointer-events-none d-none d-md-block">
         <svg
             viewBox="0 0 1440 180"
             preserveAspectRatio="none"
@@ -76,9 +76,9 @@
     </div>
 
     <!-- Layer 6: Content -->
-    <div class="container relative z-30 pt-10 text-center md:text-left px-4">
+    <div class="container relative z-30 pt-4 md:pt-10 text-center md:text-left px-4">
         @if(!empty($breadcrumbs))
-            <nav aria-label="breadcrumb" class="mb-6 animate-fade-down">
+            <nav aria-label="breadcrumb" class="mb-4 md:mb-6 animate-fade-down d-none d-md-block">
                 <ol class="breadcrumb bg-white/20 backdrop-blur-md inline-flex px-5 py-2.5 rounded-full shadow-glass border border-white/20">
                     <li class="breadcrumb-item">
                         <a href="{{ url('/') }}" class="text-white hover:text-accent transition-colors flex items-center gap-2 font-bold text-sm">
@@ -99,16 +99,17 @@
             </nav>
         @endif
 
-        <div class="max-w-4xl">
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 tracking-tight drop-shadow-md animate-fade-up">
+        <div class="max-w-4xl mx-auto md:mx-0">
+            <h1 class="text-2xl md:text-5xl lg:text-6xl font-black text-white mb-2 md:mb-4 tracking-tight drop-shadow-md animate-fade-up">
                 {{ $title }}
             </h1>
             
             @if($subtitle)
-                <p class="text-white/80 text-lg md:text-xl font-medium max-w-2xl leading-relaxed animate-fade-up" style="animation-delay: 100ms;">
+                <p class="text-white/80 text-sm md:text-xl font-medium max-w-2xl leading-relaxed animate-fade-up mx-auto md:mx-0" style="animation-delay: 100ms;">
                     {{ $subtitle }}
                 </p>
             @endif
         </div>
     </div>
 </section>
+

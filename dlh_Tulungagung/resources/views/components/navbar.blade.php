@@ -3,22 +3,19 @@
     <div class="absolute inset-0 bg-white/70 backdrop-blur-md -z-10 opacity-0 transition-opacity duration-300" id="navbar-bg"></div>
     <div class="container-fluid px-4 lg:px-8">
         <!-- Logo -->
-        <a href="{{ url('/') }}" class="navbar-brand d-flex align-items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-xl" aria-label="Beranda">
+        <a href="{{ url('/') }}" class="navbar-brand d-flex align-items-center gap-2 md:gap-3 group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-xl" aria-label="Beranda">
             @if(!empty($globalSettings['logo']))
-                <img src="{{ asset('storage/' . $globalSettings['logo']) }}" alt="Logo" fetchpriority="high" decoding="async" class="h-[32px] md:h-[36px] w-auto drop-shadow-sm transition-opacity duration-300 group-hover:opacity-80">
+                <img src="{{ asset('storage/' . $globalSettings['logo']) }}" alt="Logo" fetchpriority="high" decoding="async" class="h-[36px] md:h-[40px] w-auto drop-shadow-sm transition-opacity duration-300 group-hover:opacity-80 shrink-0">
             @else
-                <img src="{{ asset('images/icon-dinas.png') }}" alt="Logo" fetchpriority="high" decoding="async" class="h-[32px] md:h-[36px] w-auto drop-shadow-sm transition-opacity duration-300 group-hover:opacity-80" onerror="this.src='https://placehold.co/36x36/146C43/ffffff?text=DLH'">
+                <img src="{{ asset('images/icon-dinas.png') }}" alt="Logo" fetchpriority="high" decoding="async" class="h-[36px] md:h-[40px] w-auto drop-shadow-sm transition-opacity duration-300 group-hover:opacity-80 shrink-0" onerror="this.src='https://placehold.co/36x36/146C43/ffffff?text=DLH'">
             @endif
             <div class="d-flex flex-column justify-content-center">
-                <h5 class="text-xs font-black text-gray-800 mb-0 tracking-tight">{{ $globalSettings['site_name'] ?? 'DINAS LINGKUNGAN HIDUP' }}</h5>
-                <small class="text-primary font-bold text-[10px]">Kabupaten Tulungagung</small>
+                <h5 class="text-[11px] md:text-sm font-black text-gray-800 mb-0 tracking-tight leading-tight uppercase">{{ $globalSettings['site_name'] ?? 'DINAS LINGKUNGAN HIDUP' }}</h5>
+                <small class="text-primary font-bold text-[9px] md:text-xs leading-none">Kabupaten Tulungagung</small>
             </div>
         </a>
 
-        <!-- Mobile Toggle -->
-        <button class="navbar-toggler border-0 shadow-none bg-gray-50 rounded-full w-11 h-11 flex lg:hidden items-center justify-center focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+
 
         <!-- Menu Desktop & Offcanvas -->
         <div class="offcanvas-lg offcanvas-end border-0 shadow-2xl" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
