@@ -482,3 +482,7 @@ body {
     opacity: 0.4;
     pointer-events: none;
 }
+.bottom-sheet-link.active {
+    color: var(--primary-green, #146C43) !important;
+    background-color: rgba(20, 108, 67, 0.05);
+}

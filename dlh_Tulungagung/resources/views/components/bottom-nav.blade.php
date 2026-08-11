@@ -180,20 +180,14 @@
 
 
     {{-- LAYANAN --}}
-    @if($servicesMenu)
-        <a
-            href="{{ $resolveMenuUrl($servicesMenu) }}"
-            class="mobile-nav-item {{ request()->is(trim($servicesMenu->url ?? '', '/')) ? 'active' : '' }}"
-        >
-            <i class="bi bi-patch-check{{ request()->is(trim($servicesMenu->url ?? '', '/')) ? '-fill' : '' }}"></i>
-            <span>Layanan</span>
-        </a>
-    @else
-        <span class="mobile-nav-item disabled">
-            <i class="bi bi-patch-check"></i>
-            <span>Layanan</span>
-        </span>
-    @endif
+    <button
+        type="button"
+        class="mobile-nav-item border-0 bg-transparent {{ (request()->is('ppid') || request()->is('kontak') || request()->is('layanan') || request()->is('layanan/*')) ? 'active' : '' }}"
+        onclick="toggleBottomSheet('services-sheet')"
+    >
+        <i class="bi bi-patch-check{{ (request()->is('ppid') || request()->is('kontak') || request()->is('layanan') || request()->is('layanan/*')) ? '-fill' : '' }}"></i>
+        <span>Layanan</span>
+    </button>
 
 
     {{-- LAINNYA --}}
@@ -328,6 +322,60 @@
 </div>
 
 @endif
+
+
+{{-- ============================================================
+     BOTTOM SHEET: LAYANAN
+     ============================================================ --}}
+
+<div
+    id="services-sheet"
+    class="bottom-sheet-overlay fixed inset-0 bg-black/50 z-[1050] opacity-0 pointer-events-none flex items-end justify-center"
+    aria-hidden="true"
+>
+    <div
+        class="bottom-sheet-content bg-white w-full max-w-md rounded-t-3xl p-4 shadow-2xl overflow-y-auto max-h-[85vh]"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="services-sheet-title"
+    >
+
+        <div
+            class="bottom-sheet-handle"
+            onclick="toggleBottomSheet('services-sheet')"
+        ></div>
+
+        <div class="bottom-sheet-header">
+            <h6 id="services-sheet-title">
+                Layanan
+            </h6>
+
+            <button
+                type="button"
+                onclick="toggleBottomSheet('services-sheet')"
+                aria-label="Tutup menu layanan"
+            >
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+
+        <div class="bottom-sheet-list">
+            <a href="{{ route('ppid') }}" class="bottom-sheet-link {{ request()->is('ppid') ? 'active' : '' }}">
+                <span>PPID</span>
+                <i class="bi bi-chevron-right"></i>
+            </a>
+            <a href="{{ route('contact') }}" class="bottom-sheet-link {{ request()->is('kontak') ? 'active' : '' }}">
+                <span>Kontak</span>
+                <i class="bi bi-chevron-right"></i>
+            </a>
+            <a href="{{ route('services') }}" class="bottom-sheet-link {{ request()->is('layanan') || request()->is('layanan/*') ? 'active' : '' }}">
+                <span>Alur Pelayanan</span>
+                <i class="bi bi-chevron-right"></i>
+            </a>
+        </div>
+
+    </div>
+</div>
 
 
 {{-- ============================================================

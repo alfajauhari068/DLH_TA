@@ -145,7 +145,7 @@ class FrontendController extends Controller
 
     public function ppid()
     {
-        return view('frontend.ppid');
+        return redirect()->away('https://ppid.tulungagung.go.id/');
     }
 
     public function page($slug)
