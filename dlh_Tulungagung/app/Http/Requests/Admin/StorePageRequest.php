@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Http\Requests\Admin;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class StorePageRequest extends FormRequest
+{
+    public function authorize(): bool
+    {
+        return $this->user()?->can('create', \App\Models\Page::class) ?? false;
+    }
+
+    public function rules(): array
+    {
+        return [
+            'title' => ['required', 'string', 'max:255'],
+            'slug' => ['nullable', 'string', 'max:255'],
+            'content' => ['nullable', 'string'],
+            'cover_image' => ['nullable', 'image', 'max:2048'],
+            'status' => ['required', 'string', 'max:50'],
+            'template' => ['nullable', 'string', 'max:255'],
+            'seo_title' => ['nullable', 'string', 'max:255'],
+            'seo_description' => ['nullable', 'string'],
+            'published_at' => ['nullable', 'date'],
+        ];
+    }
+}
