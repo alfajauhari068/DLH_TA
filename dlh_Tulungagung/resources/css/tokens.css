@@ -1,21 +1,27 @@
 /* DLH Tulungagung Centralized Design Tokens */
 :root {
-  /* Color Tokens */
-  --primary: #064e3b; /* Forest Green */
-  --primary-dark: #022c22;
-  --primary-green: #10b981; /* Nature Green */
+  /* Color Tokens - Modern Eco-Corporate Palette */
+  --primary: #0F3D2E; /* Primary Deep Forest */
+  --primary-dark: #072219; /* Dark Emerald */
+  --primary-green: #10B981; /* Vibrant Emerald */
   --light-green: #d1fae5;
   --surface-green: #ecfdf5; /* Soft Green */
   --accent: #f59e0b; /* Warm Yellow */
   --background: #ffffff;
   --white: #ffffff;
+  --slate-50: #F8FAFC;
+  --slate-900: #0F172A;
   --gray-900: #111827;
   --gray-700: #374151;
   --gray-500: #6b7280;
   --gray-100: #f3f4f6;
   --danger: #dc3545;
-  --glass-bg: rgba(255, 255, 255, 0.85);
-  --glass-border: rgba(255, 255, 255, 0.40);
+  
+  /* Glassmorphism & Modern Effects */
+  --glass-bg: rgba(255, 255, 255, 0.95);
+  --glass-border: rgba(255, 255, 255, 0.20);
+  --glass-bg-dark: rgba(7, 34, 25, 0.08);
+  --glass-border-dark: rgba(16, 185, 129, 0.15);
 
   /* Spacing Scale Tokens */
   --space-0: 0px;
@@ -53,13 +59,16 @@
   --radius-3xl: 32px;
   --radius-full: 9999px;
 
-  /* Shadow Scale Tokens */
+  /* Shadow Scale Tokens - Modern Elevation */
   --shadow-xs: 0 2px 8px rgba(0,0,0,0.04);
   --shadow-sm: 0 8px 24px rgba(0,0,0,0.06);
   --shadow-md: 0 16px 40px -4px rgba(0,0,0,0.08);
+  --shadow-lg: 0 20px 48px rgba(0,0,0,0.10);
   --shadow-xl: 0 32px 64px -12px rgba(0,0,0,0.12);
-  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.03);
+  --shadow-card: 0 4px 24px rgba(15, 61, 46, 0.08);
   --shadow-floating: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.03);
+  --shadow-hover: 0 20px 48px rgba(15, 61, 46, 0.15);
 
   /* Elevation / Z-Index Tokens */
   --z-base: 0;

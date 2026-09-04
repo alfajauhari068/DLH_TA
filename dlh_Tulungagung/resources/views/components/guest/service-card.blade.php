@@ -15,7 +15,7 @@
         
         <!-- Bottom Text Area -->
         <div class="flex flex-col flex-grow p-8 bg-white relative z-0">
-            <h4 class="text-xl font-bold text-gray-900 mb-4 group-hover:text-primary-green transition-colors duration-300">{{ $title }}</h4>
+            <h4 class="text-xl font-bold text-slate-900 mb-4 group-hover:text-primary-green transition-colors duration-300">{{ $title }}</h4>
             <p class="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-3">
                 {{ $description }}
             </p>

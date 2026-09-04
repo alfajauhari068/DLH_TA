@@ -14,31 +14,32 @@
         $as = 'a';
     }
 
-    $baseClasses = 'inline-flex items-center justify-center font-medium rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2';
+    $baseClasses = 'inline-flex items-center justify-center font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2';
     
     $sizeClasses = [
-        'sm' => 'text-xs px-3 py-1.5 gap-1.5',
-        'md' => 'text-sm px-4 py-2 gap-2',
-        'lg' => 'text-base px-6 py-3 gap-2',
-    ][$size] ?? 'text-sm px-4 py-2 gap-2';
+        'sm' => 'text-xs px-3 py-1.5 gap-1.5 rounded-lg',
+        'md' => 'text-sm px-4 py-2 gap-2 rounded-xl',
+        'lg' => 'text-base px-6 py-3 gap-2 rounded-xl',
+    ][$size] ?? 'text-sm px-4 py-2 gap-2 rounded-xl';
 
     if ($variant === 'link') {
-        $sizeClasses = 'text-sm gap-1.5 p-0';
+        $sizeClasses = 'text-sm gap-1.5 p-0 rounded-none';
     }
 
+    // Token-based color variants using CSS custom properties
     $variantClasses = [
-        'primary' => 'bg-primary text-white hover:bg-primary-dark focus:ring-primary/50 shadow-soft hover:shadow-hover hover:-translate-y-0.5',
-        'secondary' => 'bg-secondary text-white hover:bg-secondary-dark focus:ring-secondary/50 shadow-soft hover:shadow-hover hover:-translate-y-0.5',
-        'outline' => 'bg-transparent border border-gray-300 text-gray-700 hover:bg-gray-50 focus:ring-gray-200',
-        'ghost' => 'bg-transparent text-gray-700 hover:bg-gray-100 focus:ring-gray-200',
-        'danger' => 'bg-danger text-white hover:opacity-90 focus:ring-danger/50 shadow-soft hover:shadow-hover',
-        'success' => 'bg-success text-white hover:opacity-90 focus:ring-success/50 shadow-soft hover:shadow-hover',
-        'warning' => 'bg-warning text-white hover:opacity-90 focus:ring-warning/50 shadow-soft hover:shadow-hover',
-        'link' => 'bg-transparent text-primary hover:text-primary-dark hover:underline focus:ring-0 focus:ring-offset-0',
-    ][$variant] ?? 'bg-primary text-white hover:bg-primary-dark focus:ring-primary/50';
+        'primary' => 'bg-[var(--primary)] text-white hover:bg-[var(--primary-dark)] focus:ring-[var(--primary-green)]/50 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-hover)] hover:-translate-y-1',
+        'secondary' => 'bg-[var(--primary-green)] text-white hover:opacity-90 focus:ring-[var(--primary-green)]/50 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-hover)] hover:-translate-y-1',
+        'outline' => 'bg-transparent border border-slate-300 text-slate-700 hover:bg-slate-50 focus:ring-[var(--primary-green)]/30',
+        'ghost' => 'bg-transparent text-slate-700 hover:bg-slate-100 focus:ring-[var(--primary-green)]/30',
+        'danger' => 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500/50 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-hover)]',
+        'success' => 'bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-emerald-500/50 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-hover)]',
+        'warning' => 'bg-amber-600 text-white hover:bg-amber-700 focus:ring-amber-500/50 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-hover)]',
+        'link' => 'bg-transparent text-[var(--primary)] hover:text-[var(--primary-dark)] hover:underline focus:ring-0 focus:ring-offset-0',
+    ][$variant] ?? 'bg-[var(--primary)] text-white hover:bg-[var(--primary-dark)] focus:ring-[var(--primary-green)]/50';
 
     if ($disabled || $loading) {
-        $variantClasses .= ' opacity-60 cursor-not-allowed pointer-events-none hover:translate-y-0 hover:shadow-soft hover:no-underline';
+        $variantClasses .= ' opacity-60 cursor-not-allowed pointer-events-none hover:translate-y-0 hover:shadow-[var(--shadow-card)] hover:no-underline';
     }
 
     $widthClass = $fullWidth ? 'w-full' : '';

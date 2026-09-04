@@ -16,7 +16,10 @@
             <i class="bi bi-share-fill text-xs"></i>
         </button>
 
-        <img src="{{ $news->image_url ?? asset('images/default-news.jpg') }}" alt="{{ $news->title }}" loading="lazy" decoding="async" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out">
+        @php
+            $newsImage = $news->image_url ?: asset('images/placeholder-news.svg');
+        @endphp
+        <img src="{{ $newsImage }}" alt="{{ $news->title }}" loading="lazy" decoding="async" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out" onerror="this.onerror=null;this.src='{{ asset('images/placeholder-news.svg') }}';">
     </a>
 
     <!-- Content -->
@@ -34,7 +37,7 @@
         </div>
 
         <!-- Title -->
-        <h3 class="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-primary transition-colors">
+        <h3 class="text-xl font-bold text-slate-900 mb-3 leading-tight group-hover:text-primary transition-colors">
             <a href="{{ $news->url ?? '#' }}">{{ Str::limit($news->title, 65) }}</a>
         </h3>
 

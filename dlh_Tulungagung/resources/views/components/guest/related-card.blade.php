@@ -11,12 +11,13 @@
 
 <a href="{{ $url }}" class="group bg-white/60 backdrop-blur-sm rounded-[24px] border border-white hover:border-white/50 hover:bg-white/90 hover:soft-shadow hover-lift overflow-hidden flex flex-col transition-all duration-300 h-full focus:outline-none focus:ring-2 focus:ring-primary-green focus:ring-offset-2">
     <div class="relative h-48 bg-gray-50 overflow-hidden flex-shrink-0">
+        @php
+            $resolvedThumbnail = $thumbnail ?: asset('images/placeholder-news.svg');
+        @endphp
         @if($thumbnail)
-            <img src="{{ $thumbnail }}" alt="{{ $title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+            <img src="{{ $thumbnail }}" alt="{{ $title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null;this.src='{{ asset('images/placeholder-news.svg') }}';">
         @else
-            <div class="w-full h-full flex items-center justify-center text-gray-300 bg-gradient-to-br from-gray-50 to-gray-100 group-hover:scale-105 transition-transform duration-500">
-                <i class="bi {{ $fallbackIcon }} text-4xl"></i>
-            </div>
+            <img src="{{ $resolvedThumbnail }}" alt="{{ $title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null;this.src='{{ asset('images/placeholder-news.svg') }}';">
         @endif
 
         @if($badge)
@@ -31,7 +32,7 @@
     </div>
 
     <div class="p-5 flex-1 flex flex-col">
-        <h4 class="text-lg font-bold text-gray-900 line-clamp-2 mb-2 group-hover:text-primary-green transition-colors">
+        <h4 class="text-lg font-bold text-slate-900 line-clamp-2 mb-2 group-hover:text-primary-green transition-colors">
             {{ $title }}
         </h4>
         

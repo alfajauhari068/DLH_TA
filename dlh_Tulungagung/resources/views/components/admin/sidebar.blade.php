@@ -33,31 +33,31 @@
     ];
 @endphp
 
-<aside {{ $attributes->merge(['class' => 'w-[280px] shrink-0 bg-slate-900 border-r border-slate-800 flex-shrink-0 hidden lg:flex flex-col h-screen sticky top-0 transition-all duration-300 z-40']) }} id="admin-sidebar" role="navigation" aria-label="Primary navigation">
+<aside {{ $attributes->merge(['class' => 'w-[280px] shrink-0 flex-shrink-0 hidden lg:flex flex-col h-screen sticky top-0 transition-all duration-300 z-40', 'style' => 'background-color: var(--primary-dark); border-right-color: rgba(16, 185, 129, 0.1);']) }} id="admin-sidebar" role="navigation" aria-label="Primary navigation">
     <!-- Sidebar Header / Logo -->
-    <div class="h-[72px] px-6 flex items-center border-b border-slate-800 shrink-0">
+    <div class="h-[72px] px-6 flex items-center border-b shrink-0" style="border-bottom-color: rgba(16, 185, 129, 0.15);">
         <a href="{{ route('dashboard') }}" class="flex items-center gap-3 no-underline group w-full min-w-0">
             <img src="{{ asset('images/icon-dinas.png') }}" alt="Logo DLH" class="shrink-0" style="width: 40px; height: 40px; object-fit: contain;">
             <div class="flex-1 min-w-0">
                 <h4 class="text-sm font-bold text-white truncate leading-none mb-1">DLH Tulungagung</h4>
-                <p class="text-[10px] text-slate-400 truncate leading-none">Administration Hub</p>
+                <p class="text-[10px] text-emerald-300/70 truncate leading-none">Administration Hub</p>
             </div>
         </a>
     </div>
 
     <!-- User Profile Card inside Sidebar -->
-    <div class="px-2 py-2 border-b border-slate-800 bg-slate-900 shrink-0">
-        <div class="flex items-center gap-3 p-2 bg-slate-800/50 rounded-2xl border border-slate-700/50 shadow-soft hover:bg-slate-800 transition-colors">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-green to-emerald-700 text-white font-bold flex items-center justify-center shrink-0 shadow-lg relative">
+    <div class="px-2 py-2 border-b shrink-0" style="border-bottom-color: rgba(16, 185, 129, 0.15);">
+        <div class="flex items-center gap-3 p-2 bg-white/10 rounded-2xl border border-white/10 shadow-soft hover:bg-white/15 transition-colors">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-emerald-600 text-white font-bold flex items-center justify-center shrink-0 shadow-lg relative">
                 {{ strtoupper(substr(auth()->user()->name ?? 'A', 0, 1)) }}
-                <div class="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 border-2 border-slate-900 rounded-full"></div>
+                <div class="absolute -bottom-1 -right-1 w-3 h-3 bg-emerald-300 border-2" style="border-color: var(--primary-dark); border-radius: 50%;"></div>
             </div>
             <div class="min-w-0 flex-1">
                 <h5 class="text-[11px] font-bold text-white truncate leading-tight">{{ auth()->user()->name ?? 'Administrator' }}</h5>
                 <div class="flex items-center gap-1.5 mt-0.5">
                     <span class="text-[9px] font-semibold text-emerald-400 uppercase tracking-wider">{{ auth()->user()->role->name ?? 'Admin' }}</span>
-                    <span class="w-1 h-1 rounded-full bg-slate-600"></span>
-                    <span class="text-[9px] text-slate-400">Online</span>
+                    <span class="w-1 h-1 rounded-full bg-emerald-600/50"></span>
+                    <span class="text-[9px] text-emerald-300/50">Online</span>
                 </div>
             </div>
         </div>
@@ -67,9 +67,9 @@
     <div class="px-2 pt-2 shrink-0">
         <div class="relative">
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <i class="bi bi-search text-slate-400 text-xs"></i>
+                <i class="bi bi-search text-emerald-300/50 text-xs"></i>
             </div>
-            <input type="text" id="sidebar-menu-search" class="block w-full pl-9 pr-3 py-2 border border-slate-700 rounded-xl text-xs bg-slate-800 text-white placeholder-slate-400 focus:outline-none focus:bg-slate-700 focus:ring-2 focus:ring-emerald-500/50 transition-all" placeholder="Cari menu...">
+            <input type="text" id="sidebar-menu-search" class="block w-full pl-9 pr-3 py-2 border rounded-xl text-xs text-white placeholder-emerald-300/40 focus:outline-none focus:ring-2 focus:ring-emerald-400/50 transition-all" style="background-color: rgba(16, 185, 129, 0.05); border-color: rgba(16, 185, 129, 0.15);" placeholder="Cari menu...">
         </div>
     </div>
 
@@ -78,14 +78,14 @@
         <nav class="space-y-6">
             @foreach($menuGroups as $groupLabel => $items)
                 <div class="menu-group-container">
-                    <div class="text-sm font-semibold text-slate-500 uppercase tracking-wide px-4 mb-2">{{ $groupLabel }}</div>
+                    <div class="text-sm font-semibold text-emerald-300/60 uppercase tracking-wide px-4 mb-2">{{ $groupLabel }}</div>
                     <ul class="space-y-1" role="menu">
                         @foreach($items as $item)
                             @if($user && $user->hasPermission($item['permission']))
                                 @php 
                                     $isActive = isset($item['route']) ? request()->routeIs($item['route'] . '*') : false; 
-                                    $iconClass = $isActive ? 'text-emerald-400' : 'text-slate-400 group-hover:text-emerald-400 transition-colors duration-300';
-                                    $bgClass = $isActive ? 'bg-gradient-to-r from-emerald-600/20 to-transparent text-white border-l-4 border-emerald-500' : 'text-slate-400 hover:bg-slate-800/50 hover:text-white border-l-4 border-transparent';
+                                    $iconClass = $isActive ? 'text-emerald-400' : 'text-emerald-300/60 group-hover:text-emerald-400 transition-colors duration-300';
+                                    $bgClass = $isActive ? 'bg-emerald-500/15 text-emerald-400 border-r-4 border-emerald-400 font-semibold' : 'text-emerald-300/70 hover:bg-white/10 hover:text-emerald-400 border-r-4 border-transparent';
                                     $href = isset($item['url']) ? $item['url'] : route($item['route']);
                                     $target = isset($item['url']) ? '_blank' : '_self';
                                 @endphp
@@ -100,7 +100,7 @@
                                         <span class="text-xs truncate flex-1 font-medium">{{ $item['label'] }}</span>
                                         
                                         @if($item['badge'])
-                                            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full {{ $isActive ? 'bg-emerald-500/20 text-emerald-400 shadow-sm' : 'bg-slate-800 text-slate-400' }}">
+                                            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full {{ $isActive ? 'bg-emerald-400/20 text-emerald-300 shadow-sm' : 'bg-white/5 text-emerald-300/60' }}">
                                                 {{ $item['badge'] }}
                                             </span>
                                         @endif
@@ -115,10 +115,10 @@
     </div>
     
     <!-- Sidebar Footer -->
-    <div class="p-2 border-t border-slate-800 shrink-0 bg-slate-900">
-        <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-1 text-center shadow-soft">
-            <p class="text-[10px] text-slate-400 font-medium uppercase tracking-wider mb-0.5">Versi Sistem</p>
-            <p class="text-xs font-black text-white">v2.1.0-L10</p>
+    <div class="p-2 border-t shrink-0" style="border-top-color: rgba(16, 185, 129, 0.15);">
+        <div class="rounded-2xl p-1 text-center shadow-soft" style="background-color: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.15);">
+            <p class="text-[10px] text-emerald-300/60 font-medium uppercase tracking-wider mb-0.5">Versi Sistem</p>
+            <p class="text-xs font-black text-emerald-400">v2.1.0-L10</p>
         </div>
     </div>
 </aside>

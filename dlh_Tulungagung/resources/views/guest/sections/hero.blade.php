@@ -23,9 +23,28 @@
     <div class="swiper heroSwiper">
         <div class="swiper-wrapper">
             @forelse($heroes as $hero)
-                <div class="swiper-slide">
+                <div class="swiper-slide relative">
                     <!-- Visual Hero Area (Top) -->
                     <div class="relative w-full h-[45vh] md:h-[52vh] lg:h-[520px] lg:min-h-[580px]">
+                        
+                        <!-- SVG Animated Masking Frame Overlay -->
+                        <svg class="absolute inset-0 w-full h-full pointer-events-none z-25" viewBox="0 0 1440 900" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="frameGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#10B981;stop-opacity:0.4" />
+                                    <stop offset="100%" style="stop-color:#0F3D2E;stop-opacity:0.3" />
+                                </linearGradient>
+                            </defs>
+                            <!-- Organic curved frame border -->
+                            <path d="M 30,30 L 1410,30 Q 1425,30 1425,45 L 1425,855 Q 1425,870 1410,870 L 30,870 Q 15,870 15,855 L 15,45 Q 15,30 30,30 Z" 
+                                  fill="none" 
+                                  stroke="url(#frameGradient)" 
+                                  stroke-width="3" 
+                                  stroke-linecap="round" 
+                                  stroke-linejoin="round" 
+                                  class="animate-svg-intro"/>
+                        </svg>
+                        
                         <!-- Image Background -->
                         <picture>
                             <source srcset="{{ asset('storage/'.$hero->image) }}" type="image/webp">
@@ -41,95 +60,145 @@
                             >
                         </picture>
                         
-                        <!-- Premium green tinted overlay for color consistency -->
-                        <div class="absolute inset-0 z-10 bg-[rgba(16,95,56,0.18)] mix-blend-multiply pointer-events-none"></div>
-                        <div class="absolute inset-0 z-10 bg-gradient-to-b from-transparent via-transparent to-black/10 pointer-events-none"></div>
-                    </div>
-                    
-                    <!-- Content Panel Area (Bottom Section) -->
-                    <div class="relative z-30 w-full -mt-16 md:-mt-24 lg:-mt-36" style="filter: drop-shadow(0 -15px 30px rgba(16,95,56,0.06));">
-                        <!-- Organic SVG Wave Divider -->
-                        <div class="absolute top-0 left-0 w-full overflow-hidden leading-[0] transform -translate-y-[99%] pointer-events-none">
-                            <svg class="relative block w-full h-[50px] md:h-[75px] lg:h-[100px]" viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M0,0 C300,60 650,100 1000,95 C1180,92 1320,88 1440,85 L1440,100 L0,100 Z" fill="#ffffff"></path>
-                            </svg>
-                        </div>
-
-                        <div class="w-full pb-12 lg:pb-20 pt-2 md:pt-4 lg:pt-4 bg-white" 
-                             style="background-image: 
-                                    url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E&quot;),
-                                    radial-gradient(circle at 10% 0%, rgba(15, 118, 110, 0.12) 0%, transparent 60%),
-                                    radial-gradient(circle at 90% 100%, rgba(56, 189, 248, 0.08) 0%, transparent 60%),
-                                    linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(34, 197, 94, 0.08) 35%, rgba(34, 197, 94, 0.03) 75%, #ffffff 100%);">
+                        <!-- Strong Dark Emerald Gradient Overlay for Text Contrast -->
+                        <div class="absolute inset-0 z-10 pointer-events-none bg-gradient-to-b md:bg-gradient-to-r from-emerald-950/90 via-emerald-900/80 md:via-emerald-900/75 to-emerald-950/60 md:to-transparent"></div>
                         
-                            <!-- Optional Leaf Watermark Decoration on the right -->
-                            <div class="absolute bottom-0 right-0 opacity-[0.07] pointer-events-none w-1/3 max-w-[380px] z-0">
-                                <img src="{{ asset('images/leaf-pattern.png') }}" alt="Leaf Pattern" class="w-full h-auto object-cover" onerror="this.style.display='none'">
-                            </div>
-
-                            <div class="container max-w-[1440px] px-8 md:px-16 lg:px-24 mx-auto relative z-10">
-                                <div class="flex flex-col lg:flex-row items-start justify-between gap-0 lg:gap-2">
+                        <!-- Text Content Overlay (DESKTOP ONLY) -->
+                        <div class="absolute inset-0 z-20 hidden sm:flex flex-col items-start justify-center pt-24 md:pt-32 pb-36 md:pb-48 pointer-events-none">
+                            <div class="container max-w-[1440px] px-8 md:px-16 lg:px-24 mx-auto w-full">
+                                <div class="w-full lg:w-1/2">
                                     
-                                    <!-- Left Typography Column -->
-                                    <div class="w-full lg:w-1/2 flex flex-col items-start text-left lg:-mt-20 xl:-mt-24 relative z-20">
-                                        
-                                        <!-- Badge -->
-                                        @if($hero->badge)
-                                            <div class="inline-flex items-center gap-2.5 mb-2 mt-0 lg:mb-3 bg-emerald-50/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm border border-emerald-100/60 relative z-10">
-                                                <span class="text-base leading-none">🌿</span>
-                                                <span class="text-emerald-900 font-bold text-[12px] lg:text-sm tracking-wide">{{ $hero->badge }}</span>
-                                            </div>
-                                        @endif
-                                        
-                                        <!-- H1 Display Typography -->
-                                        <h1 class="text-[34px] md:text-5xl lg:text-[54px] font-black text-gray-900 mb-4 lg:mb-6 leading-[1.15] lg:leading-[1.1] tracking-tight relative z-10">
-                                            {{ $hero->title }}
-                                        </h1>
-                                        
-                                        <!-- Body Copy -->
-                                        @if($hero->subtitle)
-                                            <p class="text-gray-600 text-[15px] md:text-lg lg:text-xl font-normal mb-8 lg:mb-10 max-w-lg leading-relaxed relative z-10">
-                                                {{ $hero->subtitle }}
-                                            </p>
-                                        @endif
-                                        
-                                        <!-- CTAs -->
-                                        <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto relative z-10">
-                                            <!-- Primary Solid CTA -->
-                                            @if($hero->button_1_text && $hero->button_1_url)
-                                                <a href="{{ $hero->button_1_url }}" class="group w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-primary text-white font-medium text-[15px] lg:text-base px-8 py-3.5 rounded-full shadow-lg shadow-primary/30 hover:bg-primary-dark hover:shadow-xl transition-all duration-300">
-                                                    <span>{{ $hero->button_1_text }}</span>
-                                                    <div class="w-6 h-6 rounded-full bg-white flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                                                        <i class="bi bi-arrow-right text-xs font-bold"></i>
-                                                    </div>
-                                                </a>
-                                            @endif
-                                            
-                                            <!-- Secondary Outline CTA -->
-                                            @if($hero->button_2_text && $hero->button_2_url)
-                                                <a href="{{ $hero->button_2_url }}" class="group w-full sm:w-auto inline-flex items-center justify-center gap-3 text-primary font-medium text-[15px] lg:text-base px-8 py-3.5 rounded-full border border-primary hover:bg-primary/5 transition-all duration-300">
-                                                    <div class="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-white group-hover:scale-110 transition-transform">
-                                                        <i class="bi bi-play-fill text-xs"></i>
-                                                    </div>
-                                                    <span>{{ $hero->button_2_text }}</span>
-                                                </a>
-                                            @endif
+                                    <!-- Badge with Glassmorphism Effect -->
+                                    @if($hero->badge)
+                                        <div class="inline-flex items-center gap-2.5 mb-2 lg:mb-3 bg-black/30 backdrop-blur-md px-3.5 py-1.5 rounded-full shadow-lg border border-white/20 pointer-events-auto">
+                                            <span class="text-base leading-none">🌿</span>
+                                            <span class="text-emerald-300 font-bold text-xs lg:text-sm tracking-wide">{{ $hero->badge }}</span>
                                         </div>
+                                    @endif
+                                    
+                                    <!-- H1 Display Typography - Modern & Bold -->
+                                    <h1 class="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 lg:mb-6 leading-tight lg:leading-tight tracking-tight drop-shadow-md max-w-3xl">
+                                        {{ $hero->title }}
+                                    </h1>
+                                    
+                                    <!-- Body Copy -->
+                                    @if($hero->subtitle)
+                                        <p class="text-white/90 text-sm md:text-base max-w-xl leading-relaxed drop-shadow mb-8 lg:mb-10">
+                                            {{ $hero->subtitle }}
+                                        </p>
+                                    @endif
+                                    
+                                    <!-- CTAs -->
+                                    <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto pointer-events-auto">
+                                        <!-- Primary Solid CTA -->
+                                        @if($hero->button_1_text && $hero->button_1_url)
+                                            <a href="{{ $hero->button_1_url }}" class="group w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-bold text-[15px] lg:text-base px-6 py-3 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                                                <span>{{ $hero->button_1_text }}</span>
+                                                <div class="w-5 h-5 rounded-full bg-emerald-600/30 flex items-center justify-center text-emerald-950 group-hover:scale-110 transition-transform">
+                                                    <i class="bi bi-arrow-right text-xs font-bold"></i>
+                                                </div>
+                                            </a>
+                                        @endif
                                         
+                                        <!-- Secondary Outline CTA -->
+                                        @if($hero->button_2_text && $hero->button_2_url)
+                                            <a href="{{ $hero->button_2_url }}" class="group w-full sm:w-auto inline-flex items-center justify-center gap-3 text-white font-medium text-[15px] lg:text-base px-6 py-3 rounded-xl border border-white/30 bg-white/10 hover:bg-white/20 backdrop-blur-sm transition-all duration-300">
+                                                <div class="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+                                                    <i class="bi bi-play-fill text-xs"></i>
+                                                </div>
+                                                <span>{{ $hero->button_2_text }}</span>
+                                            </a>
+                                        @endif
                                     </div>
                                     
-                                    <!-- Right Empty Space -->
-                                    <div class="w-full lg:w-1/2 hidden lg:block"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- Custom Organic Wave Divider (Mobile) -->
+                    <div class="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none z-10 block sm:hidden">
+                        <svg class="relative block w-full h-8 text-[#072219]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.92,126.15,114.51,192,108.7,235.63,104.85,279.37,80,321.39,56.44Z" fill="currentColor"></path>
+                        </svg>
+                    </div>
+                    
+                    <!-- Modern Surface Card Container (Mobile Only) -->
+                    <div class="block sm:hidden relative w-full bg-[#072219] text-white px-6 py-6 rounded-t-[2.5rem] -mt-4 z-20 shadow-2xl border-t border-emerald-500/20">
+                        <div class="max-w-xl">
+                            <!-- Badge -->
+                            @if($hero->badge)
+                                <div class="inline-flex items-center gap-1.5 mb-2 bg-emerald-500/20 border border-emerald-500/30 px-2.5 py-1 rounded-full text-[10px] font-medium text-emerald-300 pointer-events-auto">
+                                    <span>🌿</span>
+                                    <span>{{ $hero->badge }}</span>
+                                </div>
+                            @endif
+                            
+                            <!-- H1 Title (Mobile Compact) -->
+                            <h1 class="text-lg font-bold leading-snug text-white mb-2 max-w-full">
+                                {{ $hero->title }}
+                            </h1>
+                            
+                            <!-- Description (Line Clamp) -->
+                            @if($hero->subtitle)
+                                <p class="text-xs text-emerald-100/80 line-clamp-2 mb-4">
+                                    {{ $hero->subtitle }}
+                                </p>
+                            @endif
+                            
+                            <!-- Compact CTAs -->
+                            <div class="flex flex-col gap-2.5 w-full pointer-events-auto">
+                                <!-- Primary Compact CTA -->
+                                @if($hero->button_1_text && $hero->button_1_url)
+                                    <a href="{{ $hero->button_1_url }}" class="group w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-semibold rounded-xl bg-emerald-500 hover:bg-emerald-400 text-emerald-950 shadow-lg shadow-emerald-950/50 transition-all hover:shadow-xl hover:-translate-y-0.5">
+                                        <span>{{ $hero->button_1_text }}</span>
+                                        <div class="w-3.5 h-3.5 rounded-full bg-emerald-600/40 flex items-center justify-center text-emerald-950 group-hover:scale-110 transition-transform">
+                                            <i class="bi bi-arrow-right text-[8px] font-bold"></i>
+                                        </div>
+                                    </a>
+                                @endif
+                                
+                                <!-- Secondary Compact CTA -->
+                                @if($hero->button_2_text && $hero->button_2_url)
+                                    <a href="{{ $hero->button_2_url }}" class="group w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-medium rounded-xl border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 transition-all">
+                                        <div class="w-3.5 h-3.5 rounded-full bg-emerald-500/30 flex items-center justify-center text-emerald-300 group-hover:scale-110 transition-transform">
+                                            <i class="bi bi-play-fill text-[8px]"></i>
+                                        </div>
+                                        <span>{{ $hero->button_2_text }}</span>
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- White Background Section Below Wave (Desktop) -->
+                    <div class="hidden sm:block relative w-full bg-white pt-0 pb-6">
+                        <!-- Empty section for spacing below wave -->
+                    </div>
                 </div>
             @empty
                 <!-- Fallback Slide if database has no active slides -->
-                <div class="swiper-slide">
+                <div class="swiper-slide relative">
                     <!-- Visual Hero Area (Top) -->
                     <div class="relative w-full h-[45vh] md:h-[52vh] lg:h-[520px] lg:min-h-[580px]">
+                        
+                        <!-- SVG Animated Masking Frame Overlay -->
+                        <svg class="absolute inset-0 w-full h-full pointer-events-none z-25" viewBox="0 0 1440 900" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="frameGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#10B981;stop-opacity:0.4" />
+                                    <stop offset="100%" style="stop-color:#0F3D2E;stop-opacity:0.3" />
+                                </linearGradient>
+                            </defs>
+                            <!-- Organic curved frame border -->
+                            <path d="M 30,30 L 1410,30 Q 1425,30 1425,45 L 1425,855 Q 1425,870 1410,870 L 30,870 Q 15,870 15,855 L 15,45 Q 15,30 30,30 Z" 
+                                  fill="none" 
+                                  stroke="url(#frameGradient2)" 
+                                  stroke-width="3" 
+                                  stroke-linecap="round" 
+                                  stroke-linejoin="round" 
+                                  class=\"animate-svg-intro\"/>
+                        </svg>
                         <picture>
                             <source srcset="{{ asset('build/assets/cropped-WhatsApp-Image-2026-07-17-at-11.01.42-1-1.jpeg') }}" type="image/jpeg">
                             <img 
@@ -143,40 +212,86 @@
                                 decoding="async"
                             >
                         </picture>
-                        <div class="absolute inset-0 z-10 bg-[rgba(16,95,56,0.18)] mix-blend-multiply pointer-events-none"></div>
-                        <div class="absolute inset-0 z-10 bg-gradient-to-b from-transparent via-transparent to-black/10 pointer-events-none"></div>
-                    </div>
-                    
-                    <!-- Content Panel Area (Bottom Section) -->
-                    <div class="relative z-30 w-full -mt-16 md:-mt-24 lg:-mt-36" style="filter: drop-shadow(0 -15px 30px rgba(16,95,56,0.06));">
-                        <div class="absolute top-0 left-0 w-full overflow-hidden leading-[0] transform -translate-y-[99%] pointer-events-none">
-                            <svg class="relative block w-full h-[50px] md:h-[75px] lg:h-[100px]" viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M0,0 C300,60 650,100 1000,95 C1180,92 1320,88 1440,85 L1440,100 L0,100 Z" fill="#ffffff"></path>
-                            </svg>
-                        </div>
-                        <div class="w-full pb-12 lg:pb-20 pt-2 md:pt-4 lg:pt-4 bg-white" 
-                             style="background-image: 
-                                    radial-gradient(circle at 10% 0%, rgba(15, 118, 110, 0.12) 0%, transparent 60%),
-                                    radial-gradient(circle at 90% 100%, rgba(56, 189, 248, 0.08) 0%, transparent 60%),
-                                    linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(34, 197, 94, 0.08) 35%, rgba(34, 197, 94, 0.03) 75%, #ffffff 100%);">
-                            <div class="container max-w-[1440px] px-8 md:px-16 lg:px-24 mx-auto relative z-10">
-                                <div class="flex flex-col lg:flex-row items-start justify-between">
-                                    <div class="w-full lg:w-1/2 flex flex-col items-start text-left lg:-mt-20 xl:-mt-24 relative z-20">
-                                        <div class="inline-flex items-center gap-2.5 mb-2 bg-emerald-50/80 px-4 py-2 rounded-full border border-emerald-100/60">
-                                            <span class="text-base leading-none">🌿</span>
-                                            <span class="text-emerald-900 font-bold text-[12px] tracking-wide">DLH Kabupaten Tulungagung</span>
-                                        </div>
-                                        <h1 class="text-[34px] md:text-5xl lg:text-[54px] font-black text-gray-900 mb-4 leading-[1.15]">
-                                            Menjaga Alam, Melestarikan Kehidupan.
-                                        </h1>
-                                        <p class="text-gray-600 text-[15px] md:text-lg mb-8 max-w-lg">
-                                            Dinas Lingkungan Hidup Tulungagung hadir untuk mewujudkan ekosistem yang sehat, asri, dan berkelanjutan melalui transparansi dan pelayanan prima.
-                                        </p>
+                        
+                        <!-- Strong Dark Emerald Gradient Overlay for Text Contrast -->
+                        <div class="absolute inset-0 z-10 pointer-events-none bg-gradient-to-b md:bg-gradient-to-r from-emerald-950/90 via-emerald-900/80 md:via-emerald-900/75 to-emerald-950/60 md:to-transparent"></div>
+                        
+                        <!-- Text Content Overlay (DESKTOP ONLY) -->
+                        <div class="absolute inset-0 z-20 hidden sm:flex flex-col items-start justify-center pt-24 md:pt-32 pb-36 md:pb-48 pointer-events-none">
+                            <div class="container max-w-[1440px] px-8 md:px-16 lg:px-24 mx-auto w-full">
+                                <div class="w-full lg:w-1/2">
+                                    
+                                    <!-- Badge with Glassmorphism Effect -->
+                                    <div class="inline-flex items-center gap-2.5 mb-2 lg:mb-3 bg-black/30 backdrop-blur-md px-3.5 py-1.5 rounded-full shadow-lg border border-white/20 pointer-events-auto">
+                                        <span class="text-base leading-none">🌿</span>
+                                        <span class="text-emerald-300 font-bold text-xs lg:text-sm tracking-wide">DLH Kabupaten Tulungagung</span>
                                     </div>
-                                    <div class="w-full lg:w-1/2 hidden lg:block"></div>
+                                    
+                                    <!-- H1 Display Typography - Modern & Bold -->
+                                    <h1 class="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 lg:mb-6 leading-tight lg:leading-tight tracking-tight drop-shadow-md max-w-3xl">
+                                        Menjaga Alam, Melestarikan Kehidupan.
+                                    </h1>
+                                    
+                                    <!-- Body Copy -->
+                                    <p class="text-white/90 text-sm md:text-base max-w-xl leading-relaxed drop-shadow mb-8 lg:mb-10">
+                                        Dinas Lingkungan Hidup Tulungagung hadir untuk mewujudkan ekosistem yang sehat, asri, dan berkelanjutan melalui transparansi dan pelayanan prima.
+                                    </p>
+                                    
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    
+                    <!-- Custom Organic Wave Divider (Mobile) -->
+                    <div class="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none z-10 block sm:hidden">
+                        <svg class="relative block w-full h-8 text-[#072219]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.92,126.15,114.51,192,108.7,235.63,104.85,279.37,80,321.39,56.44Z" fill="currentColor"></path>
+                        </svg>
+                    </div>
+                    
+                    <!-- Modern Surface Card Container (Mobile Only) -->
+                    <div class="block sm:hidden relative w-full bg-[#072219] text-white px-6 py-6 rounded-t-[2.5rem] -mt-4 z-20 shadow-2xl border-t border-emerald-500/20">
+                        <div class="max-w-xl">
+                            <!-- Badge -->
+                            <div class="inline-flex items-center gap-1.5 mb-2 bg-emerald-500/20 border border-emerald-500/30 px-2.5 py-1 rounded-full text-[10px] font-medium text-emerald-300 pointer-events-auto">
+                                <span>🌿</span>
+                                <span>DLH Kabupaten Tulungagung</span>
+                            </div>
+                            
+                            <!-- H1 Title (Mobile Compact) -->
+                            <h1 class="text-lg font-bold leading-snug text-white mb-2 max-w-full">
+                                Menjaga Alam, Melestarikan Kehidupan.
+                            </h1>
+                            
+                            <!-- Description (Line Clamp) -->
+                            <p class="text-xs text-emerald-100/80 line-clamp-2 mb-4">
+                                Dinas Lingkungan Hidup Tulungagung hadir untuk mewujudkan ekosistem yang sehat, asri, dan berkelanjutan melalui transparansi dan pelayanan prima.
+                            </p>
+                            
+                            <!-- Compact CTAs -->
+                            <div class="flex flex-col gap-2.5 w-full pointer-events-auto">
+                                <!-- Primary Compact CTA -->
+                                <a href="/" class="group w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-semibold rounded-xl bg-emerald-500 hover:bg-emerald-400 text-emerald-950 shadow-lg shadow-emerald-950/50 transition-all hover:shadow-xl hover:-translate-y-0.5">
+                                    <span>Ajukan Layanan</span>
+                                    <div class="w-3.5 h-3.5 rounded-full bg-emerald-600/40 flex items-center justify-center text-emerald-950 group-hover:scale-110 transition-transform">
+                                        <i class="bi bi-arrow-right text-[8px] font-bold"></i>
+                                    </div>
+                                </a>
+                                
+                                <!-- Secondary Compact CTA -->
+                                <a href="/" class="group w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-medium rounded-xl border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 transition-all">
+                                    <div class="w-3.5 h-3.5 rounded-full bg-emerald-500/30 flex items-center justify-center text-emerald-300 group-hover:scale-110 transition-transform">
+                                        <i class="bi bi-play-fill text-[8px]"></i>
+                                    </div>
+                                    <span>Pelajari Lebih Lanjut</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- White Background Section Below Wave (Desktop) -->
+                    <div class="hidden sm:block relative w-full bg-white pt-0 pb-6">
+                        <!-- Empty section for spacing below wave -->
                     </div>
                 </div>
             @endforelse

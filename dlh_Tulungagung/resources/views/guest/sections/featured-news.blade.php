@@ -19,8 +19,11 @@
                     <a href="{{ url('/berita/' . ($item->slug ?? '')) }}" class="group relative flex flex-col bg-white rounded-[32px] shadow-[0_15px_40px_rgba(0,0,0,0.05)] hover:shadow-[0_30px_60px_rgba(0,0,0,0.10)] transition-all duration-300 hover:-translate-y-2 overflow-hidden border border-gray-100 h-full">
                         
                         <!-- Image Area -->
-                        <div class="w-full h-[240px] relative overflow-hidden shrink-0">
-                            <img src="{{ $item->featured_image ? asset('storage/' . $item->featured_image) : asset('images/default-news.jpg') }}" alt="{{ $item->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="w-full h-[240px] relative overflow-hidden shrink-0 bg-gray-100">
+                            @php
+                                $featuredNewsImage = $item->featured_image ? asset('storage/' . $item->featured_image) : asset('images/placeholder-news.svg');
+                            @endphp
+                            <img src="{{ $featuredNewsImage }}" alt="{{ $item->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null;this.src='{{ asset('images/placeholder-news.svg') }}';">
                             
                             <!-- Category Badge inside Image -->
                             @if(isset($item->categories) && $item->categories->count() > 0)
@@ -39,7 +42,7 @@
                                 <span>{{ isset($item->published_at) ? \Carbon\Carbon::parse($item->published_at)->translatedFormat('d M Y') : '-' }}</span>
                             </div>
                             
-                            <h3 class="text-xl md:text-2xl font-semibold text-gray-900 mb-3 group-hover:text-primary transition-colors duration-300 line-clamp-2 leading-snug">
+                            <h3 class="text-xl md:text-2xl font-semibold text-slate-900 mb-3 group-hover:text-primary transition-colors duration-300 line-clamp-2 leading-snug">
                                 {{ $item->title }}
                             </h3>
                             

@@ -1,6 +1,6 @@
 <nav id="main-navbar" class="navbar navbar-expand-lg fixed-top transition-all duration-300 min-h-[72px] z-[1030] border-b border-transparent">
     <!-- Background blur separated to prevent CSS stacking context bug on offcanvas -->
-    <div class="absolute inset-0 bg-white/70 backdrop-blur-md -z-10 opacity-0 transition-opacity duration-300" id="navbar-bg"></div>
+    <div class="absolute inset-0 bg-white/90 backdrop-blur-lg -z-10 opacity-0 transition-opacity duration-300" id="navbar-bg"></div>
     <div class="container-fluid px-4 lg:px-8">
         <!-- Logo -->
         <a href="{{ url('/') }}" class="navbar-brand d-flex align-items-center gap-2 md:gap-3 group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-xl" aria-label="Beranda">

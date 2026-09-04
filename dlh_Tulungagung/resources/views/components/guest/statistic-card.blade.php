@@ -7,10 +7,10 @@
         </div>
         {{ $slot }}
     </div>
-    <h3 class="text-4xl font-black text-gray-900 mb-2">
+    <h3 class="text-4xl font-black text-slate-900 mb-2">
         {{ $prefix }}<span class="counter" data-target="{{ $value }}">0</span>{{ $suffix }}
     </h3>
-    <p class="text-gray-500 font-medium text-sm mb-4">{{ $label }}</p>
+    <p class="text-slate-600 font-medium text-sm mb-4">{{ $label }}</p>
     
     @if(isset($chart))
         <div class="mt-auto">

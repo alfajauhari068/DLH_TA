@@ -49,7 +49,7 @@ class News extends Model
 
     public function getImageUrlAttribute()
     {
-        return $this->featured_image ? asset('storage/' . $this->featured_image) : asset('images/default-news.jpg');
+        return $this->featured_image ? asset('storage/' . $this->featured_image) : asset('images/placeholder-news.svg');
     }
 
     public function getCategoryNameAttribute()
