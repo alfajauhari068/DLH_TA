@@ -62,6 +62,7 @@ Route::middleware('auth')->group(function () {
         Route::post('news/{id}/restore', [NewsController::class, 'restore'])->name('news.restore');
         Route::delete('news/{id}/force-delete', [NewsController::class, 'forceDelete'])->name('news.forceDelete');
         Route::resource('galleries', GalleryController::class);
+        Route::delete('galleries/{gallery}/images/{item}', [GalleryController::class, 'destroyImage'])->name('galleries.images.destroy');
         Route::get('galleries/trash', [GalleryController::class, 'trash'])->name('galleries.trash');
         Route::post('galleries/{id}/restore', [GalleryController::class, 'restore'])->name('galleries.restore');
         Route::delete('galleries/{id}/force-delete', [GalleryController::class, 'forceDelete'])->name('galleries.forceDelete');

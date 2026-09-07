@@ -112,11 +112,11 @@
                             <a href="{{ route('admin.publications.edit', $item) }}" class="flex-1 flex justify-center items-center py-2 bg-blue-50 text-blue-700 text-sm font-semibold rounded-lg hover:bg-blue-100 transition-colors tooltip relative z-20" title="Edit">
                                 <i class="bi bi-pencil-square mr-1"></i> Edit
                             </a>
-                            <form action="{{ route('admin.publications.destroy', $item) }}" method="POST" class="inline relative z-20" onsubmit="return confirm('Delete this publication?');">
+                            <form action="{{ route('admin.publications.destroy', $item) }}" method="POST" class="inline relative z-20" onsubmit="return confirm('Apakah Anda yakin ingin menghapus publikasi ini?');">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="flex justify-center items-center py-2 px-3 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors tooltip" title="Delete">
-                                    <i class="bi bi-trash3"></i>
+                                <button type="submit" class="flex justify-center items-center gap-1 py-2 px-3 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 transition-colors tooltip" title="Hapus publikasi">
+                                    <i class="bi bi-trash3"></i> Hapus Publikasi
                                 </button>
                             </form>
                         </div>

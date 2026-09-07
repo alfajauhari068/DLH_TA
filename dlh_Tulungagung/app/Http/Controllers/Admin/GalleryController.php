@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\Admin\StoreGalleryRequest;
 use App\Http\Requests\Admin\UpdateGalleryRequest;
 use App\Models\Gallery;
+use App\Models\GalleryItem;
 use App\Services\GalleryService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends BaseCrudController
 {
@@ -67,6 +69,18 @@ class GalleryController extends BaseCrudController
         }
 
         return $redirect->route($this->routePrefix() . '.index')->with('success', 'Updated successfully.');
+    }
+
+    public function destroyImage(Gallery $gallery, GalleryItem $item, Redirector $redirect)
+    {
+        $this->authorize('update', $gallery);
+
+        abort_unless($item->gallery_id === $gallery->id, 404);
+
+        Storage::disk('public')->delete($item->image);
+        $item->delete();
+
+        return $redirect->back()->with('success', 'Image deleted successfully.');
     }
 
     protected function service()

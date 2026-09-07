@@ -47,6 +47,26 @@
             </x-admin.form.card>
 
             <x-admin.form.card title="Gallery Images" padding="p-6">
+                @if($gallery->items->isNotEmpty())
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-6">
+                        @foreach($gallery->items as $item)
+                            <div class="border border-gray-200 rounded-xl overflow-hidden bg-gray-50">
+                                <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->caption ?: 'Gallery image' }}" class="w-full aspect-square object-cover">
+                                <div class="p-2">
+                                    <p class="text-xs text-gray-500 truncate mb-2" title="{{ $item->caption }}">{{ $item->caption ?: 'Gallery image' }}</p>
+                                    <form action="{{ route('admin.galleries.images.destroy', [$gallery, $item]) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus image ini?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="w-full inline-flex justify-center items-center gap-1.5 py-1.5 px-2 bg-red-50 text-red-600 text-xs font-semibold rounded-lg hover:bg-red-100 transition-colors" title="Delete image">
+                                            <i class="bi bi-trash3"></i>
+                                            Delete
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-2">Upload Multiple Images</label>
                     <input type="file" name="images[]" multiple class="w-full border border-gray-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all @error('images') border-red-500 @enderror">

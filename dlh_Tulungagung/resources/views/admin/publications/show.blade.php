@@ -46,6 +46,14 @@
                     <i class="bi bi-pencil-square"></i>
                     Edit Document
                 </a>
+                <form action="{{ route('admin.publications.destroy', $publication) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus publikasi ini?');">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="w-full flex items-center justify-center gap-2 px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-xl font-semibold shadow-sm transition-all" title="Hapus publikasi">
+                        <i class="bi bi-trash3"></i>
+                        Hapus Publikasi
+                    </button>
+                </form>
             </div>
         </div>
     </div>
